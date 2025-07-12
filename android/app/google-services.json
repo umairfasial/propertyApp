@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "651060347069",
+    "project_id": "capitalprop-2e6d3",
+    "storage_bucket": "capitalprop-2e6d3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651060347069:android:50430477c3ce69568037d4",
+        "android_client_info": {
+          "package_name": "com.capital_prop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBga9DzKdNygZMAw9rnftrIW0Ttq0MVXl0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
