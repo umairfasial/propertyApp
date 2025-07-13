@@ -230,26 +230,27 @@ const ScheduleInspection = ({navigation}) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            padding: 20,
+            padding: 10,
           }}>
-          <View>
+          {/* <View>
             <Text style={styles.title}>{selectedTemplate?.label}</Text>
             <Text style={styles.description}>
               {selectedTemplate?.description}
             </Text>
-          </View>
+          </View> */}
 
           <Dropdown
             data={mappedTemplates}
             labelField="label"
+            valueField="value"
+            value={selectedTemplate?.value}
             onChange={item => setSelectedTemplate(item)}
             style={{
-              width: '50%',
-              height: 40,
+              width: '100%',
               borderRadius: 8,
             }}
             selectedTextStyle={{
-              color: 'transparent',
+              color: '#000',
             }}
             placeholder="Select Template"
           />

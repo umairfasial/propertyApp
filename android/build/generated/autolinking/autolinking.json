@@ -1,26 +1,26 @@
 {
-  "root": "/Users/farrukhehsan/Downloads/capital_prop",
-  "reactNativePath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native",
+  "root": "E:\\ReactNative\\propertyApp",
+  "reactNativePath": "E:\\ReactNative\\propertyApp\\node_modules\\react-native",
   "reactNativeVersion": "0.78",
   "dependencies": {
     "@react-native-async-storage/async-storage": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-async-storage/async-storage",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-async-storage\\async-storage",
       "name": "@react-native-async-storage/async-storage",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-async-storage/async-storage/RNCAsyncStorage.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-async-storage\\async-storage\\RNCAsyncStorage.podspec",
           "version": "2.1.2",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-async-storage/async-storage/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-async-storage\\async-storage\\android",
           "packageImportPath": "import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;",
           "packageInstance": "new AsyncStoragePackage()",
           "buildTypes": [],
           "libraryName": "rnasyncstorage",
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/@react-native-async-storage/async-storage/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -29,22 +29,22 @@
       }
     },
     "@react-native-community/checkbox": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-community/checkbox",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-community\\checkbox",
       "name": "@react-native-community/checkbox",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-community/checkbox/RNCCheckbox.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-community\\checkbox\\RNCCheckbox.podspec",
           "version": "0.5.17",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-community/checkbox/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-community\\checkbox\\android",
           "packageImportPath": "import com.reactnativecommunity.checkbox.ReactCheckBoxPackage;",
           "packageInstance": "new ReactCheckBoxPackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-community/checkbox/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/@react-native-community/checkbox/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -53,23 +53,23 @@
       }
     },
     "@react-native-community/datetimepicker": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-community/datetimepicker",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-community\\datetimepicker",
       "name": "@react-native-community/datetimepicker",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-community/datetimepicker/RNDateTimePicker.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-community\\datetimepicker\\RNDateTimePicker.podspec",
           "version": "8.3.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-community/datetimepicker/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-community\\datetimepicker\\android",
           "packageImportPath": "import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;",
           "packageInstance": "new RNDateTimePickerPackage()",
           "buildTypes": [],
           "libraryName": "RNDateTimePickerCGen",
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-community/datetimepicker/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/@react-native-community/datetimepicker/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -78,23 +78,23 @@
       }
     },
     "@react-native-documents/picker": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-documents/picker",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-documents\\picker",
       "name": "@react-native-documents/picker",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-documents/picker/react-native-document-picker.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-documents\\picker\\react-native-document-picker.podspec",
           "version": "10.1.2",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-documents/picker/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-documents\\picker\\android",
           "packageImportPath": "import com.reactnativedocumentpicker.RNDocumentPickerPackage;",
           "packageInstance": "new RNDocumentPickerPackage()",
           "buildTypes": [],
           "libraryName": "rndocumentpickerCGen",
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-documents/picker/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/@react-native-documents/picker/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -103,11 +103,11 @@
       }
     },
     "@react-native-firebase/app": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/app",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-firebase\\app",
       "name": "@react-native-firebase/app",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/app/RNFBApp.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-firebase\\app\\RNFBApp.podspec",
           "version": "22.4.0",
           "configurations": [],
           "scriptPhases": [
@@ -122,12 +122,12 @@
           ]
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/app/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-firebase\\app\\android",
           "packageImportPath": "import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;",
           "packageInstance": "new ReactNativeFirebaseAppPackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/app/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/@react-native-firebase/app/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -136,22 +136,22 @@
       }
     },
     "@react-native-firebase/auth": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/auth",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-firebase\\auth",
       "name": "@react-native-firebase/auth",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/auth/RNFBAuth.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-firebase\\auth\\RNFBAuth.podspec",
           "version": "22.4.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/auth/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-firebase\\auth\\android",
           "packageImportPath": "import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;",
           "packageInstance": "new ReactNativeFirebaseAuthPackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/auth/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/@react-native-firebase/auth/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -160,22 +160,22 @@
       }
     },
     "@react-native-firebase/firestore": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/firestore",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-firebase\\firestore",
       "name": "@react-native-firebase/firestore",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/firestore/RNFBFirestore.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-firebase\\firestore\\RNFBFirestore.podspec",
           "version": "22.4.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/firestore/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-firebase\\firestore\\android",
           "packageImportPath": "import io.invertase.firebase.firestore.ReactNativeFirebaseFirestorePackage;",
           "packageInstance": "new ReactNativeFirebaseFirestorePackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/firestore/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/@react-native-firebase/firestore/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -184,22 +184,22 @@
       }
     },
     "@react-native-firebase/storage": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/storage",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-firebase\\storage",
       "name": "@react-native-firebase/storage",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/storage/RNFBStorage.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-firebase\\storage\\RNFBStorage.podspec",
           "version": "22.4.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/storage/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-firebase\\storage\\android",
           "packageImportPath": "import io.invertase.firebase.storage.ReactNativeFirebaseStoragePackage;",
           "packageInstance": "new ReactNativeFirebaseStoragePackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-firebase/storage/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/@react-native-firebase/storage/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -208,17 +208,17 @@
       }
     },
     "@react-native-picker/picker": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-picker/picker",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-picker\\picker",
       "name": "@react-native-picker/picker",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-picker/picker/RNCPicker.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-picker\\picker\\RNCPicker.podspec",
           "version": "2.11.1",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-picker/picker/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\@react-native-picker\\picker\\android",
           "packageImportPath": "import com.reactnativecommunity.picker.RNCPickerPackage;",
           "packageInstance": "new RNCPickerPackage()",
           "buildTypes": [],
@@ -227,7 +227,7 @@
             "RNCAndroidDialogPickerComponentDescriptor",
             "RNCAndroidDropdownPickerComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/@react-native-picker/picker/android/src/main/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/@react-native-picker/picker/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -236,22 +236,22 @@
       }
     },
     "react-native-fs": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-fs",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-fs",
       "name": "react-native-fs",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-fs/RNFS.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-fs\\RNFS.podspec",
           "version": "2.20.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-fs/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-fs\\android",
           "packageImportPath": "import com.rnfs.RNFSPackage;",
           "packageInstance": "new RNFSPackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-fs/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/react-native-fs/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -260,17 +260,17 @@
       }
     },
     "react-native-gesture-handler": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-gesture-handler",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-gesture-handler",
       "name": "react-native-gesture-handler",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-gesture-handler/RNGestureHandler.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-gesture-handler\\RNGestureHandler.podspec",
           "version": "2.25.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-gesture-handler/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-gesture-handler\\android",
           "packageImportPath": "import com.swmansion.gesturehandler.RNGestureHandlerPackage;",
           "packageInstance": "new RNGestureHandlerPackage()",
           "buildTypes": [],
@@ -279,7 +279,7 @@
             "RNGestureHandlerButtonComponentDescriptor",
             "RNGestureHandlerRootViewComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -288,22 +288,22 @@
       }
     },
     "react-native-get-random-values": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-get-random-values",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-get-random-values",
       "name": "react-native-get-random-values",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-get-random-values/react-native-get-random-values.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-get-random-values\\react-native-get-random-values.podspec",
           "version": "1.11.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-get-random-values/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-get-random-values\\android",
           "packageImportPath": "import org.linusu.RNGetRandomValuesPackage;",
           "packageInstance": "new RNGetRandomValuesPackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-get-random-values/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/react-native-get-random-values/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -312,22 +312,22 @@
       }
     },
     "react-native-html-to-pdf": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-html-to-pdf",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-html-to-pdf",
       "name": "react-native-html-to-pdf",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-html-to-pdf/react-native-html-to-pdf.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-html-to-pdf\\react-native-html-to-pdf.podspec",
           "version": "0.12.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-html-to-pdf/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-html-to-pdf\\android",
           "packageImportPath": "import com.christopherdro.htmltopdf.RNHTMLtoPDFPackage;",
           "packageInstance": "new RNHTMLtoPDFPackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-html-to-pdf/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/react-native-html-to-pdf/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -336,23 +336,23 @@
       }
     },
     "react-native-image-picker": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-image-picker",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-image-picker",
       "name": "react-native-image-picker",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-image-picker/react-native-image-picker.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-image-picker\\react-native-image-picker.podspec",
           "version": "8.2.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-image-picker/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-image-picker\\android",
           "packageImportPath": "import com.imagepicker.ImagePickerPackage;",
           "packageInstance": "new ImagePickerPackage()",
           "buildTypes": [],
           "libraryName": "RNImagePickerSpec",
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-image-picker/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/react-native-image-picker/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -361,22 +361,22 @@
       }
     },
     "react-native-maps": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-maps",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-maps",
       "name": "react-native-maps",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-maps/react-native-maps.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-maps\\react-native-maps.podspec",
           "version": "1.15.6",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-maps/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-maps\\android",
           "packageImportPath": "import com.rnmaps.maps.MapsPackage;",
           "packageInstance": "new MapsPackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-maps/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/react-native-maps/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -385,23 +385,23 @@
       }
     },
     "react-native-reanimated": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-reanimated",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-reanimated",
       "name": "react-native-reanimated",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-reanimated/RNReanimated.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-reanimated\\RNReanimated.podspec",
           "version": "3.17.4",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-reanimated/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-reanimated\\android",
           "packageImportPath": "import com.swmansion.reanimated.ReanimatedPackage;",
           "packageInstance": "new ReanimatedPackage()",
           "buildTypes": [],
           "libraryName": "rnreanimated",
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/react-native-reanimated/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -410,17 +410,17 @@
       }
     },
     "react-native-safe-area-context": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-safe-area-context",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-safe-area-context",
       "name": "react-native-safe-area-context",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-safe-area-context\\react-native-safe-area-context.podspec",
           "version": "5.4.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-safe-area-context/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-safe-area-context\\android",
           "packageImportPath": "import com.th3rdwave.safeareacontext.SafeAreaContextPackage;",
           "packageInstance": "new SafeAreaContextPackage()",
           "buildTypes": [],
@@ -429,7 +429,7 @@
             "RNCSafeAreaProviderComponentDescriptor",
             "RNCSafeAreaViewComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -438,17 +438,17 @@
       }
     },
     "react-native-screens": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-screens",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-screens",
       "name": "react-native-screens",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-screens/RNScreens.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-screens\\RNScreens.podspec",
           "version": "4.10.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-screens/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-screens\\android",
           "packageImportPath": "import com.swmansion.rnscreens.RNScreensPackage;",
           "packageInstance": "new RNScreensPackage()",
           "buildTypes": [],
@@ -466,7 +466,7 @@
             "RNSScreenContentWrapperComponentDescriptor",
             "RNSModalScreenComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-screens/android/src/main/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/react-native-screens/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -475,17 +475,17 @@
       }
     },
     "react-native-svg": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-svg",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-svg",
       "name": "react-native-svg",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-svg/RNSVG.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-svg\\RNSVG.podspec",
           "version": "15.11.2",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-svg/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-svg\\android",
           "packageImportPath": "import com.horcrux.svg.SvgPackage;",
           "packageInstance": "new SvgPackage()",
           "buildTypes": [],
@@ -521,7 +521,7 @@
             "RNSVGTSpanComponentDescriptor",
             "RNSVGUseComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-svg/android/src/main/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/react-native-svg/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -530,23 +530,23 @@
       }
     },
     "react-native-vector-icons": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-vector-icons",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-vector-icons",
       "name": "react-native-vector-icons",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-vector-icons/RNVectorIcons.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-vector-icons\\RNVectorIcons.podspec",
           "version": "10.2.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-vector-icons/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\react-native-vector-icons\\android",
           "packageImportPath": "import com.oblador.vectoricons.VectorIconsPackage;",
           "packageInstance": "new VectorIconsPackage()",
           "buildTypes": [],
           "libraryName": "RNVectorIconsSpec",
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -555,22 +555,22 @@
       }
     },
     "rn-fetch-blob": {
-      "root": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/rn-fetch-blob",
+      "root": "E:\\ReactNative\\propertyApp\\node_modules\\rn-fetch-blob",
       "name": "rn-fetch-blob",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/rn-fetch-blob/rn-fetch-blob.podspec",
+          "podspecPath": "E:\\ReactNative\\propertyApp\\node_modules\\rn-fetch-blob\\rn-fetch-blob.podspec",
           "version": "0.12.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/rn-fetch-blob/android",
+          "sourceDir": "E:\\ReactNative\\propertyApp\\node_modules\\rn-fetch-blob\\android",
           "packageImportPath": "import com.RNFetchBlob.RNFetchBlobPackage;",
           "packageInstance": "new RNFetchBlobPackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/farrukhehsan/Downloads/capital_prop/node_modules/rn-fetch-blob/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "E:/ReactNative/propertyApp/node_modules/rn-fetch-blob/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -741,7 +741,7 @@
         {
           "name": "--path <path>",
           "description": "Path to the React Native project root.",
-          "default": "/Users/farrukhehsan/Downloads/capital_prop"
+          "default": "E:\\ReactNative\\propertyApp"
         },
         {
           "name": "--platform <string>",
@@ -798,7 +798,7 @@
         {
           "name": "--terminal <string>",
           "description": "Launches the Metro Bundler in a new window using the specified terminal path.",
-          "default": "vscode"
+          "default": "cmd.exe"
         },
         {
           "name": "--binary-path <string>",
@@ -958,7 +958,7 @@
         {
           "name": "--terminal <string>",
           "description": "Launches the Metro Bundler in a new window using the specified terminal path.",
-          "default": "vscode"
+          "default": "cmd.exe"
         },
         {
           "name": "--appId <string>",
@@ -1035,7 +1035,7 @@
   ],
   "project": {
     "ios": {
-      "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/ios",
+      "sourceDir": "E:\\ReactNative\\propertyApp\\ios",
       "xcodeProject": {
         "name": "capital_prop.xcworkspace",
         "path": ".",
@@ -1044,7 +1044,7 @@
       "assets": []
     },
     "android": {
-      "sourceDir": "/Users/farrukhehsan/Downloads/capital_prop/android",
+      "sourceDir": "E:\\ReactNative\\propertyApp\\android",
       "appName": "app",
       "packageName": "com.capital_prop",
       "applicationId": "com.capital_prop",

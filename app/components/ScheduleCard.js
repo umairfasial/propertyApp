@@ -8,6 +8,7 @@ const ScheduleCard = ({
   time,
   status = 'Today',
   handleNavigation,
+  templateName
 }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={handleNavigation}>
@@ -15,6 +16,7 @@ const ScheduleCard = ({
         <View style={styles.mainContent}>
           <Text style={styles.address}>{address}</Text>
           <Text style={styles.propertyType}>{propertyType}</Text>
+          <Text style={styles.propertyType}>{templateName}</Text>
           <View style={styles.timeContainer}>
             <ScheduleIcon width={15} height={15} color="#000000" />
 
@@ -90,6 +92,7 @@ const styles = StyleSheet.create({
     color: '#059669',
     fontSize: 12,
     fontWeight: '500',
+    textTransform:'capitalize'
   },
 });
 

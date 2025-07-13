@@ -2,8 +2,8 @@ import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import StatusCard from '../components/StatusCard';
 import StatusBar from '../components/StatusBar';
-import IndentIcon from '../assets/icons/indent.svg';
-import MapIcon from '../assets/icons/map.svg';
+import FilterIcon from '../assets/icons/filter.svg';
+import SortIcon from '../assets/icons/sort.svg';
 import TemperatureScale from '../assets/icons/temperatureScale.svg';
 import TapIocn from '../assets/icons/tapIcon.svg';
 import SLAStatusBar from '../components/StatusBar';
@@ -13,8 +13,6 @@ import {issueTypes, priorities} from '../contants/Constants';
 
 export default function Inspections() {
   const {issues} = useSelector(state => state.issue);
-
-  console.log('issue in the inspection', issues);
 
   return (
     <ScrollView>
@@ -41,15 +39,16 @@ export default function Inspections() {
         <Text style={styles.cardTitle}>Active Issues</Text>
         <View style={styles.iconRow}>
           <View style={styles.iconContainer}>
-            <IndentIcon width={20} height={20} color="#4B5563" />
+            <FilterIcon width={20} height={20} color="#4B5563" />
             <Text>Filter</Text>
           </View>
           <View style={styles.iconContainer}>
-            <MapIcon width={20} height={20} color="#4B5563" />
+            <SortIcon width={20} height={20} color="#4B5563" />
             <Text>Sort</Text>
           </View>
         </View>
       </View>
+      {console.log('issues',issues)}
       {issues?.length > 0 ? (
         issues.map(issue => {
           return (
@@ -150,7 +149,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginRight: 5,
-    gap: 10,
+    gap: 5,
   },
   emptyContainer: {
     flex: 1,

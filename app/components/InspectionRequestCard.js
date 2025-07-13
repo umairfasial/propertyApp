@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
-    marginHorizontal: 16,
+    marginHorizontal: 10,
     marginVertical: 8,
     shadowColor: '#000',
     shadowOffset: {
@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    padding: 16,
+    paddingVertical: 16,
+    paddingHorizontal:12
   },
   header: {
     flexDirection: 'row',
@@ -104,11 +105,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 16,
-    marginLeft: 8,
+    marginLeft: 5,
   },
   statusText: {
     fontSize: 12,
     fontWeight: '500',
+    textTransform:'capitalize'
   },
   description: {
     fontSize: 14,
@@ -132,28 +134,28 @@ const styles = StyleSheet.create({
   },
   actions: {
     flexDirection: 'row',
-    gap: 8,
+    gap: 6,
   },
   declineButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
     borderRadius: 20,
     backgroundColor: '#F3F4F6',
   },
   acceptButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
     borderRadius: 20,
     backgroundColor: '#3B82F6',
   },
   declineText: {
     color: '#374151',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
   },
   acceptText: {
     color: '#FFFFFF',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
   },
 });

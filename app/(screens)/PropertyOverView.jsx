@@ -18,7 +18,7 @@ import FormIcon from '../assets/icons/form.svg';
 import {useRoute} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
-import PersonPropertyRole from '../components/PersonPropertyRole';
+// import PersonPropertyRole from '../components/PersonPropertyRole';
 import {fetchManagers, fetchTenants} from '../redux/slices/auth/authSlice';
 import {
   deletePropertySlice,
@@ -167,7 +167,7 @@ const PropertyOverView = ({navigation}) => {
       {/* People Section */}
       <View style={styles.peopleSection}>
         {/* Landlord */}
-
+{/* 
         <PersonPropertyRole
           heading="Landlord"
           name={
@@ -221,7 +221,7 @@ const PropertyOverView = ({navigation}) => {
             tenants?.find(tan => tan.uid === selectedProperty?.tenantId)
               ?.photoUrl
           }
-        />
+        /> */}
       </View>
 
       {/* Edit & Remove Buttons */}

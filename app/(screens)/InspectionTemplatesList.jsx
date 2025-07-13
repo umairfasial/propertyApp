@@ -33,11 +33,11 @@ export default function InspectionTemplatesList({navigation}) {
         <Text style={styles.subtitle}>
           Manage and create inspection templates
         </Text>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.addButton}
           onPress={() => navigation.navigate('AddInspectionTemplate')}>
           <Text style={styles.addButtonText}>+ New Template</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <View style={styles.content}>
         {templateLoading ? (

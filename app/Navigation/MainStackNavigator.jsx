@@ -1,37 +1,37 @@
-import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import {TabsNavigator} from './TabsNavigator';
-import Notification from '../(screens)/Notification';
-import Certificate from '../(screens)/Certificate';
-import PropertyForm from '../(screens)/PropertyForm';
-import PropertyInspection from '../(screens)/PropertyInspection';
-import ReportIssue from '../(screens)/ReportIssue';
-import KnowledgeAi from '../(screens)/KnowledgeAi';
-import SubscriptionPlan from '../(screens)/SubscriptionPlan';
-import {Text, TouchableOpacity, View} from 'react-native';
-import AddCertificate from '../(screens)/AddCertificate';
+import { TabsNavigator } from "./TabsNavigator";
+import Notification from "../(screens)/Notification";
+import Certificate from "../(screens)/Certificate";
+import PropertyForm from "../(screens)/PropertyForm";
+import PropertyInspection from "../(screens)/PropertyInspection";
+import ReportIssue from "../(screens)/ReportIssue";
+import KnowledgeAi from "../(screens)/KnowledgeAi";
+import SubscriptionPlan from "../(screens)/SubscriptionPlan";
+import { Text, TouchableOpacity, View } from "react-native";
+import AddCertificate from "../(screens)/AddCertificate";
 
-import Plus from '../assets/icons/plus.svg';
-import Contract from '../(screens)/Contract';
-import Inspection from '../(screens)/Inspection';
-import ChatPage from '../(screens)/ChatPage';
-import ReportChat from '../(screens)/ReportChat';
-import ChatHistory from '../(screens)/ChatHistory';
-import AddContract from '../(screens)/AddContract';
-import AssignManager from '../(screens)/AssignManagerForm';
-import PropertyOverView from '../(screens)/PropertyOverView';
-import AssignTenants from '../(screens)/AssignTenant';
-import AddContractForm from '../(screens)/AddContractForm';
-import AddLandLoard from '../(screens)/AddLandLoard';
-import AddInspectionTemplate from '../(screens)/AddInspectionTemplate';
-import AddInspectionItem from '../(screens)/AddInspectionItem';
-import NewInspectionData from '../(screens)/NewInspectionData';
-import ScheduleInspection from '../(screens)/ScheduleInspection';
-import InsepctionChecklist from '../(screens)/InsepctionChecklist';
-import InspectionReport from '../(screens)/InspectionReport';
-import InspectionTemplatesList from '../(screens)/InspectionTemplatesList';
-import InspectionReportDetails from '../(screens)/InspectionReportDetails';
+import Plus from "../assets/icons/plus.svg";
+import Contract from "../(screens)/Contract";
+import Inspection from "../(screens)/Inspection";
+import ChatPage from "../(screens)/ChatPage";
+import ReportChat from "../(screens)/ReportChat";
+import ChatHistory from "../(screens)/ChatHistory";
+import AddContract from "../(screens)/AddContract";
+import AssignManager from "../(screens)/AssignManagerForm";
+import PropertyOverView from "../(screens)/PropertyOverView";
+import AssignTenants from "../(screens)/AssignTenant";
+import AddContractForm from "../(screens)/AddContractForm";
+import AddLandLoard from "../(screens)/AddLandLoard";
+import AddInspectionTemplate from "../(screens)/AddInspectionTemplate";
+import AddInspectionItem from "../(screens)/AddInspectionItem";
+import NewInspectionData from "../(screens)/NewInspectionData";
+import ScheduleInspection from "../(screens)/ScheduleInspection";
+import InsepctionChecklist from "../(screens)/InsepctionChecklist";
+import InspectionReport from "../(screens)/InspectionReport";
+import InspectionTemplatesList from "../(screens)/InspectionTemplatesList";
+import InspectionReportDetails from "../(screens)/InspectionReportDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -40,7 +40,7 @@ export function MainStackNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Tabs"
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         component={TabsNavigator}
       />
       <Stack.Screen
@@ -49,13 +49,14 @@ export function MainStackNavigator() {
         options={{
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
               <Text
                 style={{
                   fontSize: 20,
-                  fontWeight: 'bold',
-                  color: 'black',
-                }}>
+                  fontWeight: "bold",
+                  color: "black",
+                }}
+              >
                 Notifications
               </Text>
             </View>
@@ -66,15 +67,16 @@ export function MainStackNavigator() {
       <Stack.Screen
         name="Certificate"
         component={Certificate}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
               <Text
                 style={{
                   fontSize: 20,
-                  fontWeight: 'bold',
-                  color: 'black',
-                }}>
+                  fontWeight: "bold",
+                  color: "black",
+                }}
+              >
                 Certificates
               </Text>
             </View>
@@ -83,27 +85,29 @@ export function MainStackNavigator() {
 
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => navigation.navigate('AddCertificate')}
+              onPress={() => navigation.navigate("AddCertificate")}
               style={{
-                backgroundColor: '#2563eb',
+                backgroundColor: "#2563eb",
                 width: 160,
                 height: 40,
-                alignItems: 'center',
-                flexDirection: 'row',
-                justifyContent: 'center',
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "center",
                 borderRadius: 6,
-              }}>
+              }}
+            >
               <Plus
                 width={14}
                 height={16}
                 color="#fff"
-                style={{marginRight: 8}}
+                style={{ marginRight: 8 }}
               />
               <Text
                 style={{
-                  color: 'white',
-                  fontFamily: 'Inter',
-                }}>
+                  color: "white",
+                  fontFamily: "Inter",
+                }}
+              >
                 Add Certificate
               </Text>
             </TouchableOpacity>
@@ -120,8 +124,8 @@ export function MainStackNavigator() {
         options={{
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: '700'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text style={{ fontSize: 20, fontWeight: "700" }}>
                 Property Details
               </Text>
             </View>
@@ -135,8 +139,10 @@ export function MainStackNavigator() {
         options={{
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 Property Inspection
               </Text>
             </View>
@@ -150,8 +156,10 @@ export function MainStackNavigator() {
         options={{
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 Inspection Checklist
               </Text>
             </View>
@@ -165,8 +173,10 @@ export function MainStackNavigator() {
         options={{
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 New Inspection Template
               </Text>
             </View>
@@ -177,10 +187,12 @@ export function MainStackNavigator() {
       <Stack.Screen
         name="AddInspectionItem"
         component={AddInspectionItem}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 Add Inspection Item
               </Text>
             </View>
@@ -189,14 +201,16 @@ export function MainStackNavigator() {
 
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => navigation.navigate('NewInspectionData')}>
+              onPress={() => navigation.navigate("NewInspectionData")}
+            >
               <Text
                 style={{
-                  color: '#2563EB',
-                  fontFamily: 'Inter',
-                  fontWeight: '600',
+                  color: "#2563EB",
+                  fontFamily: "Inter",
+                  fontWeight: "600",
                   marginRight: 0,
-                }}>
+                }}
+              >
                 Add New Item
               </Text>
             </TouchableOpacity>
@@ -217,8 +231,10 @@ export function MainStackNavigator() {
         options={{
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 New Inspection Item
               </Text>
             </View>
@@ -232,8 +248,10 @@ export function MainStackNavigator() {
         options={{
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 Inspection Report
               </Text>
             </View>
@@ -247,8 +265,10 @@ export function MainStackNavigator() {
         options={{
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 Report Details
               </Text>
             </View>
@@ -262,8 +282,10 @@ export function MainStackNavigator() {
         options={{
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 Report an Issue
               </Text>
             </View>
@@ -277,8 +299,10 @@ export function MainStackNavigator() {
         options={{
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 Knowledge AI
               </Text>
             </View>
@@ -292,8 +316,10 @@ export function MainStackNavigator() {
         options={{
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 Subscription Plans
               </Text>
             </View>
@@ -307,8 +333,10 @@ export function MainStackNavigator() {
         options={{
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 Property Certificates
               </Text>
             </View>
@@ -322,8 +350,10 @@ export function MainStackNavigator() {
         options={{
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 Contract
               </Text>
             </View>
@@ -334,11 +364,13 @@ export function MainStackNavigator() {
       <Stack.Screen
         name="Contract"
         component={Contract}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 Contracts
               </Text>
             </View>
@@ -346,26 +378,27 @@ export function MainStackNavigator() {
           headerRight: () => (
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('AddContractForm');
+                navigation.navigate("AddContractForm");
               }}
               style={{
                 width: 140,
                 height: 40,
-                alignItems: 'center',
-                flexDirection: 'row',
-                justifyContent: 'flex-end',
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "flex-end",
                 borderRadius: 6,
-              }}>
+              }}
+            >
               <Plus
                 width={20}
                 height={20}
                 color="#000"
-                style={{marginRight: 8}}
+                style={{ marginRight: 8 }}
               />
             </TouchableOpacity>
           ),
           headerStyle: {
-            backgroundColor: '#fff',
+            backgroundColor: "#fff",
           },
           headerRightContainerStyle: {
             paddingRight: 16,
@@ -379,11 +412,13 @@ export function MainStackNavigator() {
       <Stack.Screen
         name="Inspection"
         component={Inspection}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 Inspection Templates
               </Text>
             </View>
@@ -391,29 +426,30 @@ export function MainStackNavigator() {
           headerRight: () => (
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('AddInspectionTemplate');
+                navigation.navigate("AddInspectionTemplate");
               }}
               style={{
-                backgroundColor: '#2563eb',
+                backgroundColor: "#2563eb",
                 width: 80,
                 height: 40,
-                alignItems: 'center',
-                flexDirection: 'row',
-                justifyContent: 'center',
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "center",
                 borderRadius: 6,
-              }}>
+              }}
+            >
               <Plus
                 width={14}
                 height={16}
                 color="#fff"
-                style={{marginRight: 8}}
+                style={{ marginRight: 8 }}
               />
-              <Text style={{color: 'white', fontWeight: 'bold'}}>Add</Text>
+              <Text style={{ color: "white", fontWeight: "bold" }}>Add</Text>
             </TouchableOpacity>
           ),
-          headerTitleAlign: 'left', // Keep this to ensure headerTitle is left aligned
+          headerTitleAlign: "left", // Keep this to ensure headerTitle is left aligned
           headerStyle: {
-            backgroundColor: '#fff',
+            backgroundColor: "#fff",
           },
           headerRightContainerStyle: {
             paddingRight: 16,
@@ -427,11 +463,13 @@ export function MainStackNavigator() {
       <Stack.Screen
         name="ScheduleInspection"
         component={ScheduleInspection}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           headerBackTitleVisible: false,
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
+              >
                 Schedule Inspection
               </Text>
             </View>
@@ -442,35 +480,36 @@ export function MainStackNavigator() {
       <Stack.Screen
         name="ChatPage"
         component={ChatPage}
-        options={({route, navigation}) => ({
+        options={({ route, navigation }) => ({
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
-                {route.params?.title || 'Chat'}
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text style={{ fontSize: 20, fontWeight: "700", color: "black" }}>
+                {route.params?.title || "Chat"}
               </Text>
             </View>
           ),
-          headerTitleAlign: 'left', // Ensure headerTitle is left aligned
+          headerTitleAlign: "left", // Ensure headerTitle is left aligned
           headerStyle: {
-            backgroundColor: '#fff',
+            backgroundColor: "#fff",
           },
           headerBackTitleVisible: false,
           headerRight: () => (
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('ReportChat');
+                navigation.navigate("ReportChat");
               }}
               style={{
                 marginRight: 0,
-                backgroundColor: '#DC2626',
+                backgroundColor: "#DC2626",
                 paddingHorizontal: 16,
                 height: 36,
-                alignItems: 'center',
-                flexDirection: 'row',
-                justifyContent: 'center',
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "center",
                 borderRadius: 6,
-              }}>
-              <Text style={{color: 'white', fontWeight: '500', fontSize: 14}}>
+              }}
+            >
+              <Text style={{ color: "white", fontWeight: "500", fontSize: 14 }}>
                 Report
               </Text>
             </TouchableOpacity>
@@ -489,15 +528,15 @@ export function MainStackNavigator() {
         component={ReportChat}
         options={() => ({
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text style={{ fontSize: 20, fontWeight: "700", color: "black" }}>
                 Report Chat
               </Text>
             </View>
           ),
-          headerTitleAlign: 'left', // Ensure headerTitle is left aligned
+          headerTitleAlign: "left", // Ensure headerTitle is left aligned
           headerStyle: {
-            backgroundColor: '#fff',
+            backgroundColor: "#fff",
           },
           headerBackTitleVisible: false,
           headerLeftContainerStyle: {
@@ -511,15 +550,15 @@ export function MainStackNavigator() {
         component={ChatHistory}
         options={() => ({
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text style={{ fontSize: 20, fontWeight: "700", color: "black" }}>
                 Chat History
               </Text>
             </View>
           ),
-          headerTitleAlign: 'left', // Ensure headerTitle is left aligned
+          headerTitleAlign: "left", // Ensure headerTitle is left aligned
           headerStyle: {
-            backgroundColor: '#fff',
+            backgroundColor: "#fff",
           },
           headerBackTitleVisible: false,
           headerLeftContainerStyle: {
@@ -533,15 +572,15 @@ export function MainStackNavigator() {
         component={PropertyOverView}
         options={() => ({
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text style={{ fontSize: 20, fontWeight: "700", color: "black" }}>
                 Property Overview
               </Text>
             </View>
           ),
           headerBackTitleVisible: false,
           headerStyle: {
-            backgroundColor: '#fff',
+            backgroundColor: "#fff",
           },
           headerLeftContainerStyle: {
             paddingLeft: 16,
@@ -551,12 +590,14 @@ export function MainStackNavigator() {
       <Stack.Screen
         name="AssignManager"
         component={AssignManager}
-        options={({navigation, route}) => {
-          const {propertyId, next} = route.params;
+        options={({ navigation, route }) => {
+          const { propertyId, next } = route.params;
           return {
             headerTitle: () => (
-              <View style={{flex: 1, alignItems: 'flex-start'}}>
-                <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
+              <View style={{ flex: 1, alignItems: "flex-start" }}>
+                <Text
+                  style={{ fontSize: 20, fontWeight: "700", color: "black" }}
+                >
                   Assign Property Manager
                 </Text>
               </View>
@@ -569,19 +610,21 @@ export function MainStackNavigator() {
               next && (
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('AssignTenants', {
+                    navigation.navigate("AssignTenants", {
                       propertyId,
                       next: true,
                     })
-                  }>
+                  }
+                >
                   <Text
-                    style={{color: '#007AFF', fontSize: 16, marginRight: 16}}>
+                    style={{ color: "#007AFF", fontSize: 16, marginRight: 16 }}
+                  >
                     Skip
                   </Text>
                 </TouchableOpacity>
               ),
             headerStyle: {
-              backgroundColor: '#fff',
+              backgroundColor: "#fff",
             },
             headerLeftContainerStyle: {
               paddingLeft: 16,
@@ -593,12 +636,14 @@ export function MainStackNavigator() {
       <Stack.Screen
         name="AssignTenants"
         component={AssignTenants}
-        options={({navigation, route}) => {
-          const {propertyId, next} = route.params;
+        options={({ navigation, route }) => {
+          const { propertyId, next } = route.params;
           return {
             headerTitle: () => (
-              <View style={{flex: 1, alignItems: 'flex-start'}}>
-                <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
+              <View style={{ flex: 1, alignItems: "flex-start" }}>
+                <Text
+                  style={{ fontSize: 20, fontWeight: "700", color: "black" }}
+                >
                   Invite Tenants
                 </Text>
               </View>
@@ -611,22 +656,24 @@ export function MainStackNavigator() {
               next && (
                 <TouchableOpacity
                   onPress={() =>
-                    propertyId && navigation.navigate('Properties')
+                    propertyId && navigation.navigate("Properties")
                   }
                   style={{
                     marginRight: 16,
-                  }}>
+                  }}
+                >
                   <Text
                     style={{
-                      color: '#007AFF',
+                      color: "#007AFF",
                       fontSize: 16,
-                    }}>
+                    }}
+                  >
                     Skip
                   </Text>
                 </TouchableOpacity>
               ),
             headerStyle: {
-              backgroundColor: '#fff',
+              backgroundColor: "#fff",
             },
             headerLeftContainerStyle: {
               paddingLeft: 16,
@@ -641,8 +688,10 @@ export function MainStackNavigator() {
         options={() => {
           return {
             headerTitle: () => (
-              <View style={{flex: 1, alignItems: 'flex-start'}}>
-                <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
+              <View style={{ flex: 1, alignItems: "flex-start" }}>
+                <Text
+                  style={{ fontSize: 20, fontWeight: "700", color: "black" }}
+                >
                   Assign Landloard
                 </Text>
               </View>
@@ -652,7 +701,7 @@ export function MainStackNavigator() {
             headerBackVisible: true,
             headerBackTitleVisible: false,
             headerStyle: {
-              backgroundColor: '#fff',
+              backgroundColor: "#fff",
             },
             headerLeftContainerStyle: {
               paddingLeft: 16,
@@ -666,15 +715,15 @@ export function MainStackNavigator() {
         component={AddContractForm}
         options={() => ({
           headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text style={{ fontSize: 20, fontWeight: "700", color: "black" }}>
                 Add Contract Form
               </Text>
             </View>
           ),
           headerBackTitleVisible: false,
           headerStyle: {
-            backgroundColor: '#fff',
+            backgroundColor: "#fff",
           },
           headerLeftContainerStyle: {
             paddingLeft: 16,
@@ -685,15 +734,49 @@ export function MainStackNavigator() {
       <Stack.Screen
         name="InspectionTemplatesList"
         component={InspectionTemplatesList}
-        options={{
-          headerBackTitleVisible: false,
-          headerTitle: () => (
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>
-                Inspection Templates
-              </Text>
-            </View>
-          ),
+        options={({ navigation, route }) => {
+          return {
+            headerBackTitleVisible: false,
+            headerTitle: () => (
+              <View
+                style={{
+                  alignSelf: "flex-start",
+                  flex: 1,
+                  marginLeft: -20,
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Text
+                  style={{ fontSize: 16, fontWeight: "bold", color: "black" }}
+                >
+                  Inspection Templates
+                </Text>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: "#2563EB",
+                    paddingHorizontal: 18,
+                    borderRadius: 8,
+                    marginLeft: "10%",
+                    height: 30,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  onPress={() => navigation.navigate("AddInspectionTemplate")}
+                >
+                  <Text
+                    style={{
+                      color: "#fff",
+                      fontWeight: "600",
+                      fontSize: 15,
+                    }}
+                  >
+                    + Add New
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ),
+          };
         }}
       />
     </Stack.Navigator>

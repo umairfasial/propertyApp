@@ -163,6 +163,11 @@ export default function PropertyInspection({navigation}) {
                     property => property.id === inspection.property,
                   )?.propertyType
                 }
+                templateName={
+                  selectedTemplate?.find(
+                    template => template.id === inspection.template,
+                  )?.name
+                }
                 time={inspection.date}
                 status={inspection.status}
                 handleNavigation={() => {
