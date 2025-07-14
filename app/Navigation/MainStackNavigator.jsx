@@ -734,50 +734,52 @@ export function MainStackNavigator() {
       <Stack.Screen
         name="InspectionTemplatesList"
         component={InspectionTemplatesList}
-        options={({ navigation, route }) => {
-          return {
-            headerBackTitleVisible: false,
-            headerTitle: () => (
-              <View
-                style={{
-                  alignSelf: "flex-start",
-                  flex: 1,
-                  marginLeft: -20,
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
+        options={({ navigation }) => ({
+          headerBackTitleVisible: false,
+          headerTitle: () => (
+            <View style={{ flex: 1, alignItems: "flex-start" }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
               >
-                <Text
-                  style={{ fontSize: 16, fontWeight: "bold", color: "black" }}
-                >
-                  Inspection Templates
-                </Text>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: "#2563EB",
-                    paddingHorizontal: 18,
-                    borderRadius: 8,
-                    marginLeft: "10%",
-                    height: 30,
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  onPress={() => navigation.navigate("AddInspectionTemplate")}
-                >
-                  <Text
-                    style={{
-                      color: "#fff",
-                      fontWeight: "600",
-                      fontSize: 15,
-                    }}
-                  >
-                    + Add New
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            ),
-          };
-        }}
+                Inspection Templates
+              </Text>
+            </View>
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("AddInspectionTemplate");
+              }}
+              style={{
+                backgroundColor: "#2563eb",
+                width: 80,
+                height: 40,
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "center",
+                borderRadius: 6,
+              }}
+            >
+              <Plus
+                width={14}
+                height={16}
+                color="#fff"
+                style={{ marginRight: 8 }}
+              />
+              <Text style={{ color: "white", fontWeight: "bold" }}>Add</Text>
+            </TouchableOpacity>
+          ),
+          headerTitleAlign: "left", // Keep this to ensure headerTitle is left aligned
+          headerStyle: {
+            backgroundColor: "#fff",
+          },
+          headerRightContainerStyle: {
+            paddingRight: 16,
+          },
+          headerLeftContainerStyle: {
+            paddingLeft: 16,
+          },
+        })}
       />
     </Stack.Navigator>
   );
