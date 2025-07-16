@@ -252,7 +252,7 @@ export function MainStackNavigator() {
               <Text
                 style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
               >
-                Inspection Report
+                Inspection Reports
               </Text>
             </View>
           ),
@@ -269,7 +269,7 @@ export function MainStackNavigator() {
               <Text
                 style={{ fontSize: 20, fontWeight: "bold", color: "black" }}
               >
-                Report Details
+                Inspection Report
               </Text>
             </View>
           ),

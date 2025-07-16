@@ -1,4 +1,4 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   addInspectionItem,
   addInspectionTemplateApi,
@@ -11,115 +11,115 @@ import {
   saveInspectionReportApi,
   fetchInspectionReportWithUserIdApi,
   fetchInspectionDetailsByIdsApi,
-} from './inspectionApi';
-import {fetchInspectionItemsApi} from './inspectionApi';
+} from "./inspectionApi";
+import { fetchInspectionItemsApi } from "./inspectionApi";
 
 // ✅ Thunk to add a new inspection
 export const addInspectionItemSlice = createAsyncThunk(
-  'inspection/addInspectionItemSlice',
-  async (inspectionData, {rejectWithValue}) => {
+  "inspection/addInspectionItemSlice",
+  async (inspectionData, { rejectWithValue }) => {
     try {
-      const response = await addInspectionItem({inspectionData});
-      console.log('response', response).data;
+      const response = await addInspectionItem({ inspectionData });
+      console.log("response", response).data;
 
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || 'Something went wrong');
+      return rejectWithValue(error.response?.data || "Something went wrong");
     }
-  },
+  }
 );
 
 export const addInspectionTemplateSlice = createAsyncThunk(
-  'inspection/addInspectionTemplateSlice',
-  async ({inspectionTemplate}, {rejectWithValue}) => {
+  "inspection/addInspectionTemplateSlice",
+  async ({ inspectionTemplate }, { rejectWithValue }) => {
     try {
-      const response = await addInspectionTemplateApi({inspectionTemplate});
-      console.log('response', response).data;
+      const response = await addInspectionTemplateApi({ inspectionTemplate });
+      console.log("response", response).data;
 
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || 'Something went wrong');
+      return rejectWithValue(error.response?.data || "Something went wrong");
     }
-  },
+  }
 );
 
 export const fetchInspectionItems = createAsyncThunk(
-  'inspection/fetchInspectionItems',
-  async (_, {rejectWithValue}) => {
+  "inspection/fetchInspectionItems",
+  async (_, { rejectWithValue }) => {
     try {
       const response = await fetchInspectionItemsApi();
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || 'Something went wrong');
+      return rejectWithValue(error.response?.data || "Something went wrong");
     }
-  },
+  }
 );
 
 export const fetchInspectionTemplatesSlice = createAsyncThunk(
-  'inspection/fetchInspectionTemplates',
-  async (_, {rejectWithValue}) => {
+  "inspection/fetchInspectionTemplates",
+  async (_, { rejectWithValue }) => {
     try {
       const response = await fetchInspectionTemplatesApi();
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || 'Something went wrong');
+      return rejectWithValue(error.response?.data || "Something went wrong");
     }
-  },
+  }
 );
 
 export const scheduleInspectionSlice = createAsyncThunk(
-  'inspection/scheduleInspection',
-  async (inspectionData, {rejectWithValue}) => {
+  "inspection/scheduleInspection",
+  async (inspectionData, { rejectWithValue }) => {
     try {
       const response = await scheduleInspectionApi(inspectionData);
       return response;
     } catch (error) {
-      return rejectWithValue(error.response?.data || 'Something went wrong');
+      return rejectWithValue(error.response?.data || "Something went wrong");
     }
-  },
+  }
 );
 
 export const fetchInspectionsByUserIdSlice = createAsyncThunk(
-  'inspection/fetchInspectionsByUserId',
-  async (userId, {rejectWithValue}) => {
+  "inspection/fetchInspectionsByUserId",
+  async (userId, { rejectWithValue }) => {
     try {
       const response = await fetchInspectionsByUserIdApi(userId);
       return response;
     } catch (error) {
-      return rejectWithValue(error.response?.data || 'Something went wrong');
+      return rejectWithValue(error.response?.data || "Something went wrong");
     }
-  },
+  }
 );
 
 export const fetchTemplateByTemplateIdSlice = createAsyncThunk(
-  'inspection/fetchTemplateByTemplateId',
-  async (templateId, {rejectWithValue}) => {
+  "inspection/fetchTemplateByTemplateId",
+  async (templateId, { rejectWithValue }) => {
     try {
       const response = await fetchTemplateByTemplateIdApi(templateId);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || 'Something went wrong');
+      return rejectWithValue(error.response?.data || "Something went wrong");
     }
-  },
+  }
 );
 
 export const fetchInspectionItemsByIdsSlice = createAsyncThunk(
-  'inspection/fetchInspectionItemsByIdsSlice',
-  async (inspectionItems, {rejectWithValue}) => {
+  "inspection/fetchInspectionItemsByIdsSlice",
+  async (inspectionItems, { rejectWithValue }) => {
     try {
       const response = await fetchInspectionItemsByIdsApi(inspectionItems);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || 'Something went wrong');
+      return rejectWithValue(error.response?.data || "Something went wrong");
     }
-  },
+  }
 );
 
 export const saveInspectionReportSlice = createAsyncThunk(
-  'inspection/saveInspectionReport',
+  "inspection/saveInspectionReport",
   async (
-    {inspectionId, checklistItemsData, templateId, userId, propertyId},
-    {rejectWithValue},
+    { inspectionId, checklistItemsData, templateId, userId, propertyId },
+    { rejectWithValue }
   ) => {
     try {
       const reportData = {};
@@ -130,9 +130,9 @@ export const saveInspectionReportSlice = createAsyncThunk(
           const itemData = checklistItemsData[itemId];
 
           if (itemData.isSkipped) {
-            reportData[itemId] = {skipped: true};
+            reportData[itemId] = { skipped: true };
           } else {
-            const itemReport = {...itemData.data};
+            const itemReport = { ...itemData.data };
             const itemUploadPromises = [];
             const imageUrls = [];
             const videoUrls = [];
@@ -143,12 +143,12 @@ export const saveInspectionReportSlice = createAsyncThunk(
                 const storagePath = `inspection_reports/${inspectionId}/${itemId}/images/${index}_${image.fileName}`;
                 itemUploadPromises.push(
                   uploadFileToFirebaseStorage(image.uri, storagePath).then(
-                    result => {
+                    (result) => {
                       if (result.success) {
                         imageUrls.push(result.url);
                       }
-                    },
-                  ),
+                    }
+                  )
                 );
               });
             }
@@ -159,12 +159,12 @@ export const saveInspectionReportSlice = createAsyncThunk(
                 const storagePath = `inspection_reports/${inspectionId}/${itemId}/videos/${index}_${video.fileName}`;
                 itemUploadPromises.push(
                   uploadFileToFirebaseStorage(video.uri, storagePath).then(
-                    result => {
+                    (result) => {
                       if (result.success) {
                         videoUrls.push(result.url); // Collect video URLs here
                       }
-                    },
-                  ),
+                    }
+                  )
                 );
               });
             }
@@ -182,7 +182,7 @@ export const saveInspectionReportSlice = createAsyncThunk(
       }
 
       // Wait for all items to be processed (including their uploads)
-      await Promise.all(itemProcessingPromises.map(promise => promise()));
+      await Promise.all(itemProcessingPromises.map((promise) => promise()));
 
       // Save the report data to Firestore
       const saveResult = await saveInspectionReportApi(
@@ -192,47 +192,47 @@ export const saveInspectionReportSlice = createAsyncThunk(
         },
         templateId,
         userId,
-        propertyId,
+        propertyId
       ); // Include templateId, userId, and propertyId at the top level
 
       if (!saveResult.success) {
         return rejectWithValue(
-          saveResult.error || 'Failed to save inspection report',
+          saveResult.error || "Failed to save inspection report"
         );
       }
 
-      return {success: true, inspectionId};
+      return { success: true, inspectionId };
     } catch (error) {
-      console.error('Error in saveInspectionReportSlice:', error);
+      console.error("Error in saveInspectionReportSlice:", error);
       return rejectWithValue(
-        error.message || 'Something went wrong saving the report',
+        error.message || "Something went wrong saving the report"
       );
     }
-  },
+  }
 );
 
 export const fetchInspectionReportWithUserId = createAsyncThunk(
-  'inspection/fetchInspectionReportWithUserId',
-  async (userId, {rejectWithValue}) => {
+  "inspection/fetchInspectionReportWithUserId",
+  async (userId, { rejectWithValue }) => {
     try {
       const response = await fetchInspectionReportWithUserIdApi(userId);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || 'Something went wrong');
+      return rejectWithValue(error.response?.data || "Something went wrong");
     }
-  },
+  }
 );
 
 export const fetchInspectionDetailsByIds = createAsyncThunk(
-  'inspection/fetchInspectionDetailsByIds',
-  async (inspectionIds, {rejectWithValue}) => {
+  "inspection/fetchInspectionDetailsByIds",
+  async (inspectionIds, { rejectWithValue }) => {
     try {
       const response = await fetchInspectionDetailsByIdsApi(inspectionIds);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || 'Something went wrong');
+      return rejectWithValue(error.response?.data || "Something went wrong");
     }
-  },
+  }
 );
 
 const initialState = {
@@ -253,18 +253,18 @@ const initialState = {
 };
 
 const inspectionSlice = createSlice({
-  name: 'inspection',
+  name: "inspection",
   initialState,
   reducers: {
-    clearInspectionState: state => {
+    clearInspectionState: (state) => {
       state.loading = false;
       state.error = null;
       state.successMessage = null;
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(addInspectionItemSlice.pending, state => {
+      .addCase(addInspectionItemSlice.pending, (state) => {
         state.loading = true;
         state.error = null;
         state.successMessage = null;
@@ -272,13 +272,13 @@ const inspectionSlice = createSlice({
       .addCase(addInspectionItemSlice.fulfilled, (state, action) => {
         state.loading = false;
         state.inspectionItems.push(action.payload);
-        state.successMessage = 'Inspection item added successfully';
+        state.successMessage = "Inspection item added successfully";
       })
       .addCase(addInspectionItemSlice.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(fetchInspectionItems.pending, state => {
+      .addCase(fetchInspectionItems.pending, (state) => {
         state.loading = true;
         state.error = null;
         state.successMessage = null;
@@ -286,13 +286,13 @@ const inspectionSlice = createSlice({
       .addCase(fetchInspectionItems.fulfilled, (state, action) => {
         state.loading = false;
         state.inspectionItems = action.payload;
-        state.successMessage = 'Inspection item added successfully';
+        state.successMessage = "Inspection item added successfully";
       })
       .addCase(fetchInspectionItems.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(fetchInspectionTemplatesSlice.pending, state => {
+      .addCase(fetchInspectionTemplatesSlice.pending, (state) => {
         state.templateLoading = true;
         state.error = null;
         state.successMessage = null;
@@ -300,26 +300,26 @@ const inspectionSlice = createSlice({
       .addCase(fetchInspectionTemplatesSlice.fulfilled, (state, action) => {
         state.templateLoading = false;
         state.inspectionTemplates = action.payload;
-        state.successMessage = 'Inspection item added successfully';
+        state.successMessage = "Inspection item added successfully";
       })
       .addCase(fetchInspectionTemplatesSlice.rejected, (state, action) => {
         state.templateLoading = false;
         state.error = action.payload;
       })
-      .addCase(scheduleInspectionSlice.pending, state => {
+      .addCase(scheduleInspectionSlice.pending, (state) => {
         state.scheduleLoading = true;
         state.error = null;
         state.successMessage = null;
       })
       .addCase(scheduleInspectionSlice.fulfilled, (state, action) => {
         state.scheduleLoading = false;
-        state.successMessage = 'Inspection scheduled successfully';
+        state.successMessage = "Inspection scheduled successfully";
       })
       .addCase(scheduleInspectionSlice.rejected, (state, action) => {
         state.scheduleLoading = false;
         state.error = action.payload;
       })
-      .addCase(fetchInspectionsByUserIdSlice.pending, state => {
+      .addCase(fetchInspectionsByUserIdSlice.pending, (state) => {
         state.fetchInspectionsLoading = true;
         state.error = null;
       })
@@ -331,7 +331,7 @@ const inspectionSlice = createSlice({
         state.fetchInspectionsLoading = false;
         state.error = action.payload;
       })
-      .addCase(fetchTemplateByTemplateIdSlice.pending, state => {
+      .addCase(fetchTemplateByTemplateIdSlice.pending, (state) => {
         state.templateLoading = true;
         state.error = null;
         state.successMessage = null;
@@ -344,7 +344,7 @@ const inspectionSlice = createSlice({
         state.templateLoading = false;
         state.error = action.payload;
       })
-      .addCase(fetchInspectionItemsByIdsSlice.pending, state => {
+      .addCase(fetchInspectionItemsByIdsSlice.pending, (state) => {
         state.itemLoading = true;
         state.error = null;
         state.successMessage = null;
@@ -357,7 +357,7 @@ const inspectionSlice = createSlice({
         state.itemLoading = false;
         state.error = action.payload;
       })
-      .addCase(saveInspectionReportSlice.pending, state => {
+      .addCase(saveInspectionReportSlice.pending, (state) => {
         state.loading = true;
         state.error = null;
         state.successMessage = null;
@@ -370,7 +370,7 @@ const inspectionSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(fetchInspectionReportWithUserId.pending, state => {
+      .addCase(fetchInspectionReportWithUserId.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -382,7 +382,7 @@ const inspectionSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(fetchInspectionDetailsByIds.pending, state => {
+      .addCase(fetchInspectionDetailsByIds.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -397,5 +397,5 @@ const inspectionSlice = createSlice({
   },
 });
 
-export const {clearInspectionState} = inspectionSlice.actions;
+export const { clearInspectionState } = inspectionSlice.actions;
 export default inspectionSlice.reducer;

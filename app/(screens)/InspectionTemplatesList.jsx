@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,14 +6,15 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
-} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import InspectionTemplateCard from '../components/ui/InspectionTemplateCard';
-import {fetchInspectionTemplatesSlice} from '../redux/slices/inspection/inspectionSlice';
+} from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import InspectionTemplateCard from "../components/ui/InspectionTemplateCard";
+import { fetchInspectionTemplatesSlice } from "../redux/slices/inspection/inspectionSlice";
+import { useFocusEffect } from "@react-navigation/native";
 
-export default function InspectionTemplatesList({navigation}) {
-  const {inspectionTemplates, templateLoading} = useSelector(
-    state => state.inspection,
+export default function InspectionTemplatesList({ navigation }) {
+  const { inspectionTemplates, templateLoading } = useSelector(
+    (state) => state.inspection
   );
   const dispatch = useDispatch();
 
@@ -21,7 +22,13 @@ export default function InspectionTemplatesList({navigation}) {
     dispatch(fetchInspectionTemplatesSlice());
   }, []);
 
-  const handleTemplatePress = templateId => {
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(fetchInspectionTemplatesSlice());
+    }, [dispatch])
+  );
+
+  const handleTemplatePress = (templateId) => {
     // TODO: Navigate to template details or edit page if needed
     // navigation.navigate('InspectionTemplateDetails', { templateId });
   };
@@ -47,7 +54,7 @@ export default function InspectionTemplatesList({navigation}) {
             style={styles.loader}
           />
         ) : inspectionTemplates && inspectionTemplates.length > 0 ? (
-          inspectionTemplates.map(template => (
+          inspectionTemplates.map((template) => (
             <InspectionTemplateCard
               key={template.id}
               title={template.name}
@@ -67,44 +74,44 @@ export default function InspectionTemplatesList({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
+    backgroundColor: "#F8F9FA",
   },
   header: {
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
-    backgroundColor: 'white',
+    borderBottomColor: "#E5E7EB",
+    backgroundColor: "white",
   },
   title: {
     fontSize: 24,
-    fontWeight: '700',
+    fontWeight: "700",
     marginBottom: 5,
   },
   subtitle: {
     fontSize: 14,
-    color: '#6B7280',
+    color: "#6B7280",
     lineHeight: 20,
   },
   addButton: {
     marginTop: 12,
-    backgroundColor: '#2563EB',
+    backgroundColor: "#2563EB",
     paddingVertical: 10,
     paddingHorizontal: 18,
     borderRadius: 8,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
   },
   addButtonText: {
-    color: '#fff',
-    fontWeight: '600',
+    color: "#fff",
+    fontWeight: "600",
     fontSize: 16,
   },
   content: {
     padding: 16,
   },
   emptyText: {
-    textAlign: 'center',
-    color: '#6B7280',
+    textAlign: "center",
+    color: "#6B7280",
     marginTop: 20,
   },
   loader: {

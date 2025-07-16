@@ -1,31 +1,31 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   StyleSheet,
   Text,
   TouchableOpacity,
   ScrollView,
-} from 'react-native';
-import StatCard from '../components/StatCard';
+} from "react-native";
+import StatCard from "../components/StatCard";
 
 // Import Icons
-import PropertiesIcon from '../assets/icons/properties.svg';
-import InspectionsIcon from '../assets/icons/inspections.svg';
-import IssuesIcon from '../assets/icons/issues.svg';
-import ComplianceIcon from '../assets/icons/compliance.svg';
-import Plus from '../assets/icons/plus.svg';
-import DashboardSection from '../components/DashboardSection';
-import ClipboardCheck from '../assets/icons/clipboard-check.svg';
-import Knowledge from '../assets/icons/knowledge.svg';
-import {useDispatch, useSelector} from 'react-redux';
-import {logoutUserSlice} from '../redux/slices/auth/authSlice';
+import PropertiesIcon from "../assets/icons/properties.svg";
+import InspectionsIcon from "../assets/icons/inspections.svg";
+import IssuesIcon from "../assets/icons/issues.svg";
+import ComplianceIcon from "../assets/icons/compliance.svg";
+import Plus from "../assets/icons/plus.svg";
+import DashboardSection from "../components/DashboardSection";
+import ClipboardCheck from "../assets/icons/clipboard-check.svg";
+import Knowledge from "../assets/icons/knowledge.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUserSlice } from "../redux/slices/auth/authSlice";
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
   const dispatch = useDispatch();
-  const {userData} = useSelector(state => state.auth);
+  const { userData } = useSelector((state) => state.auth);
 
   const handleLogOut = () => {
-    dispatch(logoutUserSlice({uid: userData.uid})).then(() => {
+    dispatch(logoutUserSlice({ uid: userData.uid })).then(() => {
       // navigation.navigate('Login');
     });
   };
@@ -75,7 +75,8 @@ export default function Home({navigation}) {
           </View>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('SubscriptionPlan')}>
+            onPress={() => navigation.navigate("SubscriptionPlan")}
+          >
             <Plus width={14} height={16} color="#fff" />
             <Text style={styles.buttonText}>Upgrade</Text>
           </TouchableOpacity>
@@ -87,28 +88,28 @@ export default function Home({navigation}) {
             items={[
               {
                 icon: <Plus width={18} height={18} color="#3B82F6" />,
-                iconBackground: '#DBEAFE',
-                label: 'Add Property',
-                clicked: () => navigation.navigate('PropertyForm'),
+                iconBackground: "#DBEAFE",
+                label: "Add Property",
+                clicked: () => navigation.navigate("PropertyForm"),
               },
               {
                 icon: <ClipboardCheck width={18} height={18} color="#8B5CF6" />,
-                iconBackground: '#EDE9FE',
-                label: 'Inspect',
-                clicked: () => navigation.navigate('ScheduleInspection'),
+                iconBackground: "#EDE9FE",
+                label: "Inspect",
+                clicked: () => navigation.navigate("ScheduleInspection"),
               },
               {
                 icon: <IssuesIcon width={18} height={18} color="#EF4444" />,
-                iconBackground: '#FEE2E2',
-                label: 'Report Issue',
-                clicked: () => navigation.navigate('ReportIssue'),
+                iconBackground: "#FEE2E2",
+                label: "Report Issue",
+                clicked: () => navigation.navigate("ReportIssue"),
               },
-              {
-                icon: <Knowledge width={18} height={18} color="#DC2626" />,
-                iconBackground: '#FFEDD5',
-                label: 'Knowledge',
-                clicked: () => navigation.navigate('KnowledgeAi'),
-              },
+              // {
+              //   icon: <Knowledge width={18} height={18} color="#DC2626" />,
+              //   iconBackground: '#FFEDD5',
+              //   label: 'Knowledge',
+              //   clicked: () => navigation.navigate('KnowledgeAi'),
+              // },
             ]}
           />
         </View>
@@ -119,10 +120,10 @@ export default function Home({navigation}) {
             items={[
               {
                 icon: <PropertiesIcon width={12} height={16} color="#3B82F6" />,
-                iconBackground: '#DBEAFE',
-                title: 'New property registered',
-                subtitle: '123 Main Street, Suite 4B',
-                time: '2m ago',
+                iconBackground: "#DBEAFE",
+                title: "New property registered",
+                subtitle: "123 Main Street, Suite 4B",
+                time: "2m ago",
               },
             ]}
           />
@@ -136,10 +137,10 @@ export default function Home({navigation}) {
                 icon: (
                   <InspectionsIcon width={12} height={16} color="#8B5CF6" />
                 ),
-                iconBackground: '#EDE9FE',
-                title: 'Inspection scheduled',
-                subtitle: '456 Park Avenue - Annual Check',
-                time: '1h ago',
+                iconBackground: "#EDE9FE",
+                title: "Inspection scheduled",
+                subtitle: "456 Park Avenue - Annual Check",
+                time: "1h ago",
               },
             ]}
           />
@@ -157,73 +158,73 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: "#F9FAFB",
   },
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 15,
     gap: 10,
   },
   card: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     borderRadius: 10,
     padding: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    shadowColor: '#000',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOpacity: 0.1,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
     elevation: 3,
     marginBottom: 15,
   },
   label: {
     fontSize: 14,
-    color: '#1F2937',
-    fontFamily: 'Inter',
+    color: "#1F2937",
+    fontFamily: "Inter",
     lineHeight: 18,
-    fontWeight: '300',
+    fontWeight: "300",
     marginBottom: 10,
   },
   plan: {
     fontSize: 20,
-    fontWeight: '700',
-    color: '#1F2937',
-    fontFamily: 'Inter',
+    fontWeight: "700",
+    color: "#1F2937",
+    fontFamily: "Inter",
     lineHeight: 18,
   },
   button: {
-    backgroundColor: '#2563EB',
-    flexDirection: 'row',
-    alignItems: 'center',
+    backgroundColor: "#2563EB",
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 8,
   },
   buttonText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 14,
-    fontWeight: '700',
+    fontWeight: "700",
     marginLeft: 5,
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
   },
   verifyButton: {
-    display: 'flex',
-    flexDirection: 'row',
-    backgroundColor: '#2563EB',
+    display: "flex",
+    flexDirection: "row",
+    backgroundColor: "#2563EB",
     paddingVertical: 15,
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 20,
-    width: '100%',
+    width: "100%",
     borderRadius: 10,
   },
   verifyButtonText: {
-    color: 'white',
-    fontWeight: '500',
+    color: "white",
+    fontWeight: "500",
     fontSize: 14,
     marginRight: 10,
   },
