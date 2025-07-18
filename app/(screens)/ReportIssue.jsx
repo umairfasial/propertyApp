@@ -151,9 +151,6 @@ export default function ReportIssue() {
     const selectedPropertyData = properties?.find(
       (property) => property.id === selectedProperty
     );
-    console.log("====================================");
-    console.log("selectedPropertyData", selectedPropertyData);
-    console.log("====================================");
     if (!selectedPropertyData) return [];
 
     if (userData?.role === "tenant") {
