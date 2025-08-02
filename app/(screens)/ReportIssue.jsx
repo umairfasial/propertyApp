@@ -124,29 +124,6 @@ export default function ReportIssue() {
     );
   };
 
-  const validateForm = () => {
-    if (!selectedProperty) {
-      Alert.alert("Error", "Please select a property");
-      return false;
-    }
-    if (!selectedIssueType) {
-      Alert.alert("Error", "Please select an issue type");
-      return false;
-    }
-    if (!selectedPriority) {
-      Alert.alert("Error", "Please select a priority");
-      return false;
-    }
-    if (!issueTitle.trim()) {
-      Alert.alert("Error", "Please enter an issue title");
-      return false;
-    }
-    if (!description.trim()) {
-      Alert.alert("Error", "Please enter a description");
-      return false;
-    }
-    return true;
-  };
   const getAssignMemberNames = () => {
     const selectedPropertyData = properties?.find(
       (property) => property.id === selectedProperty
