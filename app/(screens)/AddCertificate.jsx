@@ -230,20 +230,6 @@ const AddCertificate = ({navigation}) => {
     }
   };
 
-  // const certificates = [
-  //   {
-  //     title: 'Gas Safety Certificate',
-  //     address: '123 Main Street',
-  //     expiryDate: 'Dec 31, 2025',
-  //     status: 'valid',
-  //   },
-  //   {
-  //     title: 'EPC Certificate',
-  //     address: '456 Park Avenue',
-  //     expiryDate: 'Jun 30, 2024',
-  //     status: 'expired',
-  //   },
-  // ];
 
   return (
     <ScrollView style={styles.container}>

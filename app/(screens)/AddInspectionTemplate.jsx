@@ -110,7 +110,7 @@ export default function AddInspectionTemplate({navigation, route}) {
             </TouchableOpacity>
           </View>
 
-          {/* Render Cards */}
+          
           {selectedInspectionItem && selectedInspectionItem.length > 0 ? (
             selectedInspectionItem.map((item, index) => {
               const options = item.inspectionData?.options || {};
