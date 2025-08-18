@@ -28,11 +28,6 @@ export default function InspectionTemplatesList({ navigation }) {
     }, [dispatch])
   );
 
-  const handleTemplatePress = (templateId) => {
-    // TODO: Navigate to template details or edit page if needed
-    // navigation.navigate('InspectionTemplateDetails', { templateId });
-  };
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>

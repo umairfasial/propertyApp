@@ -2,9 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   TouchableOpacity,
-  Image,
   ScrollView,
   FlatList,
   ActivityIndicator,
@@ -58,7 +56,6 @@ export default function InspectionReport() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const [searchText, setSearchText] = useState("");
   const [selectProperty, setselectProperty] = useState(null);
   const [selectTemplate, setselectTemplate] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState(null);
@@ -187,7 +184,10 @@ export default function InspectionReport() {
             </Text>
             {inspectionDetails?.status && (
               <View
-                style={[styles.statusBadge, getStatusBadgeStyle(inspectionDetails?.status)]}
+                style={[
+                  styles.statusBadge,
+                  getStatusBadgeStyle(inspectionDetails?.status),
+                ]}
               >
                 <Text style={styles.statusBadgeText}>
                   {capitalizeStatus(inspectionDetails?.status)}
@@ -491,13 +491,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FFF",
-    borderColor:'#E5E7EB',
+    borderColor: "#E5E7EB",
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderWidth: 1,
     width: 80,
-    height:66
+    height: 66,
   },
   chatText: {
     color: "#2563EB",

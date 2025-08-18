@@ -6,20 +6,20 @@ import {
   TouchableOpacity,
   Alert,
   ActivityIndicator,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import Feather from '../assets/icons/clockOutlined.svg';
-import {useDispatch, useSelector} from 'react-redux';
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import Feather from "../assets/icons/clockOutlined.svg";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchInspectionItemsByIdsSlice,
   saveInspectionReportSlice,
   clearInspectionState,
-} from '../redux/slices/inspection/inspectionSlice';
-import InspectionChecklistCard from '../components/InspectionChecklistCard';
+} from "../redux/slices/inspection/inspectionSlice";
+import InspectionChecklistCard from "../components/InspectionChecklistCard";
 
-export default function InsepctionChecklist({navigation, route}) {
+export default function InsepctionChecklist({ navigation, route }) {
   const params = route?.params || {};
-  const {inspectionId, propertyId, templateId} = params;
+  const { inspectionId, propertyId, templateId } = params;
 
   const {
     userInspections,
@@ -28,9 +28,9 @@ export default function InsepctionChecklist({navigation, route}) {
     loading,
     error,
     successMessage,
-  } = useSelector(state => state.inspection);
-  const {selectedProperty} = useSelector(state => state.property);
-  const {userData} = useSelector(state => state.auth);
+  } = useSelector((state) => state.inspection);
+  const { selectedProperty } = useSelector((state) => state.property);
+  const { userData } = useSelector((state) => state.auth);
   const [selectedInspection, setSelectedInspection] = useState(null);
   const [selectProperty, setSelectProperty] = useState(null);
   const [selectTemplate, setSelectTemplate] = useState(null);
@@ -40,8 +40,10 @@ export default function InsepctionChecklist({navigation, route}) {
   useEffect(() => {
     if (templateId) {
       let inspectionItems = [];
-      const template = selectedTemplate?.find(item => item?.id === templateId);
-      template?.inspectionItems?.forEach(item => {
+      const template = selectedTemplate?.find(
+        (item) => item?.id === templateId
+      );
+      template?.inspectionItems?.forEach((item) => {
         inspectionItems.push(item);
       });
       dispatch(fetchInspectionItemsByIdsSlice(inspectionItems));
@@ -51,10 +53,14 @@ export default function InsepctionChecklist({navigation, route}) {
   useEffect(() => {
     if (inspectionId && propertyId && templateId) {
       const inspection = userInspections?.find(
-        item => item.id === inspectionId,
+        (item) => item.id === inspectionId
       );
-      const property = selectedProperty?.find(item => item?.id === propertyId);
-      const template = selectedTemplate?.find(item => item?.id === templateId);
+      const property = selectedProperty?.find(
+        (item) => item?.id === propertyId
+      );
+      const template = selectedTemplate?.find(
+        (item) => item?.id === templateId
+      );
 
       setSelectedInspection(inspection || null);
       setSelectProperty(property);
@@ -70,27 +76,22 @@ export default function InsepctionChecklist({navigation, route}) {
   ]);
 
   const handleItemDataChange = (itemId, data) => {
-    setChecklistItemsData(prevData => ({
+    setChecklistItemsData((prevData) => ({
       ...prevData,
       [itemId]: data,
     }));
   };
 
-  const handleCancel = () => {
-    console.log('Cancel button pressed');
-    navigation.goBack();
-  };
-
   const handleCompleteInspection = () => {
-    console.log('Complete Inspection button pressed');
-    console.log('Collected Checklist Data:', checklistItemsData);
+    console.log("Complete Inspection button pressed");
+    console.log("Collected Checklist Data:", checklistItemsData);
 
-    const allRequiredItemsComplete = selectedItems?.every(item => {
+    const allRequiredItemsComplete = selectedItems?.every((item) => {
       const itemData = checklistItemsData[item.id];
       const isRequired =
         item.inspectionData.options &&
         Object.values(item.inspectionData.options).some(
-          option => option === true,
+          (option) => option === true
         );
 
       if (!isRequired) return true;
@@ -100,13 +101,13 @@ export default function InsepctionChecklist({navigation, route}) {
 
     if (!allRequiredItemsComplete) {
       Alert.alert(
-        'Incomplete Inspection',
-        'Please complete all required checklist items or mark them as skipped.',
+        "Incomplete Inspection",
+        "Please complete all required checklist items or mark them as skipped."
       );
       return;
     }
 
-    console.log('checklistItemsData', checklistItemsData);
+    console.log("checklistItemsData", checklistItemsData);
 
     dispatch(
       saveInspectionReportSlice({
@@ -115,10 +116,10 @@ export default function InsepctionChecklist({navigation, route}) {
         templateId,
         userId: userData.uid,
         propertyId,
-      }),
+      })
     ).then(() => {
-      Alert.alert('success', 'Inspection Report Submitted Successfully');
-      navigation.navigate('PropertyInspection');
+      Alert.alert("success", "Inspection Report Submitted Successfully");
+      navigation.navigate("PropertyInspection");
     });
   };
 
@@ -135,7 +136,8 @@ export default function InsepctionChecklist({navigation, route}) {
         style={styles.scrollView}
         contentContainerStyle={styles.contentContainer}
         showsVerticalScrollIndicator={true}
-        bounces={true}>
+        bounces={true}
+      >
         <View style={styles.card}>
           <Text style={styles.title}>{selectTemplate?.name}</Text>
           <Text style={styles.subtitle}>{selectProperty?.address}</Text>
@@ -169,7 +171,8 @@ export default function InsepctionChecklist({navigation, route}) {
         <TouchableOpacity
           style={styles.completeButton}
           onPress={handleCompleteInspection}
-          disabled={loading}>
+          disabled={loading}
+        >
           <Text style={styles.completeButtonText}>Complete Inspection</Text>
         </TouchableOpacity>
       </View>
@@ -180,8 +183,8 @@ export default function InsepctionChecklist({navigation, route}) {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#F3F4F6',
-    position: 'relative',
+    backgroundColor: "#F3F4F6",
+    position: "relative",
   },
   scrollView: {
     flex: 1,
@@ -190,13 +193,13 @@ const styles = StyleSheet.create({
     paddingBottom: 80,
   },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 8,
     padding: 15,
     marginBottom: 10,
     marginHorizontal: 16,
     marginTop: 16,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -207,71 +210,71 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
   },
   subtitle: {
     fontSize: 14,
-    color: '#666',
+    color: "#666",
     marginBottom: 10,
   },
   timeContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   timeText: {
     fontSize: 14,
-    color: '#333',
+    color: "#333",
     marginLeft: 5,
   },
   footerContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
     paddingVertical: 10,
     paddingHorizontal: 16,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     borderTopWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: "#E5E7EB",
   },
   cancelButton: {
     flex: 1,
     marginRight: 8,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: "#E5E7EB",
     borderRadius: 25,
     paddingVertical: 12,
-    alignItems: 'center',
+    alignItems: "center",
   },
   cancelButtonText: {
     fontSize: 16,
-    fontWeight: '600',
-    color: '#6B7280',
+    fontWeight: "600",
+    color: "#6B7280",
   },
   completeButton: {
     flex: 1,
     marginLeft: 8,
-    backgroundColor: '#2563EB',
+    backgroundColor: "#2563EB",
     borderRadius: 25,
     paddingVertical: 12,
-    alignItems: 'center',
+    alignItems: "center",
   },
   completeButtonText: {
     fontSize: 16,
-    fontWeight: '600',
-    color: '#FFFFFF',
+    fontWeight: "600",
+    color: "#FFFFFF",
   },
   loadingOverlay: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    justifyContent: "center",
+    alignItems: "center",
     zIndex: 1,
   },
 });
