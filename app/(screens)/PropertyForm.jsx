@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -15,43 +15,43 @@ import {
   SafeAreaView,
   Modal,
   KeyboardAvoidingView,
-} from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import {pick} from '@react-native-documents/picker';
-import RNFS from 'react-native-fs';
-import CheckBox from 'react-native-check-box';
-import {Formik} from 'formik';
-import * as Yup from 'yup';
-import CustomDropdown from '../components/ui/Dropdown';
+} from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { pick } from "@react-native-documents/picker";
+import RNFS from "react-native-fs";
+import CheckBox from "react-native-check-box";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import CustomDropdown from "../components/ui/Dropdown";
 import {
   countData,
   CountryCodes,
   countryData,
   currencyData,
   tenancyTypes,
-} from '../contants/Constants';
-import House from '../assets/icons/home.svg';
-import Apartment from '../assets/icons/properties.svg';
-import Office from '../assets/icons/office.svg';
-import Room from '../assets/icons/roomIcon.svg';
-import Retail from '../assets/icons/retailIcon.svg';
-import Industrial from '../assets/icons/industry.svg';
-import {useDispatch, useSelector} from 'react-redux';
+} from "../contants/Constants";
+import House from "../assets/icons/home.svg";
+import Apartment from "../assets/icons/properties.svg";
+import Office from "../assets/icons/office.svg";
+import Room from "../assets/icons/roomIcon.svg";
+import Retail from "../assets/icons/retailIcon.svg";
+import Industrial from "../assets/icons/industry.svg";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addPropertySlice,
   editPropertySlice,
-} from '../redux/slices/property/propertySlice';
-import {useRoute} from '@react-navigation/native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import UploadIcon from '../assets/icons/upload.svg';
+} from "../redux/slices/property/propertySlice";
+import { useRoute } from "@react-navigation/native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import UploadIcon from "../assets/icons/upload.svg";
 
 const validationSchema = Yup.object().shape({
-  propertyName: Yup.string().required('Property Name is required'),
-  address: Yup.string().required('Address is required'),
-  city: Yup.string().required('City is required'),
-  postalCode: Yup.string().required('Postal Code is required'),
-  monthlyIncome: Yup.string().required('Monthly income is required'),
+  propertyName: Yup.string().required("Property Name is required"),
+  address: Yup.string().required("Address is required"),
+  city: Yup.string().required("City is required"),
+  postalCode: Yup.string().required("Postal Code is required"),
+  monthlyIncome: Yup.string().required("Monthly income is required"),
 });
 
 const typeIcons = {
@@ -63,33 +63,33 @@ const typeIcons = {
   Industrial,
 };
 
-export default function PropertyForm({navigation}) {
+export default function PropertyForm({ navigation }) {
   const route = useRoute();
-  const {propertyId} = route?.params || '';
-  const [step, setStep] = useState('Type');
+  const { propertyId } = route?.params || "";
+  const [step, setStep] = useState("Type");
   const [progress, setProgress] = useState(1);
-  const [propertyType, setPropertyType] = useState('');
+  const [propertyType, setPropertyType] = useState("");
   const [reviewDate, setReviewDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [tenancyType, setTenancyType] = useState('Rental Contract');
+  const [tenancyType, setTenancyType] = useState("Rental Contract");
   const [currency, setCurrency] = useState(null);
   const [country, setCountry] = useState(null);
-  const {properties} = useSelector(state => state.property);
+  const { properties } = useSelector((state) => state.property);
   const [contractFile, setContractFile] = useState(null);
-  const [fileError, setFileError] = useState('');
+  const [fileError, setFileError] = useState("");
   const [uploading, setUploading] = useState(false);
   const selectedProperty = properties?.find(
-    property => property?.id === propertyId,
+    (property) => property?.id === propertyId
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showDatePickerIos, setShowDatePickerIos] = useState(false);
   const formRef = useRef();
 
   const dispatch = useDispatch();
-  const userData = useSelector(state => state.auth.userData);
+  const userData = useSelector((state) => state.auth.userData);
 
   useEffect(() => {
-    setPropertyType('Room');
+    setPropertyType("Room");
   }, []);
 
   useEffect(() => {
@@ -101,36 +101,36 @@ export default function PropertyForm({navigation}) {
       setCurrency(selectedProperty.currency);
       setCountry(selectedProperty.country);
       formRef.current.setValues({
-        propertyName: selectedProperty?.propertyName || '',
-        address: selectedProperty?.address || '',
-        city: selectedProperty?.city || '',
-        postalCode: selectedProperty?.postalCode || '',
-        monthlyIncome: selectedProperty?.monthlyIncome || '',
+        propertyName: selectedProperty?.propertyName || "",
+        address: selectedProperty?.address || "",
+        city: selectedProperty?.city || "",
+        postalCode: selectedProperty?.postalCode || "",
+        monthlyIncome: selectedProperty?.monthlyIncome || "",
         empty: selectedProperty?.empty || false,
         ownerOccupied: selectedProperty?.ownerOccupied || false,
-        noOfBedrooms: selectedProperty?.noOfBedrooms || '',
-        noOfBathrooms: selectedProperty?.noOfBathrooms || '',
+        noOfBedrooms: selectedProperty?.noOfBedrooms || "",
+        noOfBathrooms: selectedProperty?.noOfBathrooms || "",
         rearGarden: selectedProperty?.rearGarden || false,
         offStreetParking: selectedProperty?.offStreetParking || false,
-        unit: selectedProperty?.unit || '',
-        floor: selectedProperty?.floor || '',
-        building: selectedProperty?.building || '',
+        unit: selectedProperty?.unit || "",
+        floor: selectedProperty?.floor || "",
+        building: selectedProperty?.building || "",
       });
     }
   }, [selectedProperty]);
 
-  const formatDate = date => {
-    if (!date) return 'DD MON YYYY';
+  const formatDate = (date) => {
+    if (!date) return "DD MON YYYY";
     return date.toLocaleDateString();
   };
 
   const handleDateChange = (event, selectedDate) => {
-    setShowDatePicker(Platform.OS === 'ios');
-    if (event.type === 'set' && selectedDate) {
+    setShowDatePicker(Platform.OS === "ios");
+    if (event.type === "set" && selectedDate) {
       const onlyDate = new Date(
         selectedDate.getFullYear(),
         selectedDate.getMonth(),
-        selectedDate.getDate(),
+        selectedDate.getDate()
       );
       setReviewDate(onlyDate);
     }
@@ -138,75 +138,75 @@ export default function PropertyForm({navigation}) {
 
   // Function to check if Type section is complete
   const isTypeComplete = () => {
-    return propertyType !== '';
+    return propertyType !== "";
   };
 
   // Function to check if Details section is complete
-  const isDetailsComplete = values => {
+  const isDetailsComplete = (values) => {
     return (
-      values.propertyName !== '' &&
-      values.address !== '' &&
-      values.city !== '' &&
-      values.postalCode !== ''
+      values.propertyName !== "" &&
+      values.address !== "" &&
+      values.city !== "" &&
+      values.postalCode !== ""
     );
   };
 
   // Function to check if Contract section is complete
-  const isContractComplete = values => {
+  const isContractComplete = (values) => {
     return (
-      tenancyType !== '' &&
+      tenancyType !== "" &&
       reviewDate !== null &&
-      currency !== '' &&
-      values.monthlyIncome !== ''
+      currency !== "" &&
+      values.monthlyIncome !== ""
     );
   };
 
   // Update progress based on form completion
-  const updateProgress = values => {
+  const updateProgress = (values) => {
     if (isTypeComplete()) {
       if (isDetailsComplete(values)) {
         if (isContractComplete(values)) {
           setProgress(3);
-          setStep('Contract');
+          setStep("Contract");
         } else {
           setProgress(2);
-          setStep('Contract');
+          setStep("Contract");
         }
       } else {
         setProgress(1);
-        setStep('Details');
+        setStep("Details");
       }
     } else {
       setProgress(0);
-      setStep('Type');
+      setStep("Type");
     }
   };
 
   // Separate function to handle form submission
-  const handleFormSubmit = async values => {
+  const handleFormSubmit = async (values) => {
     if (!userData || !userData.uid) {
-      Alert.alert('Error', 'User not authenticated. Please log in again.');
+      Alert.alert("Error", "User not authenticated. Please log in again.");
       return;
     }
 
     if (!propertyType) {
-      Alert.alert('Error', 'Please select a property type');
+      Alert.alert("Error", "Please select a property type");
       return;
     }
 
     if (!reviewDate) {
-      Alert.alert('Error', 'Please select a review date');
+      Alert.alert("Error", "Please select a review date");
       return;
     }
 
     if (!contractFile) {
-      Alert.alert('Error', 'Please upload a contract document');
+      Alert.alert("Error", "Please upload a contract document");
       return;
     }
 
-    const filteredValues = {...values};
+    const filteredValues = { ...values };
 
-    if (propertyType === 'Room' || propertyType === 'Apartment') {
+    if (propertyType === "Room" || propertyType === "Apartment") {
       delete filteredValues.noOfBedrooms;
       delete filteredValues.noOfBathrooms;
       delete filteredValues.rearGarden;
@@ -214,18 +214,18 @@ export default function PropertyForm({navigation}) {
       delete filteredValues.unit;
       delete filteredValues.floor;
       delete filteredValues.building;
-    } else if (propertyType === 'House') {
+    } else if (propertyType === "House") {
       delete filteredValues.unit;
       delete filteredValues.floor;
       delete filteredValues.building;
-    } else if (propertyType === 'Retail') {
+    } else if (propertyType === "Retail") {
       delete filteredValues.noOfBedrooms;
       delete filteredValues.noOfBathrooms;
       delete filteredValues.rearGarden;
       delete filteredValues.offStreetParking;
       delete filteredValues.floor;
       delete filteredValues.building;
-    } else if (propertyType === 'Office' || propertyType === 'Industrial') {
+    } else if (propertyType === "Office" || propertyType === "Industrial") {
       delete filteredValues.noOfBedrooms;
       delete filteredValues.noOfBathrooms;
       delete filteredValues.rearGarden;
@@ -245,29 +245,29 @@ export default function PropertyForm({navigation}) {
         contractFile: contractFile,
         userId: userData.uid,
       };
-      console.log('finalData', finalData);
+      console.log("finalData", finalData);
 
       let response;
       if (selectedProperty) {
         response = await dispatch(
-          editPropertySlice({finalData, propertyId}),
+          editPropertySlice({ finalData, propertyId })
         ).unwrap();
       } else {
-        response = await dispatch(addPropertySlice({finalData})).unwrap();
+        response = await dispatch(addPropertySlice({ finalData })).unwrap();
       }
 
-      navigation.navigate('AssignManager', {
+      navigation.navigate("AssignManager", {
         propertyId: response.id,
         next: true,
       });
 
       Alert.alert(
-        'Success',
-        `Property  ${propertyId ? 'Editted' : 'Added'} Successfully`,
+        "Success",
+        `Property  ${propertyId ? "Editted" : "Added"} Successfully`
       );
     } catch (error) {
-      console.error('Error submitting property:', error);
-      Alert.alert('Error', 'Failed to add property. Please try again.');
+      console.error("Error submitting property:", error);
+      Alert.alert("Error", "Failed to add property. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -276,33 +276,33 @@ export default function PropertyForm({navigation}) {
   const pickDocument = async () => {
     try {
       const result = await pick({
-        copyTo: 'cachesDirectory',
+        copyTo: "cachesDirectory",
       });
 
       if (result && result[0]) {
         const file = result[0];
-        console.log('Selected file:', file);
+        console.log("Selected file:", file);
 
-        const fileType = file.type?.toLowerCase() || '';
+        const fileType = file.type?.toLowerCase() || "";
         const isValidType = [
-          'application/pdf',
-          'application/msword',
-          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          "application/pdf",
+          "application/msword",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         ].includes(fileType);
 
         if (!isValidType) {
-          setFileError('Please select only PDF or DOC files');
+          setFileError("Please select only PDF or DOC files");
           return;
         }
 
         // Check file size (5MB limit)
         if (file.size > 5 * 1024 * 1024) {
-          setFileError('File size should be less than 5MB');
+          setFileError("File size should be less than 5MB");
           return;
         }
 
         // For Android, we need to copy the file to a location we can access
-        if (Platform.OS === 'android' && file.uri) {
+        if (Platform.OS === "android" && file.uri) {
           try {
             // Create a unique filename in the app's cache directory
             const fileName = `${Date.now()}_${Math.random()
@@ -315,34 +315,35 @@ export default function PropertyForm({navigation}) {
 
             // Update the file object with the new path
             file.uri = destinationPath;
-            console.log('File copied to:', destinationPath);
+            console.log("File copied to:", destinationPath);
           } catch (copyError) {
-            console.error('Error copying file:', copyError);
-            setFileError('Error processing the selected file');
+            console.error("Error copying file:", copyError);
+            setFileError("Error processing the selected file");
             return;
           }
         }
 
         setContractFile(file);
-        setFileError('');
+        setFileError("");
       }
     } catch (err) {
       if (!err.isCancel) {
-        setFileError('Error picking the document');
-        console.log('Document picker error:', err);
+        setFileError("Error picking the document");
+        console.log("Document picker error:", err);
       }
     }
   };
 
   return (
     <KeyboardAwareScrollView
-      style={{flex: 1}}
+      style={{ flex: 1 }}
       enableOnAndroid={true}
-      keyboardShouldPersistTaps="handled">
+      keyboardShouldPersistTaps="handled"
+    >
       <SafeAreaView>
         <View style={styles.container}>
           <View style={[styles.stepIndicatorContainer]}>
-            {['Type', 'Details', 'Contract'].map((label, index) => (
+            {["Type", "Details", "Contract"].map((label, index) => (
               <React.Fragment key={label}>
                 <View style={styles.stepItem}>
                   <View
@@ -351,14 +352,16 @@ export default function PropertyForm({navigation}) {
                       index + 1 <= progress
                         ? styles.circleActive
                         : styles.circleInactive,
-                    ]}>
+                    ]}
+                  >
                     <Text
                       style={[
                         styles.circleText,
                         index + 1 <= progress
                           ? styles.circleTextActive
                           : styles.circleTextInactive,
-                      ]}>
+                      ]}
+                    >
                       {index + 1}
                     </Text>
                   </View>
@@ -368,7 +371,8 @@ export default function PropertyForm({navigation}) {
                       index + 1 <= progress
                         ? styles.stepLabelActive
                         : styles.stepLabelInactive,
-                    ]}>
+                    ]}
+                  >
                     {label}
                   </Text>
                 </View>
@@ -381,10 +385,10 @@ export default function PropertyForm({navigation}) {
                           {
                             width:
                               index + 1 < progress
-                                ? '100%'
+                                ? "100%"
                                 : index + 1 === progress
-                                ? '50%'
-                                : '0%',
+                                ? "50%"
+                                : "0%",
                           },
                         ]}
                       />
@@ -398,23 +402,24 @@ export default function PropertyForm({navigation}) {
           <Formik
             innerRef={formRef}
             initialValues={{
-              propertyName: '',
-              address: '',
-              city: '',
-              postalCode: '',
-              monthlyIncome: '',
+              propertyName: "",
+              address: "",
+              city: "",
+              postalCode: "",
+              monthlyIncome: "",
               empty: false,
               ownerOccupied: false,
-              noOfBedrooms: '',
-              noOfBathrooms: '',
+              noOfBedrooms: "",
+              noOfBathrooms: "",
               rearGarden: false,
               offStreetParking: false,
-              unit: '',
-              floor: '',
-              building: '',
+              unit: "",
+              floor: "",
+              building: "",
             }}
             validationSchema={validationSchema}
-            onSubmit={handleFormSubmit}>
+            onSubmit={handleFormSubmit}
+          >
             {({
               handleChange,
               handleBlur,
@@ -424,7 +429,6 @@ export default function PropertyForm({navigation}) {
               touched,
               setFieldValue,
             }) => {
-              // Update progress whenever form values change
               useEffect(() => {
                 updateProgress(values);
               }, [values, propertyType, reviewDate, tenancyType, currency]);
@@ -435,13 +439,13 @@ export default function PropertyForm({navigation}) {
                     <Text style={styles.label}>Property Type</Text>
                     <View style={styles.typeButtons}>
                       {[
-                        'Room',
-                        'Apartment',
-                        'House',
-                        'Retail',
-                        'Office',
-                        'Industrial',
-                      ].map(type => {
+                        "Room",
+                        "Apartment",
+                        "House",
+                        "Retail",
+                        "Office",
+                        "Industrial",
+                      ].map((type) => {
                         const IconComponent = typeIcons[type];
                         return (
                           <TouchableOpacity
@@ -452,12 +456,13 @@ export default function PropertyForm({navigation}) {
                             ]}
                             onPress={() => {
                               setPropertyType(type);
-                            }}>
+                            }}
+                          >
                             <IconComponent
                               width={20}
                               height={20}
                               color={
-                                propertyType === type ? '#2563EB' : '#4B5563'
+                                propertyType === type ? "#2563EB" : "#4B5563"
                               }
                             />
                             <Text style={[styles.typeButtonText]}>{type}</Text>
@@ -467,26 +472,13 @@ export default function PropertyForm({navigation}) {
                     </View>
                   </View>
 
-                  {/* Inputs */}
-                  <View style={styles.miniContainer}>
-                    <Text style={styles.label}>Property Details</Text>
-                    <TextInput
-                      placeholder="Property Name"
-                      value={values.propertyName}
-                      onChangeText={handleChange('propertyName')}
-                      onBlur={handleBlur('propertyName')}
-                      style={styles.input}
-                      placeholderTextColor="#000"
-                    />
-                    {touched.propertyName && errors.propertyName && (
-                      <Text style={styles.error}>{errors.propertyName}</Text>
-                    )}
+
 
                     <TextInput
                       placeholder="Address"
                       value={values.address}
-                      onChangeText={handleChange('address')}
-                      onBlur={handleBlur('address')}
+                      onChangeText={handleChange("address")}
+                      onBlur={handleBlur("address")}
                       style={styles.input}
                       placeholderTextColor="#000"
                     />
@@ -501,27 +493,27 @@ export default function PropertyForm({navigation}) {
                         onPress={() => {}}
                         query={{
                           key: process.env.GOOGLE_MAPS_API_KEY,
-                          language: 'en',
+                          language: "en",
                         }}
                         textInputProps={{
-                          placeholderTextColor: 'black',
+                          placeholderTextColor: "black",
                           onFocus: () => {},
                         }}
                         styles={{
                           textInput: {
                             ...styles.googleInput,
-                            color: 'black',
+                            color: "black",
                           },
                           container: {
                             flex: 1,
                           },
                           listView: {
-                            backgroundColor: 'white',
-                            position: 'relative',
+                            backgroundColor: "white",
+                            position: "relative",
                             zIndex: 1000,
                           },
                           description: {
-                            color: 'black',
+                            color: "black",
                           },
                         }}
                         keyboardShouldPersistTaps="handled"
@@ -537,8 +529,8 @@ export default function PropertyForm({navigation}) {
                         <TextInput
                           placeholder="City"
                           value={values.city}
-                          onChangeText={handleChange('city')}
-                          onBlur={handleBlur('city')}
+                          onChangeText={handleChange("city")}
+                          onBlur={handleBlur("city")}
                           style={styles.input}
                           placeholderTextColor="#000"
                         />
@@ -551,8 +543,8 @@ export default function PropertyForm({navigation}) {
                         <TextInput
                           placeholder="Postal Code"
                           value={values.postalCode}
-                          onChangeText={handleChange('postalCode')}
-                          onBlur={handleBlur('postalCode')}
+                          onChangeText={handleChange("postalCode")}
+                          onBlur={handleBlur("postalCode")}
                           style={styles.input}
                           placeholderTextColor="#000"
                         />
@@ -567,35 +559,35 @@ export default function PropertyForm({navigation}) {
                         data={countryData}
                         defaultValue={country}
                         placeholder="Select the country"
-                        onSelect={value => {
+                        onSelect={(value) => {
                           setCountry(value);
                           const currency = currencyData.find(
-                            item => item.country === value,
+                            (item) => item.country === value
                           ).label;
                           setCurrency(currency);
                         }}
                       />
                     </View>
                   </View>
-                  {propertyType !== 'Room' && propertyType !== '' && (
+                  {propertyType !== "Room" && propertyType !== "" && (
                     <View style={styles.miniContainer}>
                       <Text style={styles.label}>More Details</Text>
-                      {propertyType === 'House' ||
-                        (propertyType === 'Apartment' && (
+                      {propertyType === "House" ||
+                        (propertyType === "Apartment" && (
                           <View>
-                            <View style={{marginBottom: 10}}>
+                            <View style={{ marginBottom: 10 }}>
                               <CustomDropdown
                                 data={countData}
                                 placeholder="Number of Bed Rooms"
-                                onSelect={handleChange('noOfBedrooms')}
+                                onSelect={handleChange("noOfBedrooms")}
                               />
                             </View>
 
-                            <View style={{marginBottom: 10}}>
+                            <View style={{ marginBottom: 10 }}>
                               <CustomDropdown
                                 data={countData}
                                 placeholder="Number of Bathrooms"
-                                onSelect={handleChange('noOfBathrooms')}
+                                onSelect={handleChange("noOfBathrooms")}
                               />
                             </View>
                             <View style={styles.row}>
@@ -603,21 +595,22 @@ export default function PropertyForm({navigation}) {
                                 style={[
                                   styles.inputHalf,
                                   styles.checkBoxContainer,
-                                ]}>
+                                ]}
+                              >
                                 <CheckBox
                                   isChecked={values.rearGarden}
                                   onClick={() =>
                                     setFieldValue(
-                                      'rearGarden',
-                                      !values.rearGarden,
+                                      "rearGarden",
+                                      !values.rearGarden
                                     )
                                   }
                                   checkBoxColor={
-                                    values.rearGarden ? '#007bff' : '#ccc'
+                                    values.rearGarden ? "#007bff" : "#ccc"
                                   }
                                   rightTextStyle={{
                                     fontSize: 16,
-                                    color: '#333',
+                                    color: "#333",
                                   }}
                                 />
                                 <Text>Rear Garden</Text>
@@ -626,21 +619,22 @@ export default function PropertyForm({navigation}) {
                                 style={[
                                   styles.inputHalf,
                                   styles.checkBoxContainer,
-                                ]}>
+                                ]}
+                              >
                                 <CheckBox
                                   isChecked={values.offStreetParking}
                                   onClick={() =>
                                     setFieldValue(
-                                      'offStreetParking',
-                                      !values.offStreetParking,
+                                      "offStreetParking",
+                                      !values.offStreetParking
                                     )
                                   }
                                   checkBoxColor={
-                                    values.offStreetParking ? '#007bff' : '#ccc'
+                                    values.offStreetParking ? "#007bff" : "#ccc"
                                   }
                                   rightTextStyle={{
                                     fontSize: 16,
-                                    color: '#333',
+                                    color: "#333",
                                   }}
                                 />
                                 <Text>Off Street Parking</Text>
@@ -648,15 +642,15 @@ export default function PropertyForm({navigation}) {
                             </View>
                           </View>
                         ))}
-                      {(propertyType === 'Retail' ||
-                        propertyType === 'Office' ||
-                        propertyType === 'Industrial') &&
-                        (propertyType === 'Retail' ? (
+                      {(propertyType === "Retail" ||
+                        propertyType === "Office" ||
+                        propertyType === "Industrial") &&
+                        (propertyType === "Retail" ? (
                           <TextInput
                             placeholder="Unit Name or Number"
                             value={values.unit}
-                            onChangeText={handleChange('unit')}
-                            onBlur={handleBlur('unit')}
+                            onChangeText={handleChange("unit")}
+                            onBlur={handleBlur("unit")}
                             style={styles.input}
                             placeholderTextColor="#000"
                           />
@@ -665,16 +659,16 @@ export default function PropertyForm({navigation}) {
                             <TextInput
                               placeholder="Unit Name or Number"
                               value={values.unit}
-                              onChangeText={handleChange('unit')}
-                              onBlur={handleBlur('unit')}
+                              onChangeText={handleChange("unit")}
+                              onBlur={handleBlur("unit")}
                               style={styles.input}
                               placeholderTextColor="#000"
                             />
                             <TextInput
                               placeholder="Floor Name or Number"
                               value={values.floor}
-                              onChangeText={handleChange('floor')}
-                              onBlur={handleBlur('floor')}
+                              onChangeText={handleChange("floor")}
+                              onBlur={handleBlur("floor")}
                               style={styles.input}
                               placeholderTextColor="#000"
                             />
@@ -682,8 +676,8 @@ export default function PropertyForm({navigation}) {
                             <TextInput
                               placeholder="Building Name or Number"
                               value={values.building}
-                              onChangeText={handleChange('building')}
-                              onBlur={handleBlur('building')}
+                              onChangeText={handleChange("building")}
+                              onBlur={handleBlur("building")}
                               style={styles.input}
                               placeholderTextColor="#000"
                             />
@@ -694,18 +688,19 @@ export default function PropertyForm({navigation}) {
 
                   {/* Picker Row */}
                   <View style={styles.miniContainer}>
-                    <View style={[styles.row, {marginVertical: 10}]}>
+                    <View style={[styles.row, { marginVertical: 10 }]}>
                       <View
-                        style={[styles.inputHalf, styles.checkBoxContainer]}>
+                        style={[styles.inputHalf, styles.checkBoxContainer]}
+                      >
                         <CheckBox
                           isChecked={values.empty}
                           onClick={() => {
-                            setFieldValue('empty', !values.empty);
+                            setFieldValue("empty", !values.empty);
                             if (!values.empty)
-                              setFieldValue('ownerOccupied', false); // Uncheck other
+                              setFieldValue("ownerOccupied", false); // Uncheck other
                           }}
-                          checkBoxColor={values.empty ? '#007bff' : '#ccc'}
-                          rightTextStyle={{fontSize: 16, color: '#333'}}
+                          checkBoxColor={values.empty ? "#007bff" : "#ccc"}
+                          rightTextStyle={{ fontSize: 16, color: "#333" }}
                           disabled={values.ownerOccupied} // Disable if other is selected
                         />
                         <Text>Empty property</Text>
@@ -715,22 +710,23 @@ export default function PropertyForm({navigation}) {
                         style={[
                           styles.inputHalf,
                           styles.checkBoxContainer,
-                          {paddingRight: 10},
-                        ]}>
+                          { paddingRight: 10 },
+                        ]}
+                      >
                         <CheckBox
                           isChecked={values.ownerOccupied}
                           onClick={() => {
                             setFieldValue(
-                              'ownerOccupied',
-                              !values.ownerOccupied,
+                              "ownerOccupied",
+                              !values.ownerOccupied
                             );
                             if (!values.ownerOccupied)
-                              setFieldValue('empty', false); // Uncheck other
+                              setFieldValue("empty", false); // Uncheck other
                           }}
                           checkBoxColor={
-                            values.ownerOccupied ? '#007bff' : '#ccc'
+                            values.ownerOccupied ? "#007bff" : "#ccc"
                           }
-                          rightTextStyle={{fontSize: 16, color: '#333'}}
+                          rightTextStyle={{ fontSize: 16, color: "#333" }}
                           disabled={values.empty} // Disable if other is selected
                         />
                         <Text>Owner Occupied property</Text>
@@ -742,7 +738,7 @@ export default function PropertyForm({navigation}) {
                         <CustomDropdown
                           data={tenancyTypes}
                           defaultValue={tenancyType}
-                          onSelect={value => setTenancyType(value)}
+                          onSelect={(value) => setTenancyType(value)}
                         />
                       </View>
                       <View style={styles.inputHalf}>
@@ -752,16 +748,17 @@ export default function PropertyForm({navigation}) {
                         <TouchableOpacity
                           style={styles.datePicker}
                           onPress={() => {
-                            Platform.OS === 'android'
+                            Platform.OS === "android"
                               ? setShowDatePicker(true)
                               : setShowDatePickerIos(true);
-                          }}>
+                          }}
+                        >
                           <Text style={styles.dateText}>
                             {formatDate(reviewDate)}
                           </Text>
                         </TouchableOpacity>
                         {(showDatePicker || showDatePickerIos) &&
-                          (Platform.OS === 'android' ? (
+                          (Platform.OS === "android" ? (
                             <DateTimePicker
                               value={reviewDate || new Date()}
                               mode="date"
@@ -773,9 +770,8 @@ export default function PropertyForm({navigation}) {
                               transparent={true}
                               animationType="slide"
                               visible={showDatePickerIos}
-                              onRequestClose={() =>
-                                setShowDatePickerIos(false)
-                              }>
+                              onRequestClose={() => setShowDatePickerIos(false)}
+                            >
                               <View style={styles.modalBackground}>
                                 <View style={styles.modalContainer}>
                                   <DateTimePicker
@@ -786,11 +782,12 @@ export default function PropertyForm({navigation}) {
                                       if (selectedDate)
                                         setReviewDate(selectedDate);
                                     }}
-                                    style={{width: '100%'}}
+                                    style={{ width: "100%" }}
                                   />
                                   <TouchableOpacity
                                     style={styles.doneButton}
-                                    onPress={() => setShowDatePickerIos(false)}>
+                                    onPress={() => setShowDatePickerIos(false)}
+                                  >
                                     <Text style={styles.doneText}>Done</Text>
                                   </TouchableOpacity>
                                 </View>
@@ -806,7 +803,7 @@ export default function PropertyForm({navigation}) {
                         <CustomDropdown
                           data={currencyData}
                           defaultValue={currency}
-                          onSelect={value => setCurrency(value)}
+                          onSelect={(value) => setCurrency(value)}
                         />
                       </View>
 
@@ -817,8 +814,8 @@ export default function PropertyForm({navigation}) {
                         <TextInput
                           placeholder="0.00"
                           value={values.monthlyIncome}
-                          onChangeText={handleChange('monthlyIncome')}
-                          onBlur={handleBlur('monthlyIncome')}
+                          onChangeText={handleChange("monthlyIncome")}
+                          onBlur={handleBlur("monthlyIncome")}
                           keyboardType="numeric"
                           style={styles.input}
                           placeholderTextColor="#000"
@@ -836,7 +833,8 @@ export default function PropertyForm({navigation}) {
                     <TouchableOpacity
                       style={styles.uploadButton}
                       onPress={pickDocument}
-                      activeOpacity={0.7}>
+                      activeOpacity={0.7}
+                    >
                       {contractFile ? (
                         <View style={styles.filePreview}>
                           <View style={styles.fileIconContainer}>
@@ -852,12 +850,13 @@ export default function PropertyForm({navigation}) {
                       ) : (
                         <Text style={styles.uploadText}>
                           <UploadIcon color="#9CA3AF" width={30} height={20} />
-                          {'\n'}
+                          {"\n"}
                           <Text
-                            style={[styles.uploadText, {fontWeight: '700'}]}>
+                            style={[styles.uploadText, { fontWeight: "700" }]}
+                          >
                             Click to upload or drag and drop
                           </Text>
-                          {'\n'}PDF, DOC up to 5MB
+                          {"\n"}PDF, DOC up to 5MB
                         </Text>
                       )}
                     </TouchableOpacity>
@@ -873,14 +872,15 @@ export default function PropertyForm({navigation}) {
                       isSubmitting && styles.submitButtonDisabled,
                     ]}
                     onPress={handleSubmit}
-                    disabled={isSubmitting}>
+                    disabled={isSubmitting}
+                  >
                     {isSubmitting ? (
                       <ActivityIndicator color="#fff" />
                     ) : (
                       <Text style={styles.submitButtonText}>
                         {propertyId
-                          ? 'Edit Property Details'
-                          : 'Add Property Details'}
+                          ? "Edit Property Details"
+                          : "Add Property Details"}
                       </Text>
                     )}
                   </TouchableOpacity>
@@ -900,248 +900,248 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   miniContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 15,
     borderRadius: 15,
     marginBottom: 15,
   },
   stepIndicatorContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 24,
     paddingHorizontal: 16,
   },
   stepItem: {
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    flexDirection: "row",
   },
   circle: {
     width: 30,
     height: 30,
     borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginRight: 5,
   },
   circleActive: {
-    backgroundColor: '#2563EB',
+    backgroundColor: "#2563EB",
   },
   circleInactive: {
-    backgroundColor: '#E5E7EB',
+    backgroundColor: "#E5E7EB",
   },
   circleText: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   circleTextActive: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
   },
   circleTextInactive: {
-    color: '#9CA3AF',
+    color: "#9CA3AF",
   },
   stepLabel: {
     marginTop: 4,
     fontSize: 12,
   },
   stepLabelActive: {
-    color: '#000',
+    color: "#000",
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   stepLabelInactive: {
-    color: '#9CA3AF',
+    color: "#9CA3AF",
     fontSize: 14,
   },
   label: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 16,
     marginBottom: 8,
   },
   typeButtons: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   typeButton: {
-    width: '48%',
+    width: "48%",
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 10,
     padding: 15,
     marginBottom: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
   typeButtonActive: {
-    backgroundColor: '#EFF6FF',
-    borderColor: '#007bff',
+    backgroundColor: "#EFF6FF",
+    borderColor: "#007bff",
   },
   typeButtonText: {
-    color: '#1F2937',
-    fontFamily: 'Inter',
+    color: "#1F2937",
+    fontFamily: "Inter",
     fontSize: 14,
     fontWeight: 500,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: "#E5E7EB",
     borderRadius: 8,
     padding: 12,
     marginBottom: 10,
   },
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   checkBoxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   inputHalf: {
-    width: '48%',
+    width: "48%",
   },
   googleInput: {
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderWidth: 1,
     borderRadius: 8,
     padding: 10,
-    color: 'black',
+    color: "black",
   },
   inputLabel: {
     marginBottom: 5,
-    color: '#6B7280',
-    fontFamily: 'Inter',
-    fontWeight: '400',
+    color: "#6B7280",
+    fontFamily: "Inter",
+    fontWeight: "400",
     fontSize: 12,
   },
   picker: {
     height: 50,
-    width: '100%',
+    width: "100%",
   },
   datePicker: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 8,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: 12,
   },
   uploadBox: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 8,
-    borderStyle: 'dashed',
+    borderStyle: "dashed",
     padding: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 20,
     height: 150,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
   },
 
   uploadText: {
-    textAlign: 'center',
-    color: '#6B7280',
+    textAlign: "center",
+    color: "#6B7280",
     fontSize: 14,
     lineHeight: 20,
   },
   imagePreview: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     borderRadius: 8,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   submitButton: {
-    backgroundColor: '#2563EB',
+    backgroundColor: "#2563EB",
     padding: 16,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 25,
   },
   submitButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
+    color: "#fff",
+    fontWeight: "bold",
   },
   error: {
-    color: '#DC2626',
+    color: "#DC2626",
     fontSize: 12,
     marginTop: -10,
     marginBottom: 16,
   },
   dateText: {
     fontSize: 14,
-    color: '#333',
+    color: "#333",
   },
   progressLineContainer: {
     flex: 1,
     marginHorizontal: 8,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   progressLineBackground: {
     height: 4,
-    backgroundColor: '#E5E7EB',
-    overflow: 'hidden',
+    backgroundColor: "#E5E7EB",
+    overflow: "hidden",
   },
   progressLineFill: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     top: 0,
-    height: '100%',
-    backgroundColor: '#2563EB',
-    transition: 'width 0.3s ease',
+    height: "100%",
+    backgroundColor: "#2563EB",
+    transition: "width 0.3s ease",
   },
   filePreview: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
   },
   fileIconContainer: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#F3F4F6',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#F3F4F6",
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 8,
   },
   fileIcon: {
     width: 24,
     height: 24,
-    backgroundColor: '#9CA3AF',
+    backgroundColor: "#9CA3AF",
     borderRadius: 4,
   },
   fileName: {
     fontSize: 14,
-    color: '#111827',
-    fontWeight: '500',
+    color: "#111827",
+    fontWeight: "500",
     marginBottom: 4,
-    textAlign: 'center',
+    textAlign: "center",
   },
   fileSize: {
     fontSize: 12,
-    color: '#6B7280',
+    color: "#6B7280",
   },
   submitButtonDisabled: {
     opacity: 0.7,
   },
   modalBackground: {
     flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: "flex-end",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContainer: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
   doneButton: {
-    alignSelf: 'flex-end',
+    alignSelf: "flex-end",
     marginTop: 10,
     padding: 10,
   },
   doneText: {
-    color: '#007AFF',
+    color: "#007AFF",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   googlePlacesContainer: {
     marginBottom: 10,
