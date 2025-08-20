@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,51 +6,43 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
-} from 'react-native';
-import MapView, {Marker} from 'react-native-maps';
-import IssuesIcon from '../assets/icons/issues.svg';
-import ClipboardCheck from '../assets/icons/clipboard-check.svg';
-import ClockIcon from '../assets/icons/clock.svg';
-import DeleteIcon from '../assets/icons/bin.svg';
-import DashboardSection from '../components/DashboardSection';
-import CertificateIcon from '../assets/icons/certificate.svg';
-import FormIcon from '../assets/icons/form.svg';
-import {useRoute} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
-import moment from 'moment';
+} from "react-native";
+import MapView, { Marker } from "react-native-maps";
+import IssuesIcon from "../assets/icons/issues.svg";
+import ClipboardCheck from "../assets/icons/clipboard-check.svg";
+import ClockIcon from "../assets/icons/clock.svg";
+import DeleteIcon from "../assets/icons/bin.svg";
+import DashboardSection from "../components/DashboardSection";
+import CertificateIcon from "../assets/icons/certificate.svg";
+import FormIcon from "../assets/icons/form.svg";
+import { useRoute } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 // import PersonPropertyRole from '../components/PersonPropertyRole';
-import {fetchManagers, fetchTenants} from '../redux/slices/auth/authSlice';
+import { fetchManagers, fetchTenants } from "../redux/slices/auth/authSlice";
 import {
   deletePropertySlice,
   fetchPropertiesSlice,
-} from '../redux/slices/property/propertySlice';
-import StorageTestButton from '../components/StorageTestButton';
+} from "../redux/slices/property/propertySlice";
+import StorageTestButton from "../components/StorageTestButton";
 
-const PropertyOverView = ({navigation}) => {
+const PropertyOverView = ({ navigation }) => {
   const [coordinates, setCoordinates] = useState(null);
-  const {userData, tenants, managers} = useSelector(state => state.auth);
-  const {properties} = useSelector(state => state.property);
+  const { userData, tenants, managers } = useSelector((state) => state.auth);
+  const { properties } = useSelector((state) => state.property);
   const [deleteLoader, setDeleteLoader] = useState(false);
   const route = useRoute();
   const dispatch = useDispatch();
-  const {propertyId} = route.params;
+  const { propertyId } = route.params;
   const selectedProperty = properties?.find(
-    property => property.id === propertyId,
+    (property) => property.id === propertyId
   );
 
   useEffect(() => {
     dispatch(fetchTenants());
     dispatch(fetchManagers());
-    dispatch(fetchPropertiesSlice({userId: userData.uid}));
+    dispatch(fetchPropertiesSlice({ userId: userData.uid }));
   }, [userData]);
-
-  const handleDelete = () => {
-    dispatch(deletePropertySlice({propertyId})).then(() => {
-      navigation.navigate('Properties');
-      dispatch(fetchPropertiesSlice({userId: userData.uid}));
-      setDeleteLoader(false);
-    });
-  };
 
   return (
     <ScrollView style={styles.container}>
@@ -64,7 +56,8 @@ const PropertyOverView = ({navigation}) => {
               longitude: selectedProperty?.longitude,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
-            }}>
+            }}
+          >
             <Marker
               coordinate={{
                 latitude: selectedProperty?.latitude,
@@ -77,7 +70,7 @@ const PropertyOverView = ({navigation}) => {
           <ActivityIndicator
             size="large"
             color="#0000ff"
-            style={{alignSelf: 'center'}}
+            style={{ alignSelf: "center" }}
           />
         )}
       </View>
@@ -98,7 +91,7 @@ const PropertyOverView = ({navigation}) => {
           <View style={styles.infoBlock}>
             <Text style={styles.label}>Rent Review Date</Text>
             <Text style={styles.dateValue}>
-              {moment(selectedProperty?.reviewDate).format('Do MMMM YYYY')}
+              {moment(selectedProperty?.reviewDate).format("Do MMMM YYYY")}
             </Text>
           </View>
         </View>
@@ -126,34 +119,34 @@ const PropertyOverView = ({navigation}) => {
                 icon: (
                   <CertificateIcon width={18} height={18} color="#059669" />
                 ),
-                iconBackground: '#10B98126',
-                label: 'Certificates',
+                iconBackground: "#10B98126",
+                label: "Certificates",
                 clicked: () => {
-                  navigation.navigate('Certificate');
+                  navigation.navigate("Certificate");
                 },
               },
               {
                 icon: <FormIcon width={18} height={18} color="#2563EB" />,
-                iconBackground: '#2563EB24',
-                label: 'Contract',
+                iconBackground: "#2563EB24",
+                label: "Contract",
                 clicked: () => {
-                  navigation.navigate('Contract');
+                  navigation.navigate("Contract");
                 },
               },
               {
                 icon: <ClipboardCheck width={18} height={18} color="#8B5CF6" />,
-                iconBackground: '#EDE9FE',
-                label: 'Inspections',
+                iconBackground: "#EDE9FE",
+                label: "Inspections",
                 clicked: () => {
-                  navigation.navigate('Inspection');
+                  navigation.navigate("Inspection");
                 },
               },
               {
                 icon: <IssuesIcon width={18} height={18} color="#EF4444" />,
-                iconBackground: '#FEE2E2',
-                label: 'View Issues',
+                iconBackground: "#FEE2E2",
+                label: "View Issues",
                 clicked: () => {
-                  navigation.navigate('KnowledgeAi');
+                  navigation.navigate("KnowledgeAi");
                 },
               },
             ]}
@@ -167,7 +160,7 @@ const PropertyOverView = ({navigation}) => {
       {/* People Section */}
       <View style={styles.peopleSection}>
         {/* Landlord */}
-{/* 
+        {/* 
         <PersonPropertyRole
           heading="Landlord"
           name={
@@ -227,7 +220,8 @@ const PropertyOverView = ({navigation}) => {
       {/* Edit & Remove Buttons */}
       <TouchableOpacity
         style={styles.editButton}
-        onPress={() => navigation.navigate('PropertyForm', {propertyId})}>
+        onPress={() => navigation.navigate("PropertyForm", { propertyId })}
+      >
         <Text style={styles.editButtonText}>Edit</Text>
       </TouchableOpacity>
 
@@ -250,21 +244,21 @@ const styles = StyleSheet.create({
     height: 200,
     marginVertical: 10,
     borderRadius: 10,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   map: {
     flex: 1,
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 10,
   },
   mapPlaceholder: {
     height: 150,
-    backgroundColor: '#E5E7EB',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#E5E7EB",
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 10,
     margin: 16,
   },
@@ -274,115 +268,115 @@ const styles = StyleSheet.create({
   },
   address: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#000',
-    fontFamily: 'Inter',
+    fontWeight: "700",
+    color: "#000",
+    fontFamily: "Inter",
     marginBottom: 5,
   },
   subAddress: {
     fontSize: 14,
-    fontFamily: 'Inter',
-    color: '#4B5563',
+    fontFamily: "Inter",
+    color: "#4B5563",
     marginTop: 2,
   },
   infoRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 12,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     marginBottom: 5,
   },
   infoBlock: {},
   label: {
     fontSize: 14,
-    fontFamily: 'Inter',
-    fontWeight: '500',
-    color: '#6B7280',
+    fontFamily: "Inter",
+    fontWeight: "500",
+    color: "#6B7280",
   },
   value: {
     fontSize: 16,
-    fontWeight: '700',
-    fontFamily: 'Inter',
+    fontWeight: "700",
+    fontFamily: "Inter",
     marginTop: 4,
-    color: '#111827',
+    color: "#111827",
   },
   dateValue: {
     fontSize: 16,
-    fontFamily: 'Inter',
-    fontWeight: '600',
+    fontFamily: "Inter",
+    fontWeight: "600",
     marginTop: 4,
-    color: '#D97706',
+    color: "#D97706",
   },
   badgeRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 12,
     gap: 8,
   },
   issueBadge: {
-    flexDirection: 'row',
-    backgroundColor: '#FECACA',
+    flexDirection: "row",
+    backgroundColor: "#FECACA",
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 12,
-    alignItems: 'center',
+    alignItems: "center",
     marginRight: 8,
     gap: 4,
   },
   inspectionBadge: {
-    flexDirection: 'row',
-    backgroundColor: '#FEF3C7',
+    flexDirection: "row",
+    backgroundColor: "#FEF3C7",
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 12,
-    alignItems: 'center',
+    alignItems: "center",
     gap: 4,
   },
   badgeIssueText: {
     fontSize: 12,
-    fontFamily: 'Inter',
-    fontWeight: '500',
-    color: '#DC2626',
+    fontFamily: "Inter",
+    fontWeight: "500",
+    color: "#DC2626",
     marginLeft: 4,
   },
   badgeInspectionText: {
     fontSize: 12,
-    fontFamily: 'Inter',
-    fontWeight: '500',
-    color: '#D97706',
+    fontFamily: "Inter",
+    fontWeight: "500",
+    color: "#D97706",
     marginLeft: 4,
   },
   quickActions: {
-    backgroundColor: '#F9FAFB',
+    backgroundColor: "#F9FAFB",
     marginVertical: 16,
     paddingVertical: 16,
     paddingHorizontal: 10,
   },
   quickActionsTitle: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 16,
-    color: '#1F2937',
+    color: "#1F2937",
   },
   actionsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   actionButton: {
-    alignItems: 'center',
+    alignItems: "center",
     flex: 1,
   },
   iconCircle: {
     width: 50,
     height: 50,
-    backgroundColor: '#EFF6FF',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#EFF6FF",
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 25,
     marginBottom: 8,
   },
   actionLabel: {
     fontSize: 12,
-    color: '#6B7280',
-    textAlign: 'center',
+    color: "#6B7280",
+    textAlign: "center",
   },
   peopleSection: {
     paddingHorizontal: 10,
@@ -393,52 +387,52 @@ const styles = StyleSheet.create({
   addButton: {
     height: 40,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: "#E5E7EB",
     borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 16,
   },
   addButtonText: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#3B82F6',
+    fontWeight: "600",
+    color: "#3B82F6",
   },
 
   changeText: {
     fontSize: 12,
-    color: '#3B82F6',
-    fontWeight: '500',
+    color: "#3B82F6",
+    fontWeight: "500",
   },
   editButton: {
-    backgroundColor: '#3B82F6',
+    backgroundColor: "#3B82F6",
     padding: 14,
     margin: 16,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
   editButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   removeButton: {
     marginHorizontal: 16,
     marginBottom: 32,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
   },
   deleteIconStyle: {
     width: 15,
     height: 15,
-    color: '#EF4444',
+    color: "#EF4444",
     marginRight: 8,
   },
   removeButtonText: {
-    color: '#EF4444',
+    color: "#EF4444",
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
 

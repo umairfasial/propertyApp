@@ -124,22 +124,6 @@ export default function ReportIssue() {
     );
   };
 
-  const getAssignMemberNames = () => {
-    const selectedPropertyData = properties?.find(
-      (property) => property.id === selectedProperty
-    );
-    if (!selectedPropertyData) return [];
-
-    if (userData?.role === "tenant") {
-      return [
-        selectedPropertyData.managerName,
-        selectedPropertyData.userName,
-      ].filter(Boolean);
-    } else {
-      return [selectedPropertyData.tenantName].filter(Boolean);
-    }
-  };
-  useEffect(() => {}, []);
   const names = getAssignMemberNames();
   console.log("Assigned Member Names:", names);
   const getAssignMemberId = () => {

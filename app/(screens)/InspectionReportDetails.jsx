@@ -46,11 +46,6 @@ export default function InspectionReportDetails({route, navigation}) {
     return true; // iOS doesn't need this permission
   };
 
-  // Helper function to render images from reportData
-  const renderImages = (itemData) => {
-    if (!itemData || !itemData.images || !Array.isArray(itemData.images)) {
-      return null;
-    }
 
     return (
       <View style={styles.imagesContainer}>
