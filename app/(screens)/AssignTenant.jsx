@@ -5,41 +5,38 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import PersonRow from '../components/PersonRow'; // adjust the path if needed
-import BuildingIcon from '../assets/icons/properties.svg';
-import SearchIcon from '../assets/icons/search.svg';
-import InputField from '../components/ui/InputLabelField';
-import {useDispatch, useSelector} from 'react-redux';
-import {useRoute} from '@react-navigation/native';
-import {fetchManagers, fetchTenants} from '../redux/slices/auth/authSlice';
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import PersonRow from "../components/PersonRow"; // adjust the path if needed
+import BuildingIcon from "../assets/icons/properties.svg";
+import SearchIcon from "../assets/icons/search.svg";
+import InputField from "../components/ui/InputLabelField";
+import { useDispatch, useSelector } from "react-redux";
+import { useRoute } from "@react-navigation/native";
+import { fetchManagers, fetchTenants } from "../redux/slices/auth/authSlice";
 import {
   addPropertyTenant,
   fetchPropertiesSlice,
-} from '../redux/slices/property/propertySlice';
-import {ActivityIndicator} from 'react-native';
-import CheckBox from 'react-native-check-box';
-import {Dropdown} from 'react-native-element-dropdown';
-import MailIcon from '../assets/icons/email.svg';
-import PhoneIcon from '../assets/icons/phone.svg';
-import PlaneIcon from '../assets/icons/plane.svg';
-import PropertiesIcon from '../assets/icons/properties.svg';
+} from "../redux/slices/property/propertySlice";
+import { ActivityIndicator } from "react-native";
+import CheckBox from "react-native-check-box";
+import { Dropdown } from "react-native-element-dropdown";
+import MailIcon from "../assets/icons/email.svg";
+import PhoneIcon from "../assets/icons/phone.svg";
+import PlaneIcon from "../assets/icons/plane.svg";
+import PropertiesIcon from "../assets/icons/properties.svg";
 
-export default function AssignTenants({navigation}) {
-  const {properties} = useSelector(state => state.property);
-  const {tenants, userData} = useSelector(state => state.auth);
+export default function AssignTenants({ navigation }) {
+  const { properties } = useSelector((state) => state.property);
+  const { tenants, userData } = useSelector((state) => state.auth);
   const route = useRoute();
   const dispatch = useDispatch();
-  const {propertyId, next} = route.params;
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const { propertyId, next } = route.params;
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [sendViaBoth, setSendViaBoth] = useState(false);
-  // const selectedProperty = properties.find(
-  //   property => property.id === propertyId,
-  // );
 
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -51,20 +48,20 @@ export default function AssignTenants({navigation}) {
     }
   }, [propertyId]);
 
-  const handleManagerClick = tenantId => {
+  const handleManagerClick = (tenantId) => {
     setLoading(true);
-    console.log('handleManagerClick', tenantId);
-    dispatch(addPropertyTenant({tenantId, propertyId})).then(() => {
-      dispatch(fetchPropertiesSlice({userId: userData?.uid}));
+    console.log("handleManagerClick", tenantId);
+    dispatch(addPropertyTenant({ tenantId, propertyId })).then(() => {
+      dispatch(fetchPropertiesSlice({ userId: userData?.uid }));
       setLoading(false);
       if (next) {
-        navigation.navigate('Properties');
+        navigation.navigate("Properties");
       }
     });
   };
 
-  const filteredTenants = tenants?.filter(tenant =>
-    tenant.fullName.toLowerCase().includes(searchText.toLowerCase()),
+  const filteredTenants = tenants?.filter((tenant) =>
+    tenant.fullName.toLowerCase().includes(searchText.toLowerCase())
   );
 
   return (
@@ -78,7 +75,7 @@ export default function AssignTenants({navigation}) {
           <View style={styles.propertyCard}>
             <Dropdown
               style={styles.dropdown}
-              data={properties.map(property => ({
+              data={properties.map((property) => ({
                 label: property.propertyName,
                 value: property.id,
               }))}
@@ -86,7 +83,7 @@ export default function AssignTenants({navigation}) {
               valueField="value"
               placeholder="Select Property"
               value={selectedProperty}
-              onChange={item => {
+              onChange={(item) => {
                 setSelectedProperty(item.value);
               }}
               renderLeftIcon={() => (
@@ -94,7 +91,7 @@ export default function AssignTenants({navigation}) {
                   width={15}
                   height={15}
                   color="#2563EB"
-                  style={{marginRight: 8}}
+                  style={{ marginRight: 8 }}
                 />
               )}
             />
@@ -103,7 +100,7 @@ export default function AssignTenants({navigation}) {
           <InputField
             icon={SearchIcon}
             placeholder="Search tenants...."
-            onChangeText={text => setSearchText(text)}
+            onChangeText={(text) => setSearchText(text)}
             containerStyle={styles.mainInputContainer}
             labelStyle={styles.labelStyle}
             inputContainerStyle={styles.inputContainer}
@@ -113,7 +110,7 @@ export default function AssignTenants({navigation}) {
           <Text style={styles.availableManagersTitle}>Available Tenants</Text>
           {filteredTenants?.length > 0 ? (
             filteredTenants.map((tenant, index) => (
-              <View style={{padding: 10}}>
+              <View style={{ padding: 10 }}>
                 <PersonRow
                   key={tenant.uid}
                   name={tenant.fullName}
@@ -126,7 +123,7 @@ export default function AssignTenants({navigation}) {
               </View>
             ))
           ) : (
-            <View style={{padding: 10, alignItems: 'center'}}>
+            <View style={{ padding: 10, alignItems: "center" }}>
               <Text>No matching tenant found</Text>
             </View>
           )}
@@ -163,7 +160,7 @@ export default function AssignTenants({navigation}) {
                 onClick={() => {
                   setSendViaBoth(!sendViaBoth);
                 }}
-                checkBoxColor={sendViaBoth ? '#007bff' : '#ccc'}
+                checkBoxColor={sendViaBoth ? "#007bff" : "#ccc"}
               />
               <Text style={styles.checkboxLabel}>
                 Send invitation via both email & SMS
@@ -183,36 +180,36 @@ export default function AssignTenants({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fafafa',
+    backgroundColor: "#fafafa",
     marginTop: 10,
   },
   loadingContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   propertyCard: {
-    backgroundColor: '#ffff',
+    backgroundColor: "#ffff",
     padding: 16,
     marginBottom: 10,
   },
   dropdown: {
     height: 50,
-    borderColor: '#E5E7EB',
+    borderColor: "#E5E7EB",
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 8,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     marginVertical: 10,
   },
   propertyName: {
     fontSize: 16,
-    fontWeight: '600',
-    color: '#1F2937',
+    fontWeight: "600",
+    color: "#1F2937",
   },
   propertyAddress: {
     fontSize: 12,
-    color: '#6B7280',
+    color: "#6B7280",
     marginTop: 4,
   },
   mainInputContainer: {
@@ -220,20 +217,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   labelStyle: {
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
     fontWeight: 500,
     fontSize: 14,
-    color: '#374151',
+    color: "#374151",
     marginBottom: 5,
   },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 10,
-    borderColor: '#E5E7EB',
-    backgroundColor: '#FFFFFF',
+    borderColor: "#E5E7EB",
+    backgroundColor: "#FFFFFF",
   },
   inputIcon: {
     marginLeft: 10,
@@ -243,103 +240,103 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 50,
     marginLeft: 10,
-    color: '#000',
+    color: "#000",
   },
   searchInput: {
-    backgroundColor: '#F3F4F6',
+    backgroundColor: "#F3F4F6",
     padding: 12,
     borderRadius: 8,
     marginBottom: 16,
   },
   availableManagersTitle: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#4B5563',
+    fontWeight: "600",
+    color: "#4B5563",
     marginBottom: 12,
     paddingHorizontal: 16,
   },
   inviteBox: {
     marginTop: 24,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: "#F9FAFB",
     padding: 16,
     borderRadius: 12,
   },
   inviteTitle: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#4B5563',
+    fontWeight: "600",
+    color: "#4B5563",
     marginBottom: 8,
   },
   emailInput: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: '#D1D5DB',
+    borderColor: "#D1D5DB",
     borderRadius: 8,
     padding: 12,
     marginBottom: 12,
   },
   sendInvitationButton: {
-    backgroundColor: '#10B981',
+    backgroundColor: "#10B981",
     padding: 14,
     borderRadius: 8,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
   },
   sendInvitationButtonText: {
-    color: '#FFFFFF',
-    fontWeight: '600',
+    color: "#FFFFFF",
+    fontWeight: "600",
   },
   card: {
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 8,
     marginTop: 15,
   },
   inputContainers: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderColor: '#E5E7EB',
+    flexDirection: "row",
+    alignItems: "center",
+    borderColor: "#E5E7EB",
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 12,
     paddingHorizontal: 10,
-    backgroundColor: '#ffff',
+    backgroundColor: "#ffff",
   },
 
   iconPlaceholder: {
     width: 20,
     height: 20,
-    color: '#9CA3AF',
+    color: "#9CA3AF",
   },
   checkboxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginVertical: 16,
   },
   checkboxLabel: {
     marginLeft: 8,
-    color: '#4B5563',
+    color: "#4B5563",
     fontSize: 14,
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
   },
   sendButton: {
-    flexDirection: 'row',
-    backgroundColor: '#2563EB',
+    flexDirection: "row",
+    backgroundColor: "#2563EB",
     paddingVertical: 12,
     borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   sendIconPlaceholder: {
     width: 16,
     height: 16,
-    color: '#fff',
+    color: "#fff",
     marginRight: 8,
   },
   sendButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
+    color: "#fff",
+    fontWeight: "bold",
     fontSize: 16,
   },
 });

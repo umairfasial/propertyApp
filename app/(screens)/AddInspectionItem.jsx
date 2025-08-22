@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 import InspectionItemCard from "../components/InspectionItemCard";
 import SearchIcon from "../assets/icons/search.svg";
 import InputField from "../components/ui/InputLabelField";
