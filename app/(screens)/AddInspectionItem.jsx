@@ -40,16 +40,7 @@ export default function AddInspectionItem({ navigation, route }) {
     );
   };
 
-  const handleAddItems = () => {
-    if (selectedItems.length === 0) {
-      alert("Please select at least one item to add.");
-      return;
-    }
-    console.log("Selected Items:", selectedItems);
-    navigation.navigate("AddInspectionTemplate", {
-      selectedItems: selectedItems,
-    });
-  };
+
 
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
@@ -93,22 +84,6 @@ export default function AddInspectionItem({ navigation, route }) {
           ))}
         </ScrollView>
 
-        <View style={styles.listContainer}>
-          {inspectionItems && inspectionItems.length > 0 ? (
-            inspectionItems
-              .filter(
-                (item) =>
-                  selectedFilter === "All Items" ||
-                  item.inspectionData?.type === selectedFilter
-              )
-              .map((item) => {
-                const options = item.inspectionData?.options || {};
-                const fields = Object.entries(options).map(
-                  ([label, value]) => ({
-                    label,
-                    value,
-                  })
-                );
 
                 return (
                   <TouchableOpacity
