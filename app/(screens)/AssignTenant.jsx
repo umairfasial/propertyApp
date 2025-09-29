@@ -154,14 +154,7 @@ export default function AssignTenants({ navigation }) {
             </View>
 
             <View style={styles.checkboxContainer}>
-              <CheckBox
-                value={sendViaBoth}
-                isChecked={sendViaBoth}
-                onClick={() => {
-                  setSendViaBoth(!sendViaBoth);
-                }}
-                checkBoxColor={sendViaBoth ? "#007bff" : "#ccc"}
-              />
+      
               <Text style={styles.checkboxLabel}>
                 Send invitation via both email & SMS
               </Text>

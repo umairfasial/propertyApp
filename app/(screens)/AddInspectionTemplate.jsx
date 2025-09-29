@@ -134,13 +134,6 @@ export default function AddInspectionTemplate({ navigation, route }) {
         </ScrollView>
 
         {/* Fixed Save Button */}
-        <TouchableOpacity style={styles.saveButton} onPress={handleSubmit}>
-          {templateLoading ? (
-            <ActivityIndicator color="#fff" size="small" />
-          ) : (
-            <Text style={styles.saveText}>+ Save</Text>
-          )}
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
