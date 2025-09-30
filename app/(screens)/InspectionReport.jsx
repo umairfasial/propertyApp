@@ -104,24 +104,6 @@ export default function InspectionReport() {
     }
   }, [inspectionReports, dispatch]);
 
-  useEffect(() => {
-    if (inspectionReports && Array.isArray(inspectionReports)) {
-      const inspectionitems = new Set();
-
-      inspectionReports.forEach((report) => {
-        Object.keys(report.reportData).forEach((id) => {
-          inspectionitems.add(id);
-        });
-      });
-
-      console.log("inspectionitems", inspectionitems);
-
-      if (inspectionitems.size > 0) {
-        dispatch(fetchInspectionItemsByIdsSlice(Array.from(inspectionitems)));
-      }
-    }
-  }, [inspectionReports]);
-
   console.log(
     "inspectionReports, selectedTemplate, selectedInspections, selectedItems",
     inspectionReports,

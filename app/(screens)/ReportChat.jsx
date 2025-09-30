@@ -5,24 +5,23 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-} from 'react-native';
-import React, {useState} from 'react';
+} from "react-native";
+import React, { useState } from "react";
 
 export default function ReportChat() {
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [description, setDescription] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [description, setDescription] = useState("");
 
   const categories = [
-    'Harassment',
-    'Spam',
-    'Hate Speech',
-    'Inappropriate Content',
+    "Harassment",
+    "Spam",
+    "Hate Speech",
+    "Inappropriate Content",
   ];
 
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        {/* User Info Section */}
         <View style={styles.userSection}>
           <View style={styles.userInfo}>
             <View style={styles.avatar} />
@@ -36,7 +35,6 @@ export default function ReportChat() {
           </Text>
         </View>
 
-        {/* Category Selection */}
         <View style={styles.categorySection}>
           <Text style={styles.sectionTitle}>Select category of abuse</Text>
           {categories.map((category, index) => (
@@ -47,12 +45,14 @@ export default function ReportChat() {
                 selectedCategory === category && styles.categoryButtonSelected,
                 index === categories.length - 1 && styles.lastCategoryButton,
               ]}
-              onPress={() => setSelectedCategory(category)}>
+              onPress={() => setSelectedCategory(category)}
+            >
               <Text
                 style={[
                   styles.categoryText,
                   selectedCategory === category && styles.categoryTextSelected,
-                ]}>
+                ]}
+              >
                 {category}
               </Text>
               {selectedCategory === category && (
@@ -86,7 +86,8 @@ export default function ReportChat() {
               ? styles.submitButtonActive
               : styles.submitButtonDisabled,
           ]}
-          disabled={!selectedCategory || !description}>
+          disabled={!selectedCategory || !description}
+        >
           <Text style={styles.submitButtonText}>Submit Report</Text>
         </TouchableOpacity>
       </View>
@@ -97,27 +98,27 @@ export default function ReportChat() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
+    backgroundColor: "#F8F9FA",
   },
   scrollView: {
     flex: 1,
   },
   userSection: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: "#E5E7EB",
   },
   userInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 12,
   },
   avatar: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: "#E5E7EB",
     marginRight: 12,
   },
   userTextInfo: {
@@ -125,17 +126,17 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontSize: 16,
-    fontWeight: '500',
-    color: '#111827',
+    fontWeight: "500",
+    color: "#111827",
     marginBottom: 4,
   },
   userTime: {
     fontSize: 14,
-    color: '#6B7280',
+    color: "#6B7280",
   },
   originalMessage: {
     fontSize: 14,
-    color: '#374151',
+    color: "#374151",
     lineHeight: 20,
   },
   categorySection: {
@@ -143,74 +144,74 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 16,
-    fontWeight: '500',
-    color: '#111827',
+    fontWeight: "500",
+    color: "#111827",
     marginBottom: 16,
   },
   categoryButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     padding: 16,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
+    borderTopColor: "#E5E7EB",
   },
   lastCategoryButton: {
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: "#E5E7EB",
   },
   categoryButtonSelected: {
-    backgroundColor: '#F3F4F6',
+    backgroundColor: "#F3F4F6",
   },
   categoryText: {
     fontSize: 16,
-    color: '#111827',
+    color: "#111827",
   },
   categoryTextSelected: {
-    color: '#2563EB',
-    fontWeight: '500',
+    color: "#2563EB",
+    fontWeight: "500",
   },
   checkIcon: {
     width: 20,
     height: 20,
     borderRadius: 10,
-    backgroundColor: '#2563EB',
+    backgroundColor: "#2563EB",
   },
   descriptionSection: {
     padding: 16,
   },
   descriptionInput: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: "#E5E7EB",
     borderRadius: 8,
     padding: 12,
     height: 120,
     fontSize: 14,
-    color: '#111827',
+    color: "#111827",
   },
   bottomContainer: {
     padding: 16,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
+    borderTopColor: "#E5E7EB",
   },
   submitButton: {
     height: 48,
     borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   submitButtonActive: {
-    backgroundColor: '#DC2626',
+    backgroundColor: "#DC2626",
   },
   submitButtonDisabled: {
-    backgroundColor: '#eaaa9d',
+    backgroundColor: "#eaaa9d",
   },
   submitButtonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
   },
 });

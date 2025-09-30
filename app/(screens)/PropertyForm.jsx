@@ -472,219 +472,100 @@ export default function PropertyForm({ navigation }) {
                     </View>
                   </View>
 
+                  <TextInput
+                    placeholder="Address"
+                    value={values.address}
+                    onChangeText={handleChange("address")}
+                    onBlur={handleBlur("address")}
+                    style={styles.input}
+                    placeholderTextColor="#000"
+                  />
 
-
-                    <TextInput
-                      placeholder="Address"
-                      value={values.address}
-                      onChangeText={handleChange("address")}
-                      onBlur={handleBlur("address")}
-                      style={styles.input}
-                      placeholderTextColor="#000"
+                  <View style={styles.googlePlacesContainer}>
+                    <GooglePlacesAutocomplete
+                      placeholder="Select a location"
+                      placeholderTextColor="black"
+                      predefinedPlaces={[]}
+                      fetchDetails={true}
+                      currentLocationLabel="Current Location"
+                      onPress={() => {}}
+                      query={{
+                        key: process.env.GOOGLE_MAPS_API_KEY,
+                        language: "en",
+                      }}
+                      textInputProps={{
+                        placeholderTextColor: "black",
+                        onFocus: () => {},
+                      }}
+                      styles={{
+                        textInput: {
+                          ...styles.googleInput,
+                          color: "black",
+                        },
+                        container: {
+                          flex: 1,
+                        },
+                        listView: {
+                          backgroundColor: "white",
+                          position: "relative",
+                          zIndex: 1000,
+                        },
+                        description: {
+                          color: "black",
+                        },
+                      }}
+                      keyboardShouldPersistTaps="handled"
                     />
+                  </View>
 
-                    <View style={styles.googlePlacesContainer}>
-                      <GooglePlacesAutocomplete
-                        placeholder="Select a location"
-                        placeholderTextColor="black"
-                        predefinedPlaces={[]}
-                        fetchDetails={true}
-                        currentLocationLabel="Current Location"
-                        onPress={() => {}}
-                        query={{
-                          key: process.env.GOOGLE_MAPS_API_KEY,
-                          language: "en",
-                        }}
-                        textInputProps={{
-                          placeholderTextColor: "black",
-                          onFocus: () => {},
-                        }}
-                        styles={{
-                          textInput: {
-                            ...styles.googleInput,
-                            color: "black",
-                          },
-                          container: {
-                            flex: 1,
-                          },
-                          listView: {
-                            backgroundColor: "white",
-                            position: "relative",
-                            zIndex: 1000,
-                          },
-                          description: {
-                            color: "black",
-                          },
-                        }}
-                        keyboardShouldPersistTaps="handled"
+                  {touched.address && errors.address && (
+                    <Text style={styles.error}>{errors.address}</Text>
+                  )}
+
+                  <View style={styles.row}>
+                    <View style={styles.inputHalf}>
+                      <TextInput
+                        placeholder="City"
+                        value={values.city}
+                        onChangeText={handleChange("city")}
+                        onBlur={handleBlur("city")}
+                        style={styles.input}
+                        placeholderTextColor="#000"
                       />
+                      {touched.city && errors.city && (
+                        <Text style={styles.error}>{errors.city}</Text>
+                      )}
                     </View>
 
-                    {touched.address && errors.address && (
-                      <Text style={styles.error}>{errors.address}</Text>
-                    )}
-
-                    <View style={styles.row}>
-                      <View style={styles.inputHalf}>
-                        <TextInput
-                          placeholder="City"
-                          value={values.city}
-                          onChangeText={handleChange("city")}
-                          onBlur={handleBlur("city")}
-                          style={styles.input}
-                          placeholderTextColor="#000"
-                        />
-                        {touched.city && errors.city && (
-                          <Text style={styles.error}>{errors.city}</Text>
-                        )}
-                      </View>
-
-                      <View style={styles.inputHalf}>
-                        <TextInput
-                          placeholder="Postal Code"
-                          value={values.postalCode}
-                          onChangeText={handleChange("postalCode")}
-                          onBlur={handleBlur("postalCode")}
-                          style={styles.input}
-                          placeholderTextColor="#000"
-                        />
-                        {touched.postalCode && errors.postalCode && (
-                          <Text style={styles.error}>{errors.postalCode}</Text>
-                        )}
-                      </View>
-                    </View>
-
-                    <View>
-                      <CustomDropdown
-                        data={countryData}
-                        defaultValue={country}
-                        placeholder="Select the country"
-                        onSelect={(value) => {
-                          setCountry(value);
-                          const currency = currencyData.find(
-                            (item) => item.country === value
-                          ).label;
-                          setCurrency(currency);
-                        }}
+                    <View style={styles.inputHalf}>
+                      <TextInput
+                        placeholder="Postal Code"
+                        value={values.postalCode}
+                        onChangeText={handleChange("postalCode")}
+                        onBlur={handleBlur("postalCode")}
+                        style={styles.input}
+                        placeholderTextColor="#000"
                       />
+                      {touched.postalCode && errors.postalCode && (
+                        <Text style={styles.error}>{errors.postalCode}</Text>
+                      )}
                     </View>
                   </View>
-                  {propertyType !== "Room" && propertyType !== "" && (
-                    <View style={styles.miniContainer}>
-                      <Text style={styles.label}>More Details</Text>
-                      {propertyType === "House" ||
-                        (propertyType === "Apartment" && (
-                          <View>
-                            <View style={{ marginBottom: 10 }}>
-                              <CustomDropdown
-                                data={countData}
-                                placeholder="Number of Bed Rooms"
-                                onSelect={handleChange("noOfBedrooms")}
-                              />
-                            </View>
 
-                            <View style={{ marginBottom: 10 }}>
-                              <CustomDropdown
-                                data={countData}
-                                placeholder="Number of Bathrooms"
-                                onSelect={handleChange("noOfBathrooms")}
-                              />
-                            </View>
-                            <View style={styles.row}>
-                              <View
-                                style={[
-                                  styles.inputHalf,
-                                  styles.checkBoxContainer,
-                                ]}
-                              >
-                                <CheckBox
-                                  isChecked={values.rearGarden}
-                                  onClick={() =>
-                                    setFieldValue(
-                                      "rearGarden",
-                                      !values.rearGarden
-                                    )
-                                  }
-                                  checkBoxColor={
-                                    values.rearGarden ? "#007bff" : "#ccc"
-                                  }
-                                  rightTextStyle={{
-                                    fontSize: 16,
-                                    color: "#333",
-                                  }}
-                                />
-                                <Text>Rear Garden</Text>
-                              </View>
-                              <View
-                                style={[
-                                  styles.inputHalf,
-                                  styles.checkBoxContainer,
-                                ]}
-                              >
-                                <CheckBox
-                                  isChecked={values.offStreetParking}
-                                  onClick={() =>
-                                    setFieldValue(
-                                      "offStreetParking",
-                                      !values.offStreetParking
-                                    )
-                                  }
-                                  checkBoxColor={
-                                    values.offStreetParking ? "#007bff" : "#ccc"
-                                  }
-                                  rightTextStyle={{
-                                    fontSize: 16,
-                                    color: "#333",
-                                  }}
-                                />
-                                <Text>Off Street Parking</Text>
-                              </View>
-                            </View>
-                          </View>
-                        ))}
-                      {(propertyType === "Retail" ||
-                        propertyType === "Office" ||
-                        propertyType === "Industrial") &&
-                        (propertyType === "Retail" ? (
-                          <TextInput
-                            placeholder="Unit Name or Number"
-                            value={values.unit}
-                            onChangeText={handleChange("unit")}
-                            onBlur={handleBlur("unit")}
-                            style={styles.input}
-                            placeholderTextColor="#000"
-                          />
-                        ) : (
-                          <View>
-                            <TextInput
-                              placeholder="Unit Name or Number"
-                              value={values.unit}
-                              onChangeText={handleChange("unit")}
-                              onBlur={handleBlur("unit")}
-                              style={styles.input}
-                              placeholderTextColor="#000"
-                            />
-                            <TextInput
-                              placeholder="Floor Name or Number"
-                              value={values.floor}
-                              onChangeText={handleChange("floor")}
-                              onBlur={handleBlur("floor")}
-                              style={styles.input}
-                              placeholderTextColor="#000"
-                            />
-
-                            <TextInput
-                              placeholder="Building Name or Number"
-                              value={values.building}
-                              onChangeText={handleChange("building")}
-                              onBlur={handleBlur("building")}
-                              style={styles.input}
-                              placeholderTextColor="#000"
-                            />
-                          </View>
-                        ))}
-                    </View>
-                  )}
+                  <View>
+                    <CustomDropdown
+                      data={countryData}
+                      defaultValue={country}
+                      placeholder="Select the country"
+                      onSelect={(value) => {
+                        setCountry(value);
+                        const currency = currencyData.find(
+                          (item) => item.country === value
+                        ).label;
+                        setCurrency(currency);
+                      }}
+                    />
+                  </View>
 
                   {/* Picker Row */}
                   <View style={styles.miniContainer}>
