@@ -37,12 +37,6 @@ export default function NewInspectionData({ navigation }) {
   const [selectedFilter, setSelectedFilter] = useState("All Items");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [switchStates, setSwitchStates] = useState(
-    toggleOptions.reduce((acc, item) => {
-      acc[item.label] = false;
-      return acc;
-    }, {})
-  );
 
   const toggleSwitch = (label) => {
     setSwitchStates((prev) => ({

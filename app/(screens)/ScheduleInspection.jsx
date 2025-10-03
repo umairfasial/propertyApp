@@ -114,22 +114,6 @@ const ScheduleInspection = ({navigation}) => {
   };
 
   const handleSubmit = async () => {
-    if (!selectedProperty) {
-      Alert.alert('Validation Error', 'Please select a property.');
-      return;
-    }
-    if (!selectedTemplate) {
-      Alert.alert('Validation Error', 'Please select an inspection template.');
-      return;
-    }
-    if (!selectedInspector) {
-      Alert.alert('Validation Error', 'Please assign an inspector.');
-      return;
-    }
-    if (!selectedDate) {
-      Alert.alert('Validation Error', 'Please select a date.');
-      return;
-    }
 
     const finalData = {
       property: selectedProperty.value,
