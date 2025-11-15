@@ -132,8 +132,6 @@ export default function AddInspectionTemplate({ navigation, route }) {
             </Text>
           )}
         </ScrollView>
-
-        {/* Fixed Save Button */}
       </View>
     </SafeAreaView>
   );

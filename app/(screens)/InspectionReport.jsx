@@ -138,11 +138,6 @@ export default function InspectionReport() {
         [];
     }
 
-    // Combine all relevant items
-    const allItems = [...items, ...templateItems].filter(
-      (item, index, self) => index === self.findIndex((i) => i.id === item.id)
-    );
-
     return (
       <TouchableOpacity
         onPress={() =>

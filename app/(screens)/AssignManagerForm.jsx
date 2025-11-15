@@ -35,21 +35,6 @@ export default function AssignManager({ navigation }) {
     dispatch(fetchManagers());
   }, [selectedProperty]);
 
-  const handleManagerClick = (managerId) => {
-    setLoading(true);
-    console.log("handleManagerClick", managerId);
-    dispatch(addPropertyManager({ managerId, propertyId })).then(() => {
-      setLoading(false);
-      dispatch(fetchPropertiesSlice({ userId: userData?.uid }));
-      if (next) {
-        navigation.navigate("AssignTenants", {
-          propertyId: propertyId,
-          next: true,
-        });
-      }
-    });
-  };
-
   const filteredManagers = managers?.filter((manager) =>
     manager.fullName.toLowerCase().includes(searchText.toLowerCase())
   );

@@ -45,13 +45,7 @@ export default function NewInspectionData({ navigation }) {
     }));
   };
 
-  const handleSubmit = () => {
-    const inspectionData = {
-      type: selectedFilter,
-      title,
-      description,
-      options: switchStates,
-    };
+
 
     dispatch(addInspectionItemSlice({ inspectionData })).then(() => {
       navigation.goBack();
