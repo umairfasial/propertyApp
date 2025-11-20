@@ -60,10 +60,6 @@ export default function AddLandLoard({ navigation }) {
     });
   };
 
-  const filteredLandlords = landloards?.filter((landloard) =>
-    landloard.fullName.toLowerCase().includes(searchText.toLowerCase())
-  );
-
   return (
     <>
       {loading ? (

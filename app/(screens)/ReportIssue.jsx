@@ -91,12 +91,6 @@ export default function ReportIssue() {
     }
   };
 
-  const removeMedia = (index) => {
-    setSelectedMedia((prevMedia) =>
-      prevMedia.filter((_, mediaIndex) => mediaIndex !== index)
-    );
-  };
-
   const renderMediaPreview = (media, index) => {
     const isVideo = media.type?.startsWith("video/");
 

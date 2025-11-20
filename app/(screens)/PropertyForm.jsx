@@ -136,12 +136,10 @@ export default function PropertyForm({ navigation }) {
     }
   };
 
-  // Function to check if Type section is complete
   const isTypeComplete = () => {
     return propertyType !== "";
   };
 
-  // Function to check if Details section is complete
   const isDetailsComplete = (values) => {
     return (
       values.propertyName !== "" &&
@@ -151,7 +149,6 @@ export default function PropertyForm({ navigation }) {
     );
   };
 
-  // Function to check if Contract section is complete
   const isContractComplete = (values) => {
     return (
       tenancyType !== "" &&
@@ -161,7 +158,6 @@ export default function PropertyForm({ navigation }) {
     );
   };
 
-  // Update progress based on form completion
   const updateProgress = (values) => {
     if (isTypeComplete()) {
       if (isDetailsComplete(values)) {
