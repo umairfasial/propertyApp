@@ -49,17 +49,6 @@ export default function AddLandLoard({ navigation }) {
     }
   }, [propertyId]);
 
-  const handleManagerClick = (tenantId) => {
-    setLoading(true);
-    console.log("handleManagerClick", tenantId);
-    dispatch(addPropertyTenant({ tenantId, propertyId })).then(() => {
-      setLoading(false);
-      if (next) {
-        navigation.navigate("Properties");
-      }
-    });
-  };
-
   return (
     <>
       {loading ? (

@@ -82,13 +82,6 @@ const PropertyOverView = ({ navigation }) => {
 
         <View style={styles.infoRow}>
           <View style={styles.infoBlock}>
-            <Text style={styles.label}>Monthly Income</Text>
-            <Text style={styles.value}>
-              {selectedProperty?.currency} {selectedProperty?.monthlyIncome}
-            </Text>
-          </View>
-
-          <View style={styles.infoBlock}>
             <Text style={styles.label}>Rent Review Date</Text>
             <Text style={styles.dateValue}>
               {moment(selectedProperty?.reviewDate).format("Do MMMM YYYY")}

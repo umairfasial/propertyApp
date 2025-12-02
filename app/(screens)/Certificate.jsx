@@ -1,18 +1,16 @@
-import React from 'react';
-import {ScrollView, View, Text, StyleSheet, TextInput} from 'react-native';
-import CertificateCard from '../components/ui/CertificateCard';
-import {useSelector} from 'react-redux';
-import InputField from '../components/ui/InputLabelField';
-import SearchIcon from '../assets/icons/search.svg';
+import React from "react";
+import { ScrollView, View, Text, StyleSheet, TextInput } from "react-native";
+import CertificateCard from "../components/ui/CertificateCard";
+import { useSelector } from "react-redux";
+import InputField from "../components/ui/InputLabelField";
+import SearchIcon from "../assets/icons/search.svg";
 
-export default function CertificateScreen({navigation}) {
-  const {certificates} = useSelector(state => state.property);
+export default function CertificateScreen({ navigation }) {
+  const { certificates } = useSelector((state) => state.property);
   const activeCertificates = certificates.filter(
-    cert => cert.status[0] === 'Active',
+    (cert) => cert.status[0] === "Active"
   );
-  const expiredCertificates = certificates.filter(
-    cert => cert.status[0] !== 'Active',
-  );
+
   return (
     <ScrollView style={styles.container}>
       <InputField
@@ -48,8 +46,8 @@ export default function CertificateScreen({navigation}) {
         </>
 
         {certificates.length === 0 && (
-          <View style={{alignItems: 'center', marginTop: 20}}>
-            <Text style={{color: '#6B7280'}}>No active certificates</Text>
+          <View style={{ alignItems: "center", marginTop: 20 }}>
+            <Text style={{ color: "#6B7280" }}>No active certificates</Text>
           </View>
         )}
       </View>
@@ -61,15 +59,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 10,
-    backgroundColor: '#fafafa',
+    backgroundColor: "#fafafa",
   },
   cardContainer: {
     marginHorizontal: 10,
   },
   sectionTitle: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#111827',
+    fontWeight: "700",
+    color: "#111827",
     marginHorizontal: 16,
     marginBottom: 10,
     amrginTop: 10,
@@ -78,16 +76,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
 
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 10,
-    borderColor: '#E5E7EB',
+    borderColor: "#E5E7EB",
   },
   inputIcon: {
     marginLeft: 10,
@@ -97,10 +95,10 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 50,
     marginLeft: 10,
-    color: '#000',
+    color: "#000",
   },
   contentCantainer: {
-    backgroundColor: '#fafafa',
+    backgroundColor: "#fafafa",
     paddingTop: 10,
     flex: 1,
   },

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -13,29 +13,30 @@ import {
   Dimensions,
   PermissionsAndroid,
   Share,
-} from 'react-native';
-import RNHTMLtoPDF from 'react-native-html-to-pdf';
-import RNFS from 'react-native-fs';
+} from "react-native";
+import RNHTMLtoPDF from "react-native-html-to-pdf";
+import RNFS from "react-native-fs";
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
-export default function InspectionReportDetails({route, navigation}) {
-  const {report, template, property, inspectionDetails, items, reportData} = route.params;
+export default function InspectionReportDetails({ route, navigation }) {
+  const { report, template, property, inspectionDetails, items, reportData } =
+    route.params;
   const [downloading, setDownloading] = useState(false);
 
   // Helper function to request storage permission on Android
   const requestStoragePermission = async () => {
-    if (Platform.OS === 'android') {
+    if (Platform.OS === "android") {
       try {
         const granted = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
           {
-            title: 'Storage Permission Required',
-            message: 'This app needs access to storage to save PDF files',
-            buttonNeutral: 'Ask Me Later',
-            buttonNegative: 'Cancel',
-            buttonPositive: 'OK',
-          },
+            title: "Storage Permission Required",
+            message: "This app needs access to storage to save PDF files",
+            buttonNeutral: "Ask Me Later",
+            buttonNegative: "Cancel",
+            buttonPositive: "OK",
+          }
         );
         return granted === PermissionsAndroid.RESULTS.GRANTED;
       } catch (err) {
@@ -44,30 +45,6 @@ export default function InspectionReportDetails({route, navigation}) {
       }
     }
     return true; // iOS doesn't need this permission
-  };
-
-
-    return (
-      <View style={styles.imagesContainer}>
-        <Text style={styles.imagesTitle}>Images:</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <View style={styles.imagesRow}>
-            {itemData.images.map((imageUri, index) => (
-              <TouchableOpacity 
-                key={index} 
-                style={styles.imageWrapper}
-                onPress={() => {
-                  // TODO: Open image in full screen
-                  Alert.alert('Image', `Image ${index + 1}`);
-                }}
-              >
-                <Image source={{uri: imageUri}} style={styles.itemImage} />
-              </TouchableOpacity>
-            ))}
-          </View>
-        </ScrollView>
-      </View>
-    );
   };
 
   // Helper function to render inspection items with their data
@@ -83,16 +60,18 @@ export default function InspectionReportDetails({route, navigation}) {
 
     return (
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Inspection Items ({items.length})</Text>
+        <Text style={styles.sectionTitle}>
+          Inspection Items ({items.length})
+        </Text>
         {items.map((item, index) => {
           const itemData = reportData ? reportData[item.id] : null;
-          
+
           return (
             <View key={item.id} style={styles.itemCard}>
               <Text style={styles.itemTitle}>
                 {item.name || item.title || `Item ${index + 1}`}
               </Text>
-              
+
               {item.description && (
                 <Text style={styles.itemDescription}>{item.description}</Text>
               )}
@@ -102,7 +81,12 @@ export default function InspectionReportDetails({route, navigation}) {
                   {itemData.status && (
                     <View style={styles.dataRow}>
                       <Text style={styles.dataLabel}>Status:</Text>
-                      <View style={[styles.statusBadge, getItemStatusStyle(itemData.status)]}>
+                      <View
+                        style={[
+                          styles.statusBadge,
+                          getItemStatusStyle(itemData.status),
+                        ]}
+                      >
                         <Text style={styles.statusText}>{itemData.status}</Text>
                       </View>
                     </View>
@@ -142,51 +126,82 @@ export default function InspectionReportDetails({route, navigation}) {
   // Helper function to get status badge style
   const getItemStatusStyle = (status) => {
     switch (status?.toLowerCase()) {
-      case 'pass':
-      case 'good':
-      case 'excellent':
-        return {backgroundColor: '#D1FAE5'};
-      case 'fail':
-      case 'poor':
-      case 'critical':
-        return {backgroundColor: '#FEE2E2'};
-      case 'warning':
-      case 'fair':
-        return {backgroundColor: '#FEF3C7'};
+      case "pass":
+      case "good":
+      case "excellent":
+        return { backgroundColor: "#D1FAE5" };
+      case "fail":
+      case "poor":
+      case "critical":
+        return { backgroundColor: "#FEE2E2" };
+      case "warning":
+      case "fair":
+        return { backgroundColor: "#FEF3C7" };
       default:
-        return {backgroundColor: '#F3F4F6'};
+        return { backgroundColor: "#F3F4F6" };
     }
   };
 
   const handleDownloadPDF = async () => {
     setDownloading(true);
-    
+
     try {
       // Request storage permission first
       const hasPermission = await requestStoragePermission();
       if (!hasPermission) {
-        Alert.alert('Permission Required', 'Storage permission is required to save PDF files.');
+        Alert.alert(
+          "Permission Required",
+          "Storage permission is required to save PDF files."
+        );
         setDownloading(false);
         return;
       }
 
       // Create more comprehensive HTML content
-      const itemsHtml = items?.map(item => {
-        const itemData = reportData ? reportData[item.id] : null;
-        return `
+      const itemsHtml =
+        items
+          ?.map((item) => {
+            const itemData = reportData ? reportData[item.id] : null;
+            return `
           <div style="margin-bottom: 20px; border: 1px solid #e5e7eb; padding: 15px; border-radius: 8px; page-break-inside: avoid;">
-            <h3 style="color: #111827; margin-bottom: 10px; font-size: 18px;">${item.name || item.title || 'Unnamed Item'}</h3>
-            ${item.description ? `<p style="color: #6B7280; margin-bottom: 10px;"><strong>Description:</strong> ${item.description}</p>` : ''}
-            ${itemData?.status ? `<p style="margin-bottom: 8px;"><strong>Status:</strong> <span style="background-color: #e5e7eb; padding: 4px 8px; border-radius: 4px;">${itemData.status}</span></p>` : ''}
-            ${itemData?.notes ? `<p style="margin-bottom: 8px;"><strong>Notes:</strong> ${itemData.notes}</p>` : ''}
-            ${itemData?.rating ? `<p style="margin-bottom: 8px;"><strong>Rating:</strong> ${itemData.rating}/5</p>` : ''}
-            ${itemData?.condition ? `<p style="margin-bottom: 8px;"><strong>Condition:</strong> ${itemData.condition}</p>` : ''}
+            <h3 style="color: #111827; margin-bottom: 10px; font-size: 18px;">${
+              item.name || item.title || "Unnamed Item"
+            }</h3>
+            ${
+              item.description
+                ? `<p style="color: #6B7280; margin-bottom: 10px;"><strong>Description:</strong> ${item.description}</p>`
+                : ""
+            }
+            ${
+              itemData?.status
+                ? `<p style="margin-bottom: 8px;"><strong>Status:</strong> <span style="background-color: #e5e7eb; padding: 4px 8px; border-radius: 4px;">${itemData.status}</span></p>`
+                : ""
+            }
+            ${
+              itemData?.notes
+                ? `<p style="margin-bottom: 8px;"><strong>Notes:</strong> ${itemData.notes}</p>`
+                : ""
+            }
+            ${
+              itemData?.rating
+                ? `<p style="margin-bottom: 8px;"><strong>Rating:</strong> ${itemData.rating}/5</p>`
+                : ""
+            }
+            ${
+              itemData?.condition
+                ? `<p style="margin-bottom: 8px;"><strong>Condition:</strong> ${itemData.condition}</p>`
+                : ""
+            }
           </div>
         `;
-      }).join('') || '<p>No items found</p>';
+          })
+          .join("") || "<p>No items found</p>";
 
       const currentDate = new Date().toLocaleDateString();
-      const reportDate = report.date || report.timestampFormatted || new Date(report.timestamp?.seconds * 1000).toLocaleDateString();
+      const reportDate =
+        report.date ||
+        report.timestampFormatted ||
+        new Date(report.timestamp?.seconds * 1000).toLocaleDateString();
 
       const htmlContent = `
         <!DOCTYPE html>
@@ -291,18 +306,28 @@ export default function InspectionReportDetails({route, navigation}) {
               <div class="info-grid">
                 <div class="info-item">
                   <div class="info-label">Property Name</div>
-                  <div class="info-value">${property?.name || property?.address || 'Unknown Property'}</div>
+                  <div class="info-value">${
+                    property?.name || property?.address || "Unknown Property"
+                  }</div>
                 </div>
-                ${property?.address ? `
+                ${
+                  property?.address
+                    ? `
                 <div class="info-item">
                   <div class="info-label">Address</div>
                   <div class="info-value">${property.address}</div>
-                </div>` : ''}
-                ${property?.type ? `
+                </div>`
+                    : ""
+                }
+                ${
+                  property?.type
+                    ? `
                 <div class="info-item">
                   <div class="info-label">Property Type</div>
                   <div class="info-value">${property.type}</div>
-                </div>` : ''}
+                </div>`
+                    : ""
+                }
               </div>
             </div>
 
@@ -315,17 +340,23 @@ export default function InspectionReportDetails({route, navigation}) {
                 </div>
                 <div class="info-item">
                   <div class="info-label">Status</div>
-                  <div class="info-value">${report.status || 'N/A'}</div>
+                  <div class="info-value">${report.status || "N/A"}</div>
                 </div>
                 <div class="info-item">
                   <div class="info-label">Template</div>
-                  <div class="info-value">${template?.name || template?.title || 'No Template'}</div>
+                  <div class="info-value">${
+                    template?.name || template?.title || "No Template"
+                  }</div>
                 </div>
-                ${inspectionDetails?.inspector ? `
+                ${
+                  inspectionDetails?.inspector
+                    ? `
                 <div class="info-item">
                   <div class="info-label">Inspector</div>
                   <div class="info-value">${inspectionDetails.inspector}</div>
-                </div>` : ''}
+                </div>`
+                    : ""
+                }
               </div>
             </div>
 
@@ -346,7 +377,7 @@ export default function InspectionReportDetails({route, navigation}) {
 
       // Determine the best directory for saving
       let directory;
-      if (Platform.OS === 'ios') {
+      if (Platform.OS === "ios") {
         directory = RNFS.DocumentDirectoryPath;
       } else {
         // For Android, use the Downloads directory
@@ -359,66 +390,70 @@ export default function InspectionReportDetails({route, navigation}) {
       const options = {
         html: htmlContent,
         fileName: fileName,
-        directory: Platform.OS === 'ios' ? 'Documents' : 'Download',
+        directory: Platform.OS === "ios" ? "Documents" : "Download",
         width: 612,
         height: 792,
         padding: 24,
-        bgColor: '#FFFFFF',
+        bgColor: "#FFFFFF",
       };
 
-      console.log('Generating PDF with options:', options);
+      console.log("Generating PDF with options:", options);
 
       const file = await RNHTMLtoPDF.convert(options);
-      console.log('PDF generated:', file);
+      console.log("PDF generated:", file);
 
       if (file.filePath) {
         // Show success message with options
         Alert.alert(
-          'PDF Generated Successfully!',
+          "PDF Generated Successfully!",
           `Report saved as: ${fileName}`,
           [
-            {text: 'OK'},
+            { text: "OK" },
             {
-              text: 'Open PDF',
+              text: "Open PDF",
               onPress: async () => {
                 try {
                   const supported = await Linking.canOpenURL(file.filePath);
                   if (supported) {
                     await Linking.openURL(file.filePath);
                   } else {
-                    Alert.alert('Error', 'Cannot open PDF file');
+                    Alert.alert("Error", "Cannot open PDF file");
                   }
                 } catch (error) {
-                  console.error('Error opening PDF:', error);
-                  Alert.alert('Error', 'Failed to open PDF file');
+                  console.error("Error opening PDF:", error);
+                  Alert.alert("Error", "Failed to open PDF file");
                 }
-              }
+              },
             },
             {
-              text: 'Share',
+              text: "Share",
               onPress: async () => {
                 try {
                   await Share.share({
                     url: file.filePath,
                     title: `Inspection Report - ${report.id}`,
-                    message: `Inspection report for ${property?.name || 'property'} - ${reportDate}`,
+                    message: `Inspection report for ${
+                      property?.name || "property"
+                    } - ${reportDate}`,
                   });
                 } catch (error) {
-                  console.error('Error sharing PDF:', error);
-                  Alert.alert('Error', 'Failed to share PDF file');
+                  console.error("Error sharing PDF:", error);
+                  Alert.alert("Error", "Failed to share PDF file");
                 }
-              }
-            }
+              },
+            },
           ]
         );
       } else {
-        throw new Error('PDF generation failed - no file path returned');
+        throw new Error("PDF generation failed - no file path returned");
       }
     } catch (error) {
-      console.error('PDF generation error:', error);
+      console.error("PDF generation error:", error);
       Alert.alert(
-        'PDF Generation Failed', 
-        `Error: ${error.message || 'Unknown error occurred'}\n\nPlease try again or contact support if the problem persists.`
+        "PDF Generation Failed",
+        `Error: ${
+          error.message || "Unknown error occurred"
+        }\n\nPlease try again or contact support if the problem persists.`
       );
     } finally {
       setDownloading(false);
@@ -439,7 +474,10 @@ export default function InspectionReportDetails({route, navigation}) {
         <View style={styles.infoRow}>
           <Text style={styles.label}>Property:</Text>
           <Text style={styles.value}>
-            {property?.name || property?.address || report.propertyName || 'Unknown Property'}
+            {property?.name ||
+              property?.address ||
+              report.propertyName ||
+              "Unknown Property"}
           </Text>
         </View>
         {property?.address && (
@@ -462,19 +500,21 @@ export default function InspectionReportDetails({route, navigation}) {
         <View style={styles.infoRow}>
           <Text style={styles.label}>Date:</Text>
           <Text style={styles.value}>
-            {report.date || report.timestampFormatted || new Date(report.timestamp?.seconds * 1000).toLocaleDateString()}
+            {report.date ||
+              report.timestampFormatted ||
+              new Date(report.timestamp?.seconds * 1000).toLocaleDateString()}
           </Text>
         </View>
         <View style={styles.infoRow}>
           <Text style={styles.label}>Status:</Text>
           <View style={[styles.statusBadge, getItemStatusStyle(report.status)]}>
-            <Text style={styles.statusText}>{report.status || 'N/A'}</Text>
+            <Text style={styles.statusText}>{report.status || "N/A"}</Text>
           </View>
         </View>
         <View style={styles.infoRow}>
           <Text style={styles.label}>Template:</Text>
           <Text style={styles.value}>
-            {template?.name || template?.title || 'No Template'}
+            {template?.name || template?.title || "No Template"}
           </Text>
         </View>
         {inspectionDetails?.inspector && (
@@ -490,13 +530,19 @@ export default function InspectionReportDetails({route, navigation}) {
 
       {/* Download Button */}
       <TouchableOpacity
-        style={[styles.downloadButton, downloading && styles.downloadButtonDisabled]}
+        style={[
+          styles.downloadButton,
+          downloading && styles.downloadButtonDisabled,
+        ]}
         onPress={handleDownloadPDF}
-        disabled={downloading}>
+        disabled={downloading}
+      >
         {downloading ? (
           <View style={styles.downloadingContainer}>
             <ActivityIndicator color="#fff" size="small" />
-            <Text style={[styles.downloadButtonText, {marginLeft: 10}]}>Generating PDF...</Text>
+            <Text style={[styles.downloadButtonText, { marginLeft: 10 }]}>
+              Generating PDF...
+            </Text>
           </View>
         ) : (
           <Text style={styles.downloadButtonText}>📄 Download PDF Report</Text>
@@ -509,29 +555,29 @@ export default function InspectionReportDetails({route, navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
+    backgroundColor: "#F8F9FA",
   },
   header: {
-    backgroundColor: '#2563EB',
+    backgroundColor: "#2563EB",
     padding: 20,
     paddingTop: 60,
   },
   title: {
     fontSize: 24,
-    fontWeight: '700',
-    color: '#fff',
+    fontWeight: "700",
+    color: "#fff",
     marginBottom: 4,
   },
   reportId: {
     fontSize: 14,
-    color: '#E0EDFF',
+    color: "#E0EDFF",
   },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     margin: 16,
     padding: 20,
     borderRadius: 12,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -541,11 +587,11 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   section: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     margin: 16,
     padding: 20,
     borderRadius: 12,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -556,46 +602,46 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: '700',
-    color: '#111827',
+    fontWeight: "700",
+    color: "#111827",
     marginBottom: 16,
   },
   infoRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 12,
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
   },
   label: {
     fontSize: 14,
-    color: '#6B7280',
-    fontWeight: '500',
+    color: "#6B7280",
+    fontWeight: "500",
     minWidth: 80,
     marginRight: 8,
   },
   value: {
     fontSize: 16,
-    color: '#111827',
-    fontWeight: '600',
+    color: "#111827",
+    fontWeight: "600",
     flex: 1,
   },
   itemCard: {
-    backgroundColor: '#F9FAFB',
+    backgroundColor: "#F9FAFB",
     padding: 16,
     borderRadius: 8,
     marginBottom: 12,
     borderLeftWidth: 4,
-    borderLeftColor: '#2563EB',
+    borderLeftColor: "#2563EB",
   },
   itemTitle: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#111827',
+    fontWeight: "700",
+    color: "#111827",
     marginBottom: 8,
   },
   itemDescription: {
     fontSize: 14,
-    color: '#6B7280',
+    color: "#6B7280",
     marginBottom: 12,
     lineHeight: 20,
   },
@@ -603,50 +649,50 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   dataRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 8,
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
   },
   dataLabel: {
     fontSize: 14,
-    color: '#4B5563',
-    fontWeight: '500',
+    color: "#4B5563",
+    fontWeight: "500",
     minWidth: 70,
     marginRight: 8,
   },
   dataValue: {
     fontSize: 14,
-    color: '#111827',
+    color: "#111827",
     flex: 1,
   },
   statusBadge: {
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 12,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
   },
   statusText: {
     fontSize: 12,
-    fontWeight: '600',
-    color: '#111827',
+    fontWeight: "600",
+    color: "#111827",
   },
   imagesContainer: {
     marginTop: 12,
   },
   imagesTitle: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#4B5563',
+    fontWeight: "600",
+    color: "#4B5563",
     marginBottom: 8,
   },
   imagesRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
   },
   imageWrapper: {
     borderRadius: 8,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   itemImage: {
     width: 100,
@@ -655,18 +701,18 @@ const styles = StyleSheet.create({
   },
   noDataText: {
     fontSize: 14,
-    color: '#9CA3AF',
-    textAlign: 'center',
-    fontStyle: 'italic',
+    color: "#9CA3AF",
+    textAlign: "center",
+    fontStyle: "italic",
   },
   downloadButton: {
     margin: 16,
     marginTop: 8,
-    backgroundColor: '#2563EB',
+    backgroundColor: "#2563EB",
     paddingVertical: 16,
     borderRadius: 12,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -676,15 +722,15 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   downloadButtonDisabled: {
-    backgroundColor: '#9CA3AF',
+    backgroundColor: "#9CA3AF",
   },
   downloadButtonText: {
-    color: '#fff',
-    fontWeight: '700',
+    color: "#fff",
+    fontWeight: "700",
     fontSize: 16,
   },
   downloadingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
