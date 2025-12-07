@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,48 +9,48 @@ import {
   Image,
   Alert,
   ActivityIndicator,
-} from 'react-native';
-import {Dropdown} from 'react-native-element-dropdown';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import PropertyIcon from '../assets/icons/properties.svg';
-import moment from 'moment';
-import {useDispatch, useSelector} from 'react-redux';
+} from "react-native";
+import { Dropdown } from "react-native-element-dropdown";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import PropertyIcon from "../assets/icons/properties.svg";
+import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchInspectionTemplatesSlice,
   scheduleInspectionSlice,
   fetchInspectionsByUserIdSlice,
-} from '../redux/slices/inspection/inspectionSlice';
+} from "../redux/slices/inspection/inspectionSlice";
 
 const property = [
-  {label: '123 Main Street', value: '123', type: 'Commercial Property'},
-  {label: '456 Oak Avenue', value: '456', type: 'Residential Property'},
+  { label: "123 Main Street", value: "123", type: "Commercial Property" },
+  { label: "456 Oak Avenue", value: "456", type: "Residential Property" },
 ];
 
 const templates = [
   {
-    label: 'Commercial Space',
-    value: 'commercial',
-    description: 'Office inspection template',
+    label: "Commercial Space",
+    value: "commercial",
+    description: "Office inspection template",
   },
   {
-    label: 'Residential Space',
-    value: 'residential',
-    description: 'Home inspection template',
+    label: "Residential Space",
+    value: "residential",
+    description: "Home inspection template",
   },
 ];
 
 const inspectors = [
-  {label: 'John Smith - Inspector', value: 'John Smith'},
-  {label: 'Emily Davis - Inspector', value: 'Emily Davis'},
+  { label: "John Smith - Inspector", value: "John Smith" },
+  { label: "Emily Davis - Inspector", value: "Emily Davis" },
 ];
 
-const ScheduleInspection = ({navigation}) => {
+const ScheduleInspection = ({ navigation }) => {
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [selectedInspector, setSelectedInspector] = useState(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const {properties} = useSelector(state => state.property);
+  const { properties } = useSelector((state) => state.property);
 
   const dispatch = useDispatch();
   const {
@@ -60,8 +60,8 @@ const ScheduleInspection = ({navigation}) => {
     error,
     userInspections,
     fetchInspectionsLoading,
-  } = useSelector(state => state.inspection);
-  const {userData} = useSelector(state => state.auth);
+  } = useSelector((state) => state.inspection);
+  const { userData } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(fetchInspectionTemplatesSlice());
@@ -70,13 +70,13 @@ const ScheduleInspection = ({navigation}) => {
     }
   }, [userData?.uid]);
 
-  const mappedTemplates = inspectionTemplates.map(template => ({
+  const mappedTemplates = inspectionTemplates.map((template) => ({
     label: template.name,
     value: template.id,
     description: template.description,
   }));
 
-  const mappedProperties = properties.map(item => ({
+  const mappedProperties = properties.map((item) => ({
     label: item.propertyName,
     value: item.id,
     type: item.propertyType,
@@ -91,58 +91,56 @@ const ScheduleInspection = ({navigation}) => {
     }
   }, [properties, inspectionTemplates]);
 
-  console.log('properties', properties);
+  console.log("properties", properties);
 
-  const formatDate = date => {
-    if (!date) return 'DD MMM YYYY';
-    return moment(date).format('DD MMM YYYY');
+  const formatDate = (date) => {
+    if (!date) return "DD MMM YYYY";
+    return moment(date).format("DD MMM YYYY");
   };
 
   const handleDateChange = (event, selectedDate) => {
-    const isSet = event.type === 'set';
-    if (Platform.OS === 'android') {
+    const isSet = event.type === "set";
+    if (Platform.OS === "android") {
       setShowDatePicker(false);
     }
     if (isSet && selectedDate) {
       const onlyDate = new Date(
         selectedDate.getFullYear(),
         selectedDate.getMonth(),
-        selectedDate.getDate(),
+        selectedDate.getDate()
       );
       setSelectedDate(onlyDate);
     }
   };
 
   const handleSubmit = async () => {
-
     const finalData = {
       property: selectedProperty.value,
       template: selectedTemplate.value,
       inspector: selectedInspector.value,
-      date: moment(selectedDate).format('DD MMM YYYY'),
+      date: moment(selectedDate).format("DD MMM YYYY"),
       userId: userData?.uid,
     };
 
-    console.log('finalData', finalData);
+    console.log("finalData", finalData);
 
     try {
       const result = await dispatch(
-        scheduleInspectionSlice(finalData),
+        scheduleInspectionSlice(finalData)
       ).unwrap();
       if (result.success) {
-        Alert.alert('Success', 'Inspection scheduled successfully');
-        navigation.navigate('PropertyInspection');
+        navigation.navigate("PropertyInspection");
 
         dispatch(fetchInspectionsByUserIdSlice(userData.uid));
       } else {
-        Alert.alert('Error', result.error || 'Failed to schedule inspection');
+        Alert.alert("Error", result.error || "Failed to schedule inspection");
       }
     } catch (error) {
-      Alert.alert('Error', error.message || 'Failed to schedule inspection');
+      Alert.alert("Error", error.message || "Failed to schedule inspection");
     }
   };
 
-  const renderInspectionItem = ({item}) => (
+  const renderInspectionItem = ({ item }) => (
     <View style={styles.inspectionItem}>
       <View style={styles.inspectionHeader}>
         <Text style={styles.inspectionTitle}>
@@ -165,31 +163,32 @@ const ScheduleInspection = ({navigation}) => {
       <View style={styles.propertyContainer}>
         <View
           style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}>
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           <Text style={styles.label}>Select Property</Text>
           <Dropdown
             data={mappedProperties}
             value={null}
             labelField="label"
-            onChange={item => setSelectedProperty(item)}
+            onChange={(item) => setSelectedProperty(item)}
             style={{
-              width: '50%',
+              width: "50%",
               height: 40,
               borderRadius: 8,
               zIndex: 10,
             }}
             selectedTextStyle={{
-              fontFamily: 'Inter',
+              fontFamily: "Inter",
               fontSize: 14,
-              color: '#fff',
+              color: "#fff",
             }}
             itemTextStyle={{
-              fontFamily: 'Inter',
+              fontFamily: "Inter",
               fontSize: 14,
-              color: '#000',
+              color: "#000",
               width: 400,
             }}
           />
@@ -210,12 +209,13 @@ const ScheduleInspection = ({navigation}) => {
         <Text style={styles.cardTitle}>Inspection Template</Text>
         <View
           style={{
-            backgroundColor: '#F9FAFB',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            backgroundColor: "#F9FAFB",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
             padding: 10,
-          }}>
+          }}
+        >
           {/* <View>
             <Text style={styles.title}>{selectedTemplate?.label}</Text>
             <Text style={styles.description}>
@@ -228,13 +228,13 @@ const ScheduleInspection = ({navigation}) => {
             labelField="label"
             valueField="value"
             value={selectedTemplate?.value}
-            onChange={item => setSelectedTemplate(item)}
+            onChange={(item) => setSelectedTemplate(item)}
             style={{
-              width: '100%',
+              width: "100%",
               borderRadius: 8,
             }}
             selectedTextStyle={{
-              color: '#000',
+              color: "#000",
             }}
             placeholder="Select Template"
           />
@@ -243,7 +243,7 @@ const ScheduleInspection = ({navigation}) => {
           <Text style={styles.label}>Date & Time</Text>
           <TouchableOpacity onPress={() => setShowDatePicker(true)}>
             <Text style={styles.selectDate}>
-              {selectedDate ? formatDate(selectedDate) : 'Select Date'}{' '}
+              {selectedDate ? formatDate(selectedDate) : "Select Date"}{" "}
             </Text>
           </TouchableOpacity>
         </View>
@@ -251,7 +251,7 @@ const ScheduleInspection = ({navigation}) => {
         <View style={styles.dateContainer}>
           <View style={styles.dateInput}>
             {showDatePicker &&
-              (Platform.OS === 'android' ? (
+              (Platform.OS === "android" ? (
                 <DateTimePicker
                   value={selectedDate || new Date()}
                   mode="date"
@@ -264,8 +264,9 @@ const ScheduleInspection = ({navigation}) => {
                 <Modal
                   transparent
                   animationType="slide"
-                  visible={showDatePicker && Platform.OS === 'ios'}
-                  onRequestClose={() => setShowDatePicker(false)}>
+                  visible={showDatePicker && Platform.OS === "ios"}
+                  onRequestClose={() => setShowDatePicker(false)}
+                >
                   <View style={styles.modalBackground}>
                     <View style={styles.modalContainer}>
                       <DateTimePicker
@@ -275,11 +276,12 @@ const ScheduleInspection = ({navigation}) => {
                         onChange={(event, date) => {
                           handleDateChange(event, date);
                         }}
-                        style={{width: '100%'}}
+                        style={{ width: "100%" }}
                       />
                       <TouchableOpacity
                         style={styles.doneButton}
-                        onPress={() => setShowDatePicker(false)}>
+                        onPress={() => setShowDatePicker(false)}
+                      >
                         <Text style={styles.doneText}>Done</Text>
                       </TouchableOpacity>
                     </View>
@@ -290,29 +292,30 @@ const ScheduleInspection = ({navigation}) => {
         </View>
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <Text style={styles.label}>Assign Inspector</Text>
           <Dropdown
             data={inspectors}
             labelField="label"
             valueField="value"
             value={selectedInspector?.value}
-            onChange={item => setSelectedInspector(item)}
+            onChange={(item) => setSelectedInspector(item)}
             placeholder="Inspector"
             style={{
-              width: '50%',
+              width: "50%",
               height: 40,
               borderRadius: 8,
             }}
             selectedTextStyle={{
-              color: '#000',
+              color: "#000",
             }}
             renderLeftIcon={() => (
               <Image
-                source={{uri: 'https://i.pravatar.cc/100'}}
+                source={{ uri: "https://i.pravatar.cc/100" }}
                 style={styles.avatar}
               />
             )}
@@ -323,7 +326,8 @@ const ScheduleInspection = ({navigation}) => {
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
           style={styles.scheduleBtn}
-          onPress={() => navigation.navigate('PropertyInspection')}>
+          onPress={() => navigation.navigate("PropertyInspection")}
+        >
           <Text style={styles.btnText}>Schedule Inspection</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -332,7 +336,8 @@ const ScheduleInspection = ({navigation}) => {
             scheduleLoading && styles.disabledButton,
           ]}
           onPress={handleSubmit}
-          disabled={scheduleLoading}>
+          disabled={scheduleLoading}
+        >
           {scheduleLoading ? (
             <ActivityIndicator color="#fff" />
           ) : (
@@ -347,49 +352,49 @@ const ScheduleInspection = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     flex: 1,
   },
   propertyContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     paddingHorizontal: 16,
     paddingVertical: 5,
     paddingBottom: 15,
     borderRadius: 12,
     marginBottom: 10,
     borderWidth: 0.5,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
   },
   label: {
     fontSize: 14,
-    color: '#000',
+    color: "#000",
     marginBottom: 8,
-    fontWeight: '700',
-    fontFamily: 'Inter',
+    fontWeight: "700",
+    fontFamily: "Inter",
   },
   iconContainer: {
     padding: 15,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: "#F3F4F6",
     borderRadius: 8,
     marginRight: 8,
     marginTop: 4,
   },
   selectedCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
 
     borderRadius: 12,
   },
   infoTitle: {
     fontSize: 16,
-    fontFamily: 'Inter-Medium',
-    color: '#000',
+    fontFamily: "Inter-Medium",
+    color: "#000",
   },
   infoSubtitle: {
     fontSize: 14,
-    fontFamily: 'Inter-Regular',
-    color: '#666',
+    fontFamily: "Inter-Regular",
+    color: "#666",
   },
 
   dropdown: {
@@ -399,57 +404,57 @@ const styles = StyleSheet.create({
   },
   infoCard: {
     padding: 12,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: "#f9f9f9",
     borderRadius: 8,
     marginBottom: 16,
   },
   infoTitle: {
     fontSize: 16,
-    fontWeight: '600',
-    fontFamily: 'Inter',
+    fontWeight: "600",
+    fontFamily: "Inter",
   },
   infoSubtitle: {
-    color: 'gray',
-    fontFamily: 'Inter',
+    color: "gray",
+    fontFamily: "Inter",
   },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 16,
     borderRadius: 12,
     marginBottom: 20,
     borderWidth: 0.5,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
   },
   cardTitle: {
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
     fontSize: 14,
     marginBottom: 10,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   title: {
     fontSize: 16,
-    fontWeight: '600',
-    fontFamily: 'Inter',
+    fontWeight: "600",
+    fontFamily: "Inter",
   },
   description: {
-    color: 'gray',
+    color: "gray",
     marginTop: 4,
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
   },
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginTop: 16,
     marginBottom: 8,
   },
   selectDate: {
-    color: '#007AFF',
-    fontFamily: 'Inter',
+    color: "#007AFF",
+    fontFamily: "Inter",
   },
   selectedDate: {
-    color: 'gray',
-    fontFamily: 'Inter',
+    color: "gray",
+    fontFamily: "Inter",
     marginBottom: 8,
   },
   avatar: {
@@ -459,26 +464,26 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   scheduleBtn: {
-    backgroundColor: '#007AFF',
+    backgroundColor: "#007AFF",
     padding: 16,
     borderRadius: 12,
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 12,
   },
   inspectNowBtn: {
-    backgroundColor: '#FF3B30',
+    backgroundColor: "#FF3B30",
     padding: 16,
     borderRadius: 12,
-    alignItems: 'center',
+    alignItems: "center",
   },
   btnText: {
-    color: '#fff',
-    fontFamily: 'Inter',
+    color: "#fff",
+    fontFamily: "Inter",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   dateContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
     marginBottom: 16,
   },
@@ -487,12 +492,12 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    fontWeight: '500',
-    color: '#333',
+    fontWeight: "500",
+    color: "#333",
     marginBottom: 8,
   },
   dateContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 12,
     marginBottom: 16,
   },
@@ -502,24 +507,24 @@ const styles = StyleSheet.create({
   statusInput: {
     height: 48,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: "#E2E8F0",
     borderRadius: 8,
     paddingHorizontal: 12,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   dateField: {
     height: 48,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: "#E2E8F0",
     borderRadius: 8,
     paddingHorizontal: 12,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   buttonsContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 10,
-    width: '100%',
-    justifyContent: 'center',
+    width: "100%",
+    justifyContent: "center",
     left: 16,
   },
   disabledButton: {
@@ -531,77 +536,77 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 10,
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
   },
   inspectionItem: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 15,
     borderRadius: 12,
     marginBottom: 10,
     borderWidth: 0.5,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
   },
   inspectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 10,
   },
   inspectionTitle: {
     fontSize: 16,
-    fontWeight: '600',
-    fontFamily: 'Inter',
+    fontWeight: "600",
+    fontFamily: "Inter",
   },
   inspectionDate: {
-    color: '#666',
-    fontFamily: 'Inter',
+    color: "#666",
+    fontFamily: "Inter",
   },
   inspectionDetails: {
     gap: 5,
   },
   inspectionProperty: {
     fontSize: 14,
-    color: '#333',
-    fontFamily: 'Inter',
+    color: "#333",
+    fontFamily: "Inter",
   },
   inspectionTemplate: {
     fontSize: 14,
-    color: '#333',
-    fontFamily: 'Inter',
+    color: "#333",
+    fontFamily: "Inter",
   },
   inspectionInspector: {
     fontSize: 14,
-    color: '#333',
-    fontFamily: 'Inter',
+    color: "#333",
+    fontFamily: "Inter",
   },
   emptyText: {
-    textAlign: 'center',
-    color: '#666',
+    textAlign: "center",
+    color: "#666",
     marginTop: 20,
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
   },
   modalBackground: {
     flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: "flex-end",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContainer: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
   doneButton: {
-    alignSelf: 'flex-end',
+    alignSelf: "flex-end",
     marginTop: 10,
     padding: 10,
   },
   doneText: {
-    color: '#007AFF',
+    color: "#007AFF",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
 

@@ -32,12 +32,6 @@ const propertyData = [
   { label: "Property 5", value: "5" },
 ];
 
-const templateData = [
-  { label: "Template A", value: "a" },
-  { label: "Template B", value: "b" },
-  { label: "Template C", value: "c" },
-];
-
 const statusData = [
   { label: "Active", value: "active" },
   { label: "Inactive", value: "inactive" },

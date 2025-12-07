@@ -48,18 +48,6 @@ export default function AssignTenants({ navigation }) {
     }
   }, [propertyId]);
 
-  const handleManagerClick = (tenantId) => {
-    setLoading(true);
-    console.log("handleManagerClick", tenantId);
-    dispatch(addPropertyTenant({ tenantId, propertyId })).then(() => {
-      dispatch(fetchPropertiesSlice({ userId: userData?.uid }));
-      setLoading(false);
-      if (next) {
-        navigation.navigate("Properties");
-      }
-    });
-  };
-
   const filteredTenants = tenants?.filter((tenant) =>
     tenant.fullName.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -154,7 +142,6 @@ export default function AssignTenants({ navigation }) {
             </View>
 
             <View style={styles.checkboxContainer}>
-      
               <Text style={styles.checkboxLabel}>
                 Send invitation via both email & SMS
               </Text>

@@ -4,29 +4,29 @@ import {
   Text,
   View,
   ActivityIndicator,
-} from 'react-native';
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+} from "react-native";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchInspectionsByUserIdSlice,
   fetchTemplateByTemplateIdSlice,
-} from '../redux/slices/inspection/inspectionSlice';
-import StatusCard from '../components/StatusCard';
-import ClockIcon from '../assets/icons/clockOutlined.svg';
-import TempleteIcon from '../assets/icons/template.svg';
-import ReportIcon from '../assets/icons/report.svg';
-import ScheduleIcon from '../assets/icons/schedule.svg';
-import IconButton from '../components/ui/IconButton';
-import InspectionRequestCard from '../components/InspectionRequestCard';
-import ScheduleCard from '../components/ScheduleCard';
-import {fetchPropertiesByPropertiesIdSlice} from '../redux/slices/property/propertySlice';
+} from "../redux/slices/inspection/inspectionSlice";
+import StatusCard from "../components/StatusCard";
+import ClockIcon from "../assets/icons/clockOutlined.svg";
+import TempleteIcon from "../assets/icons/template.svg";
+import ReportIcon from "../assets/icons/report.svg";
+import ScheduleIcon from "../assets/icons/schedule.svg";
+import IconButton from "../components/ui/IconButton";
+import InspectionRequestCard from "../components/InspectionRequestCard";
+import ScheduleCard from "../components/ScheduleCard";
+import { fetchPropertiesByPropertiesIdSlice } from "../redux/slices/property/propertySlice";
 
-export default function PropertyInspection({navigation}) {
-  const {userInspections, selectedTemplate} = useSelector(
-    state => state.inspection,
+export default function PropertyInspection({ navigation }) {
+  const { userInspections, selectedTemplate } = useSelector(
+    (state) => state.inspection
   );
-  const {selectedProperty} = useSelector(state => state.property);
-  const {userData} = useSelector(state => state.auth);
+  const { selectedProperty } = useSelector((state) => state.property);
+  const { userData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,20 +37,9 @@ export default function PropertyInspection({navigation}) {
 
   useEffect(() => {
     if (userInspections && Array.isArray(userInspections)) {
-      let properties = [];
-      userInspections.forEach(inspection => {
-        console.log('inspection', inspection.property);
-        properties.push(inspection.property);
-      });
-      dispatch(fetchPropertiesByPropertiesIdSlice({properties}));
-    }
-  }, [userInspections]);
-
-  useEffect(() => {
-    if (userInspections && Array.isArray(userInspections)) {
       let templates = [];
-      userInspections.forEach(inspection => {
-        console.log('inspection', inspection.template);
+      userInspections.forEach((inspection) => {
+        console.log("inspection", inspection.template);
         templates.push(inspection.template);
       });
       dispatch(fetchTemplateByTemplateIdSlice(templates));
@@ -59,19 +48,19 @@ export default function PropertyInspection({navigation}) {
 
   const handleAcceptInspection = () => {
     // Handle accept logic here
-    console.log('Inspection accepted');
+    console.log("Inspection accepted");
   };
 
   const handleDeclineInspection = () => {
     // Handle decline logic here
-    console.log('Inspection declined');
+    console.log("Inspection declined");
   };
 
   console.log(
-    'userInspections',
+    "userInspections",
     userInspections,
     selectedProperty,
-    selectedTemplate,
+    selectedTemplate
   );
 
   const handleNavigation = (inspectionId, propertyId, templateId) => {};
@@ -103,14 +92,14 @@ export default function PropertyInspection({navigation}) {
             title="Templates"
             color="#6B7280"
             iconColor="#fff"
-            onClick={() => navigation.navigate('InspectionTemplatesList')}
+            onClick={() => navigation.navigate("InspectionTemplatesList")}
           />
           <IconButton
             icon={ReportIcon}
             title="Reports"
             color="#10B981"
             iconColor="#fff"
-            onClick={() => navigation.navigate('InspectionReport')}
+            onClick={() => navigation.navigate("InspectionReport")}
           />
         </View>
         <View style={styles.row}>
@@ -149,29 +138,29 @@ export default function PropertyInspection({navigation}) {
 
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Today's Schedule</Text>
-          {userInspections?.map(inspection => {
+          {userInspections?.map((inspection) => {
             return (
               <ScheduleCard
                 key={inspection.id}
                 address={
                   selectedProperty?.find(
-                    property => property.id === inspection.property,
+                    (property) => property.id === inspection.property
                   )?.address
                 }
                 propertyType={
                   selectedProperty?.find(
-                    property => property.id === inspection.property,
+                    (property) => property.id === inspection.property
                   )?.propertyType
                 }
                 templateName={
                   selectedTemplate?.find(
-                    template => template.id === inspection.template,
+                    (template) => template.id === inspection.template
                   )?.name
                 }
                 time={inspection.date}
                 status={inspection.status}
                 handleNavigation={() => {
-                  navigation.navigate('InsepctionChecklist', {
+                  navigation.navigate("InsepctionChecklist", {
                     inspectionId: inspection.id,
                     propertyId: inspection.property,
                     templateId: inspection.template,
@@ -191,8 +180,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     margin: 15,
   },
   headingContainer: {
@@ -200,14 +189,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginHorizontal: 10,
     minWidth: 100,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   headingText: {
-    fontFamily: 'Inter',
-    fontWeight: '700',
+    fontFamily: "Inter",
+    fontWeight: "700",
     fontSize: 18,
     lineHeight: 18,
-    color: '#000000',
+    color: "#000000",
   },
   inspectionCardContainer: {
     paddingHorizontal: 10,
@@ -218,8 +207,8 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: '700',
-    color: '#111827',
+    fontWeight: "700",
+    color: "#111827",
     marginBottom: 16,
     marginLeft: 16,
   },
