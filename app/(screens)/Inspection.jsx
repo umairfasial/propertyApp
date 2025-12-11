@@ -4,30 +4,23 @@ import {
   View,
   ScrollView,
   ActivityIndicator,
-} from 'react-native';
-import React, {useEffect} from 'react';
-import InspectionTemplateCard from '../components/ui/InspectionTemplateCard';
+} from "react-native";
+import React, { useEffect } from "react";
+import InspectionTemplateCard from "../components/ui/InspectionTemplateCard";
 import {
   fetchInspectionTemplatesSlice,
   fetchInspectionsByUserIdSlice,
-} from '../redux/slices/inspection/inspectionSlice';
-import {useDispatch, useSelector} from 'react-redux';
+} from "../redux/slices/inspection/inspectionSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Inspection() {
-  const {inspectionTemplates, userInspections, fetchInspectionsLoading} =
-    useSelector(state => state.inspection);
-  const {userData} = useSelector(state => state.auth);
+  const { inspectionTemplates, userInspections, fetchInspectionsLoading } =
+    useSelector((state) => state.inspection);
+  const { userData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchInspectionTemplatesSlice());
-    if (userData?.id) {
-      dispatch(fetchInspectionsByUserIdSlice(userData.id));
-    }
-  }, [userData?.id]);
-
-  const handleTemplatePress = templateId => {
-    console.log('Template pressed:', templateId);
+  const handleTemplatePress = (templateId) => {
+    console.log("Template pressed:", templateId);
   };
 
   return (
@@ -41,7 +34,7 @@ export default function Inspection() {
 
       <View style={styles.content}>
         {inspectionTemplates && inspectionTemplates.length > 0 ? (
-          inspectionTemplates.map(template => (
+          inspectionTemplates.map((template) => (
             <InspectionTemplateCard
               key={template.id}
               title={template.name}
@@ -64,7 +57,7 @@ export default function Inspection() {
             style={styles.loader}
           />
         ) : userInspections && userInspections.length > 0 ? (
-          userInspections.map(inspection => (
+          userInspections.map((inspection) => (
             <View key={inspection.id} style={styles.inspectionCard}>
               <View style={styles.inspectionHeader}>
                 <Text style={styles.inspectionTitle}>
@@ -96,23 +89,23 @@ export default function Inspection() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
+    backgroundColor: "#F8F9FA",
   },
   header: {
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
-    backgroundColor: 'white',
+    borderBottomColor: "#E5E7EB",
+    backgroundColor: "white",
   },
   title: {
     fontSize: 24,
-    fontWeight: '700',
+    fontWeight: "700",
     marginBottom: 5,
   },
   subtitle: {
     fontSize: 14,
-    color: '#6B7280',
+    color: "#6B7280",
     lineHeight: 20,
   },
   content: {
@@ -120,34 +113,34 @@ const styles = StyleSheet.create({
   },
   inspectionsSection: {
     padding: 16,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     marginTop: 16,
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 16,
   },
   inspectionCard: {
-    backgroundColor: '#F8F9FA',
+    backgroundColor: "#F8F9FA",
     padding: 16,
     borderRadius: 12,
     marginBottom: 12,
     borderWidth: 0.5,
-    borderColor: '#E5E7EB',
+    borderColor: "#E5E7EB",
   },
   inspectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 12,
   },
   inspectionTitle: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   inspectionDate: {
-    color: '#6B7280',
+    color: "#6B7280",
     fontSize: 14,
   },
   inspectionDetails: {
@@ -155,11 +148,11 @@ const styles = StyleSheet.create({
   },
   inspectionText: {
     fontSize: 14,
-    color: '#374151',
+    color: "#374151",
   },
   emptyText: {
-    textAlign: 'center',
-    color: '#6B7280',
+    textAlign: "center",
+    color: "#6B7280",
     marginTop: 20,
   },
   loader: {

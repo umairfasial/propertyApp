@@ -48,9 +48,7 @@ export default function AssignTenants({ navigation }) {
     }
   }, [propertyId]);
 
-  const filteredTenants = tenants?.filter((tenant) =>
-    tenant.fullName.toLowerCase().includes(searchText.toLowerCase())
-  );
+
 
   return (
     <>
