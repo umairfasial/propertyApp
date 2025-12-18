@@ -291,12 +291,6 @@ export default function PropertyForm({ navigation }) {
           return;
         }
 
-        // Check file size (5MB limit)
-        if (file.size > 5 * 1024 * 1024) {
-          setFileError("File size should be less than 5MB");
-          return;
-        }
-
         // For Android, we need to copy the file to a location we can access
         if (Platform.OS === "android" && file.uri) {
           try {

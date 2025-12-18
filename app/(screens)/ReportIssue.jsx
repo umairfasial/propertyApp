@@ -53,11 +53,7 @@ export default function ReportIssue() {
     };
     try {
       let result;
-      if (fromCamera) {
-        result = await launchCamera(options);
-      } else {
-        result = await launchImageLibrary(options);
-      }
+
       if (result.assets) {
         // Check for videos that exceed duration limit
         const invalidVideos = result.assets.filter(

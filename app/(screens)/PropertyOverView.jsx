@@ -91,7 +91,7 @@ const PropertyOverView = ({ navigation }) => {
 
         <View style={styles.badgeRow}>
           <View style={styles.issueBadge}>
-            <IssuesIcon width={12} height={12} color="#DC2626" />
+            {/* <IssuesIcon width={12} height={12} color="#DC2626" /> */}
             <Text style={styles.badgeIssueText}>2 Issues</Text>
           </View>
           <View style={styles.inspectionBadge}>
