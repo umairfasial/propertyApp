@@ -98,15 +98,6 @@ export default function InspectionReport() {
     }
   }, [inspectionReports, dispatch]);
 
-  console.log(
-    "inspectionReports, selectedTemplate, selectedInspections, selectedItems",
-    inspectionReports,
-    selectedTemplate,
-    selectedInspections,
-    selectedProperty,
-    selectedItems
-  );
-
   const renderReportItem = ({ item }) => {
     // Find the template for this inspection
     const template = selectedTemplate?.find((t) => t.id === item.templateId);
