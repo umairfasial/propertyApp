@@ -42,13 +42,6 @@ export default function AssignTenants({ navigation }) {
   useEffect(() => {
     dispatch(fetchTenants());
   }, [selectedProperty]);
-  useEffect(() => {
-    if (propertyId) {
-      setSelectedProperty(propertyId);
-    }
-  }, [propertyId]);
-
-
 
   return (
     <>

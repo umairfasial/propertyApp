@@ -7,17 +7,11 @@ import {
 } from "react-native";
 import React, { useEffect } from "react";
 import InspectionTemplateCard from "../components/ui/InspectionTemplateCard";
-import {
-  fetchInspectionTemplatesSlice,
-  fetchInspectionsByUserIdSlice,
-} from "../redux/slices/inspection/inspectionSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Inspection() {
   const { inspectionTemplates, userInspections, fetchInspectionsLoading } =
     useSelector((state) => state.inspection);
-  const { userData } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
 
   const handleTemplatePress = (templateId) => {
     console.log("Template pressed:", templateId);
